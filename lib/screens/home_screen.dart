@@ -8,6 +8,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  //MapType _currentMapType = MapType.normal;
+
   List<String> countries = ['Ақтау қаласы', 'Жаңаөзен қаласы', 'Құрық ауданы', 'Бейнеу ауданы'];
 
   String selectedCountry = 'Ақтау қаласы';
@@ -31,7 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
           items: countries.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value, style: TextStyle(color: Colors.white),),
+              child: Text(
+                value,
+                style: TextStyle(
+                    color: Colors.white
+                ),
+              ),
             );
           }).toList(),
           onChanged: onChangedCallback,
@@ -41,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           GoogleMap(
+            //mapType: _currentMapType,
             initialCameraPosition: CameraPosition(
               target: LatLng(43.6331836, 51.1596614),
               zoom: 14,
