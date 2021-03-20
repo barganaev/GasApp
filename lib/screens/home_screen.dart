@@ -1,5 +1,44 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:gasapp/utils/cur_position.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+List<String> cities = [
+  'Ақтау қаласы',
+  'Жаңаөзен қаласы',
+  'Құрық ауданы',
+  'Бейнеу ауданы'
+];
+
+List<CameraPosition> positions = [
+  CameraPosition(
+    target: LatLng(43.655357, 51.156099),
+    zoom: 13,
+  ),
+  CameraPosition(
+    target: LatLng(43.342015, 52.857237),
+    zoom: 13,
+  ),
+  CameraPosition(
+    target: LatLng(43.178096, 51.680373),
+    zoom: 14,
+  ),
+  CameraPosition(
+    target: LatLng(45.307847, 55.183664),
+    zoom: 13,
+  ),
+];
+
+Set<Marker> _markers = {
+  Marker(
+    markerId: MarkerId('id-1'),
+    position: LatLng(43.667631, 51.150840),
+    infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
+  )
+};
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -7,112 +46,81 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> countries = [
-    'Ақтау қаласы',
-    'Жаңаөзен қаласы',
-    'Құрық ауданы',
-    'Бейнеу ауданы'
-  ];
+  Completer<GoogleMapController> _controller = Completer();
+  GoogleMapController mapController;
 
+  int indexOfCity = 0;
   String selectedCountry = 'Ақтау қаласы';
   String selectedProvince;
 
-  void onChangedCallback(country) {
-    setState(() {
-      selectedCountry = country;
-    });
+  @override
+  void initState() {
+    super.initState();
   }
 
-  Set<Marker> _markers = {
-    Marker(
-      markerId: MarkerId('id-1'),
-      position: LatLng(43.667631, 51.150840),
-      infoWindow: InfoWindow(title: 'GAS', snippet: 'AZS'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-    )
-  };
-  void _onMapCreated(GoogleMapController controller) {
+  void onChangedCallback(city) async {
+    selectedCountry = city;
+    for (int i = 0; i < cities.length; i++) {
+      if (city == cities[i]) {
+        setState(() {
+          indexOfCity = i;
+        });
+      }
+    }
+    mapController = await _controller.future;
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(positions[indexOfCity]),
+    );
+  }
+
+  Future<void> curLocation() async {
+    Position position = await determinePosition();
+    LatLng latLatPosition = LatLng(position.latitude, position.longitude);
+
+    CameraPosition cameraPosition =
+        new CameraPosition(target: latLatPosition, zoom: 14);
+
+    mapController = await _controller.future;
+    mapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  }
+
+  void _onMapCreated(GoogleMapController controller) async {
     controller.setMapStyle(Utils.mapStyle);
-    setState(() {
-      _markers.add(
-        Marker(
-          markerId: MarkerId('id-2'),
-          position: LatLng(43.669088, 51.144834),
-          infoWindow: InfoWindow(
-            anchor: Offset(0.5, 0.5),
-            title: 'Shakabayev Assan',
-            snippet: '''Flutter Developer
-            1 year experience
-            ''',
-          ),
-          icon:
-              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-        ),
-      );
-    });
+    _controller.complete(controller);
+    await curLocation();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.lightBlue,
-        title: DropdownButton<String>(
-          dropdownColor: Colors.lightBlue,
-          value: selectedCountry,
-          items: countries.map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: TextStyle(color: Colors.white),
-              ),
-            );
-          }).toList(),
-          onChanged: onChangedCallback,
-        ),
-      ),
-      drawer: HomeDrawer(),
-      body: Stack(
-        children: [
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            markers: _markers,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(43.655357, 51.156099),
-              zoom: 13,
-            ),
-            mapToolbarEnabled: false,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.1,
-              left: MediaQuery.of(context).size.width * 0.05,
-              right: MediaQuery.of(context).size.width * 0.05,
-            ),
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.lightBlue,
+          title: DropdownButton<String>(
+            dropdownColor: Colors.lightBlue,
+            value: selectedCountry,
+            items: cities.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                  style: TextStyle(color: Colors.white),
                 ),
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.9,
-                //color: Colors.white,
-                child: Center(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Where are you going to?',
-                        hintStyle: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black)),
-                  ),
-                )),
+              );
+            }).toList(),
+            onChanged: onChangedCallback,
           ),
-        ],
-      ),
-    );
+        ),
+        drawer: HomeDrawer(),
+        body: GoogleMap(
+          myLocationEnabled: true,
+          myLocationButtonEnabled: true,
+          mapType: MapType.hybrid,
+          onMapCreated: _onMapCreated,
+          markers: _markers,
+          initialCameraPosition: positions[indexOfCity],
+          mapToolbarEnabled: true,
+        ));
   }
 }
 
