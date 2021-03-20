@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gasapp/login.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -7,6 +9,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  //MapType _currentMapType = MapType.normal;
+
   List<String> countries = [
     'Ақтау қаласы',
     'Жаңаөзен қаласы',
@@ -66,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
               value: value,
               child: Text(
                 value,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Colors.white
+                ),
               ),
             );
           }).toList(),
@@ -77,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           GoogleMap(
+            //mapType: _currentMapType,
             onMapCreated: _onMapCreated,
             markers: _markers,
             initialCameraPosition: CameraPosition(
@@ -84,31 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
               zoom: 13,
             ),
             mapToolbarEnabled: false,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.1,
-              left: MediaQuery.of(context).size.width * 0.05,
-              right: MediaQuery.of(context).size.width * 0.05,
-            ),
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.9,
-                //color: Colors.white,
-                child: Center(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Where are you going to?',
-                        hintStyle: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black)),
-                  ),
-                )),
           ),
         ],
       ),
@@ -167,39 +150,44 @@ class _HomeDrawerState extends State<HomeDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
         child: ListView(children: <Widget>[
-      Container(
-        padding: EdgeInsets.only(top: 50, left: 8, right: 8, bottom: 8),
-        // color: HexColor("#31343E"),
-        color: Colors.white,
-        child: Row(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(100.0),
-              child: Image.asset(
-                "assets/gas_station.jpg",
-                width: 80,
-                height: 80,
-                fit: BoxFit.fill,
+      GestureDetector(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+        },
+        child: Container(
+          padding: EdgeInsets.only(top: 50, left: 8, right: 8, bottom: 8),
+          // color: HexColor("#31343E"),
+          color: Colors.white,
+          child: Row(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: Image.asset(
+                  "assets/account_photo_default.png",
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: "Name Surname\n",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat',
-                        color: Colors.black87)),
-                TextSpan(
-                    text: "@username",
-                    style: TextStyle(
-                        fontFamily: 'Montserrat', color: Colors.black54)),
-              ]),
-            ),
-          ],
+              SizedBox(
+                width: 8,
+              ),
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Name Surname\n",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat',
+                          color: Colors.black87)),
+                  TextSpan(
+                      text: "@username",
+                      style: TextStyle(
+                          fontFamily: 'Montserrat', color: Colors.black54)),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
       Divider(height: 1, thickness: 1, color: Colors.blueGrey[900]),
