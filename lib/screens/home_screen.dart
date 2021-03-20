@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gasapp/utils/cur_position.dart';
+import 'package:gasapp/login.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -48,6 +49,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Completer<GoogleMapController> _controller = Completer();
   GoogleMapController mapController;
+  bool mapTypeHybrid = true;
 
   int indexOfCity = 0;
   String selectedCountry = 'Ақтау қаласы';
@@ -93,34 +95,46 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.lightBlue,
-          title: DropdownButton<String>(
-            dropdownColor: Colors.lightBlue,
-            value: selectedCountry,
-            items: cities.map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(
-                  value,
-                  style: TextStyle(color: Colors.white),
-                ),
-              );
-            }).toList(),
-            onChanged: onChangedCallback,
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.lightBlue,
+        title: DropdownButton<String>(
+          dropdownColor: Colors.lightBlue,
+          value: selectedCountry,
+          items: cities.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(
+                value,
+                style: TextStyle(color: Colors.white),
+              ),
+            );
+          }).toList(),
+          onChanged: onChangedCallback,
         ),
-        drawer: HomeDrawer(),
-        body: GoogleMap(
-          myLocationEnabled: true,
-          myLocationButtonEnabled: true,
-          mapType: MapType.hybrid,
-          onMapCreated: _onMapCreated,
-          markers: _markers,
-          initialCameraPosition: positions[indexOfCity],
-          mapToolbarEnabled: true,
-        ));
+      ),
+      drawer: HomeDrawer(),
+      body: GoogleMap(
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        mapType: mapTypeHybrid ? MapType.hybrid : MapType.normal,
+        onMapCreated: _onMapCreated,
+        markers: _markers,
+        initialCameraPosition: positions[indexOfCity],
+        mapToolbarEnabled: true,
+        zoomControlsEnabled: false,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            mapTypeHybrid = !mapTypeHybrid;
+          });
+        },
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        child: const Icon(Icons.map),
+      ),
+    );
   }
 }
 
@@ -175,39 +189,45 @@ class _HomeDrawerState extends State<HomeDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
         child: ListView(children: <Widget>[
-      Container(
-        padding: EdgeInsets.only(top: 50, left: 8, right: 8, bottom: 8),
-        // color: HexColor("#31343E"),
-        color: Colors.white,
-        child: Row(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(100.0),
-              child: Image.asset(
-                "assets/gas_station.jpg",
-                width: 80,
-                height: 80,
-                fit: BoxFit.fill,
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LogIn()));
+        },
+        child: Container(
+          padding: EdgeInsets.only(top: 50, left: 8, right: 8, bottom: 8),
+          // color: HexColor("#31343E"),
+          color: Colors.white,
+          child: Row(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: Image.asset(
+                  "assets/account_photo_default.png",
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: "Name Surname\n",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat',
-                        color: Colors.black87)),
-                TextSpan(
-                    text: "@username",
-                    style: TextStyle(
-                        fontFamily: 'Montserrat', color: Colors.black54)),
-              ]),
-            ),
-          ],
+              SizedBox(
+                width: 8,
+              ),
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Name Surname\n",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat',
+                          color: Colors.black87)),
+                  TextSpan(
+                      text: "@username",
+                      style: TextStyle(
+                          fontFamily: 'Montserrat', color: Colors.black54)),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
       Divider(height: 1, thickness: 1, color: Colors.blueGrey[900]),

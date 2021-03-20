@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gasapp/screens/account_screen.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -175,7 +176,7 @@ class _LogInState extends State<LogIn> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: FlatButton(
-                          onPressed: () async {},
+                          onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));}/*async {}*/,
                           child: Text(
                             "LOGIN",
                             style: TextStyle(
