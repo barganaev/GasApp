@@ -176,7 +176,12 @@ class _LogInState extends State<LogIn> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: FlatButton(
-                          onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));}/*async {}*/,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AccountScreen()));
+                          } /*async {}*/,
                           child: Text(
                             "LOGIN",
                             style: TextStyle(
