@@ -58,6 +58,22 @@ class _HomeScreenState extends State<HomeScreen> {
     await curLocation();
   }
 
+  Set<Marker> markers(BuildContext context) {
+    Set<Marker> markers;
+    markers.add(
+      Marker(
+    onTap: () {
+      showModalBottomSheet(context: context, builder: builder){
+
+      }
+    },
+    markerId: MarkerId('id-1'),
+    position: LatLng(43.667631, 51.150840),
+    infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+  ),);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
