@@ -31,8 +31,26 @@ Set<Marker> markers = {
     markerId: MarkerId('id-1'),
     position: LatLng(43.667631, 51.150840),
     infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+  ),
+  Marker(
+    markerId: MarkerId('id-1'),
+    position: LatLng(43.668038, 51.194485),
+    infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-  )
+  ),
+  Marker(
+    markerId: MarkerId('id-1'),
+    position: LatLng(43.666453, 51.154716),
+    infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+  ),
+  Marker(
+    markerId: MarkerId('id-1'),
+    position: LatLng(43.641045, 51.181734),
+    infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
+  ),
 };
 
 String mapStyle = '''
