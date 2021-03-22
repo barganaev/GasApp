@@ -93,22 +93,31 @@ class _LogInState extends State<LogIn> {
                               autocorrect: false,
                               validator: (String inValue) {},
                               onSaved: (String inValue) {},
+                              onFieldSubmitted: (val) {
+                                
+                              },
                               decoration: InputDecoration(
-                                  border: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xFFDDDDDD)),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFFDDDDDD),
                                   ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xFFFDBC4E)),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFFFDBC4E),
                                   ),
-                                  errorStyle:
-                                      TextStyle(color: Color(0xFFE04146)),
-                                  labelText: "login",
-                                  hintStyle:
-                                      TextStyle(color: Color(0xFFDDDDDD)),
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFFDDDDDD))),
+                                ),
+                                errorStyle: TextStyle(
+                                  color: Color(0xFFE04146),
+                                ),
+                                labelText: "login",
+                                hintStyle: TextStyle(
+                                  color: Color(0xFFDDDDDD),
+                                ),
+                                labelStyle: TextStyle(
+                                  color: Color(0xFFDDDDDD),
+                                ),
+                              ),
                               style: TextStyle(
                                 color: Color(0xFF172F6B),
                                 fontSize: 18.0,
@@ -128,19 +137,24 @@ class _LogInState extends State<LogIn> {
                                   onSaved: (String inValue) {},
                                   cursorColor: Color(0xFF172F6B),
                                   decoration: InputDecoration(
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Color(0xFFDDDDDD)),
+                                    border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFDDDDDD),
                                       ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Color(0xFFFDBC4E)),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFFDBC4E),
                                       ),
-                                      labelText: "password",
-                                      hintStyle:
-                                          TextStyle(color: Color(0xFFDDDDDD)),
-                                      labelStyle:
-                                          TextStyle(color: Color(0xFFDDDDDD))),
+                                    ),
+                                    labelText: "password",
+                                    hintStyle: TextStyle(
+                                      color: Color(0xFFDDDDDD),
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: Color(0xFFDDDDDD),
+                                    ),
+                                  ),
                                   style: TextStyle(
                                     color: Color(0xFF172F6B),
                                     fontSize: 18.0,
@@ -169,26 +183,28 @@ class _LogInState extends State<LogIn> {
                                   ),
                                 )
                               ],
-                            )
-                          ],
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AccountScreen()));
-                          } /*async {}*/,
-                          child: Text(
-                            "LOGIN",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: Color(0xFF2295C1),
                             ),
-                          ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AccountScreen(),
+                                    ),
+                                  );
+                                } /*async {}*/,
+                                child: Text(
+                                  "LOGIN",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Color(0xFF2295C1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

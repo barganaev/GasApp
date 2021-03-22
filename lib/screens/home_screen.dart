@@ -5,7 +5,7 @@ import 'package:gasapp/utils/cur_position.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gasapp/utils/utils.dart';
-import 'home_drawer.dart';
+import 'drawer/home_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -88,8 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
         markers: markers,
         initialCameraPosition: positions[indexOfCity],
         mapToolbarEnabled: true,
-        zoomControlsEnabled: false,
+        zoomControlsEnabled: true,
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
