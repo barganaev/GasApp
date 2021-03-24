@@ -210,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () {
           getBottomSheet();
         },
-        markerId: MarkerId('id-2'),
+        markerId: MarkerId('id-3'),
         position: LatLng(43.666453, 51.154716),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
       ),
@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () {
           getBottomSheet();
         },
-        markerId: MarkerId('id-2'),
+        markerId: MarkerId('id-4'),
         position: LatLng(43.641045, 51.181734),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
       ),
@@ -341,24 +341,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               );
             }
-            return Stack(children: [
-              Image.asset(
-                'assets/scr_1.png',
-                fit: BoxFit.fill,
-                height: screenSize(context).height,
-                width: screenSize(context).width,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: screenSize(context).height * 0.8,
-                  left: screenSize(context).width * 0.45,
+            return Stack(
+              children: [
+                Image.asset(
+                  'assets/scr_1.png',
+                  fit: BoxFit.fill,
+                  height: screenSize(context).height,
+                  width: screenSize(context).width,
                 ),
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
-                  backgroundColor: Colors.white,
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenSize(context).height * 0.8,
+                    left: screenSize(context).width * 0.45,
+                  ),
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
+                    backgroundColor: Colors.white,
+                  ),
                 ),
-              ),
-            ]);
+              ],
+            );
           },
         ),
       ),
