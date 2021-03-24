@@ -27,34 +27,45 @@ class _HomeDrawerState extends State<HomeDrawer> {
               );
             },
             child: Container(
-              color: Colors.white,
+              height: screenSize(context).height * 0.13,
+              //color: Colors.red,
+              //color: Colors.white,
               child: ListTile(
                 contentPadding: EdgeInsets.only(
-                  top: 0,
+                  top: 20,
                   left: 10,
                   right: 10,
                   bottom: 0,
                 ),
                 leading: Image.asset(
-                  "assets/account_photo_default.png",
-                  width: screenSize(context).width * 0.2,
+                  "assets/logo_blue.png",
+                  //width: screenSize(context).width * 0.2,
                   // height: 50,
                   fit: BoxFit.fill,
                 ),
                 title: Text(
-                  "Name Surname",
+                  "АГЗС",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    color: Colors.black87,
-                  ),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
+                      color: Color(0xFF5897cf) /*Colors.black87*/,
+                      fontSize: 20),
                 ),
-                subtitle: Text("@username"),
-                trailing: Icon(Icons.arrow_right_sharp),
+                subtitle: Text(
+                  "Газозаправочные станции Мангистауской области",
+                  style: TextStyle(color: Color(0xFF5897cf), fontSize: 12),
+                ),
+                //trailing: Icon(Icons.arrow_right_sharp),
               ),
             ),
           ),
-          Divider(height: 1, thickness: 1, color: Colors.blueGrey[900]),
+          Divider(
+            height: 10,
+            thickness: 1,
+            color: Colors.grey /*Colors.blueGrey[900]*/,
+            indent: MediaQuery.of(context).size.width * 0.05,
+            endIndent: MediaQuery.of(context).size.width * 0.05,
+          ),
           ListTile(
             onTap: () {
               Navigator.push(
@@ -62,8 +73,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 MaterialPageRoute(builder: (context) => AboutCompany()),
               );
             },
-            title: Text("About company"),
-            trailing: Icon(Icons.arrow_right_sharp),
+            leading: Image.asset(
+              'assets/icon_2.png',
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            title: Text("Карта заправочных станций"),
+            //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
             onTap: () {
@@ -72,8 +87,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 MaterialPageRoute(builder: (context) => AboutProject()),
               );
             },
-            title: Text("About project"),
-            trailing: Icon(Icons.arrow_right_sharp),
+            leading: Image.asset(
+              'assets/icon_1.png',
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            title: Text("Объемы поставок газа"),
+            //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
             onTap: () {
@@ -82,19 +101,86 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 MaterialPageRoute(builder: (context) => GasBalance()),
               );
             },
-            title: Text("Balance"),
-            trailing: Icon(Icons.arrow_right_sharp),
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Container(
-            height: screenSize(context).height * 0.5,
-            color: Colors.orangeAccent,
-            child: Center(
-              child: Text("Ads"),
+            leading: Image.asset(
+              'assets/icon_3.png',
+              width: MediaQuery.of(context).size.width * 0.07,
             ),
-          )
+            title: Text("Перечень станций"),
+            //trailing: Icon(Icons.arrow_right_sharp),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => LogIn()));
+            },
+            leading: Image.asset(
+              'assets/icon_4.png',
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            title: Text("Вход в личный кабинет"),
+            //trailing: Icon(Icons.arrow_right_sharp),
+          ),
+          Divider(
+            height: 10,
+            thickness: 1,
+            color: Colors.grey /*Colors.blueGrey[900]*/,
+            indent: MediaQuery.of(context).size.width * 0.05,
+            endIndent: MediaQuery.of(context).size.width * 0.05,
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutCompany()),
+              );
+            },
+            leading: Image.asset(
+              'assets/icon_5.png',
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            title: Text("Сообщить о проблеме"),
+            //trailing: Icon(Icons.arrow_right_sharp),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutProject()),
+              );
+            },
+            leading: Image.asset(
+              'assets/icon_6.png',
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            title: Text("Обратнаяя связь"),
+            //trailing: Icon(Icons.arrow_right_sharp),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GasBalance()),
+              );
+            },
+            leading: Image.asset(
+              'assets/icon_7.png',
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            title: Text("О приложении"),
+            //trailing: Icon(Icons.arrow_right_sharp),
+          ),
+
+          // SizedBox(
+          //   height: 40,
+          // ),
+          // Container(
+          //   height: screenSize(context).height * 0.5,
+          //   color: Colors.orangeAccent,
+          //   child: Center(
+          //     child: Text("Ads"),
+          //   ),
+          // )
+
           // Container(
           //   height: MediaQuery.of(context).size.height,
           //   color: Colors.white,

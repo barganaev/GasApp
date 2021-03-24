@@ -249,6 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //     onChanged: onChangedCallback,
       //   ),
       // ),
+      backgroundColor: Colors.grey.shade500,
       drawer: HomeDrawer(),
       body: SafeArea(
         child: BlocBuilder<MapBloc, MapState>(
@@ -340,9 +341,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               );
             }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Stack(children: [
+              Image.asset(
+                'assets/scr_1.png',
+                fit: BoxFit.fill,
+                width: screenSize(context).width,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: screenSize(context).height * 0.7,
+                  left: screenSize(context).width * 0.45,
+                ),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
+                  backgroundColor: Colors.white,
+                ),
+              ),
+            ]);
           },
         ),
       ),

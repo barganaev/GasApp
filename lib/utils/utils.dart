@@ -84,7 +84,6 @@ List<CameraPosition> positions = [
 
 Set<Marker> markers = {
   Marker(
-    onTap: () {},
     markerId: MarkerId('id-1'),
     position: LatLng(43.667631, 51.150840),
     infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
