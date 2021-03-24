@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gasapp/screens/account_screen.dart';
+import 'package:gasapp/screens/verify_screen.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -74,148 +75,148 @@ class _LogInState extends State<LogIn> {
               SizedBox(
                 height: 200,
               ),
-              Center(
-                child: Text("Войти"),
-              )
-              // Expanded(
-              //   child: SingleChildScrollView(
-              //     child: Container(
-              //       // padding: EdgeInsets.only(top: screenHeight * 0.2),
-              //       // color: Colors.amber,
-              //       // padding: EdgeInsets.only(bottom: screenHeight * 0.1),
-              //       child: Column(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         children: <Widget>[
-              //           Form(
-              //             autovalidate: autovalidate,
-              //             key: this._formKey,
-              //             child: Column(
-              //               children: <Widget>[
-              //                 TextFormField(
-              //                   controller: iinController,
-              //                   autofocus: false,
-              //                   maxLines: 1,
-              //                   focusNode: _nodeText1,
-              //                   keyboardType: TextInputType.number,
-              //                   autocorrect: false,
-              //                   validator: (String inValue) {},
-              //                   onSaved: (String inValue) {},
-              //                   decoration: InputDecoration(
-              //                     border: UnderlineInputBorder(
-              //                       borderSide: BorderSide(
-              //                         color: Color(0xFFDDDDDD),
-              //                       ),
-              //                     ),
-              //                     focusedBorder: UnderlineInputBorder(
-              //                       borderSide: BorderSide(
-              //                         color: Color(0xFFFDBC4E),
-              //                       ),
-              //                     ),
-              //                     errorStyle: TextStyle(
-              //                       color: Color(0xFFE04146),
-              //                     ),
-              //                     labelText: "Номер телефона",
-              //                     hintStyle: TextStyle(
-              //                       color: Color(0xFFDDDDDD),
-              //                     ),
-              //                     labelStyle: TextStyle(
-              //                       color: Color(0xFFDDDDDD),
-              //                     ),
-              //                   ),
-              //                   style: TextStyle(
-              //                     color: Color(0xFF172F6B),
-              //                     fontSize: 18.0,
-              //                   ),
-              //                 ),
-              //                 Stack(
-              //                   children: [
-              //                     TextFormField(
-              //                       controller: passwordController,
-              //                       obscureText: _hidePassword,
-              //                       autofocus: false,
-              //                       focusNode: _nodeText2,
-              //                       validator: (String inValue) {
-              //                         if (inValue.length < 3) {}
-              //                         return null;
-              //                       },
-              //                       onSaved: (String inValue) {},
-              //                       cursorColor: Color(0xFF172F6B),
-              //                       decoration: InputDecoration(
-              //                         border: UnderlineInputBorder(
-              //                           borderSide: BorderSide(
-              //                             color: Color(0xFFDDDDDD),
-              //                           ),
-              //                         ),
-              //                         focusedBorder: UnderlineInputBorder(
-              //                           borderSide: BorderSide(
-              //                             color: Color(0xFFFDBC4E),
-              //                           ),
-              //                         ),
-              //                         labelText: "Пароль",
-              //                         hintStyle: TextStyle(
-              //                           color: Color(0xFFDDDDDD),
-              //                         ),
-              //                         labelStyle: TextStyle(
-              //                           color: Color(0xFFDDDDDD),
-              //                         ),
-              //                       ),
-              //                       style: TextStyle(
-              //                         color: Color(0xFF172F6B),
-              //                         fontSize: 18.0,
-              //                       ),
-              //                     ),
-              //                     Align(
-              //                       alignment: Alignment.centerRight,
-              //                       child: Padding(
-              //                         padding: EdgeInsets.only(top: 10),
-              //                         child: FlatButton(
-              //                           onPressed: () {
-              //                             // setState(() {
-              //                             //   _hidePassword = !_hidePassword;
-              //                             // });
-              //                           },
-              //                           color: Colors.white,
-              //                           hoverColor: Colors.white,
-              //                           splashColor: Colors.white,
-              //                           highlightColor: Colors.white,
-              //                           child: Icon(
-              //                             _hidePassword
-              //                                 ? Icons.visibility_off
-              //                                 : Icons.visibility,
-              //                           ),
-              //                         ),
-              //                       ),
-              //                     )
-              //                   ],
-              //                 ),
-              //                 Align(
-              //                   alignment: Alignment.bottomRight,
-              //                   child: TextButton(
-              //                     onPressed: () {
-              //                       Navigator.push(
-              //                         context,
-              //                         MaterialPageRoute(
-              //                           builder: (context) => AccountScreen(),
-              //                         ),
-              //                       );
-              //                     } /*async {}*/,
-              //                     child: Text(
-              //                       "LOGIN",
-              //                       style: TextStyle(
-              //                         fontSize: 18.0,
-              //                         color: Color(0xFF2295C1),
-              //                       ),
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              // Center(
+              //   child: Text("Войти"),
+              // )
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    // padding: EdgeInsets.only(top: screenHeight * 0.2),
+                    // color: Colors.amber,
+                    // padding: EdgeInsets.only(bottom: screenHeight * 0.1),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Form(
+                          autovalidate: autovalidate,
+                          key: this._formKey,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                controller: iinController,
+                                autofocus: false,
+                                maxLines: 1,
+                                focusNode: _nodeText1,
+                                keyboardType: TextInputType.number,
+                                autocorrect: false,
+                                validator: (String inValue) {},
+                                onSaved: (String inValue) {},
+                                decoration: InputDecoration(
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFDDDDDD),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFFDBC4E),
+                                    ),
+                                  ),
+                                  errorStyle: TextStyle(
+                                    color: Color(0xFFE04146),
+                                  ),
+                                  labelText: "Номер телефона",
+                                  hintStyle: TextStyle(
+                                    color: Color(0xFFDDDDDD),
+                                  ),
+                                  labelStyle: TextStyle(
+                                    color: Color(0xFFDDDDDD),
+                                  ),
+                                ),
+                                style: TextStyle(
+                                  color: Color(0xFF172F6B),
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                              Stack(
+                                children: [
+                                  TextFormField(
+                                    controller: passwordController,
+                                    obscureText: _hidePassword,
+                                    autofocus: false,
+                                    focusNode: _nodeText2,
+                                    validator: (String inValue) {
+                                      if (inValue.length < 3) {}
+                                      return null;
+                                    },
+                                    onSaved: (String inValue) {},
+                                    cursorColor: Color(0xFF172F6B),
+                                    decoration: InputDecoration(
+                                      border: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFDDDDDD),
+                                        ),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFFDBC4E),
+                                        ),
+                                      ),
+                                      labelText: "Пароль",
+                                      hintStyle: TextStyle(
+                                        color: Color(0xFFDDDDDD),
+                                      ),
+                                      labelStyle: TextStyle(
+                                        color: Color(0xFFDDDDDD),
+                                      ),
+                                    ),
+                                    style: TextStyle(
+                                      color: Color(0xFF172F6B),
+                                      fontSize: 18.0,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          // setState(() {
+                                          //   _hidePassword = !_hidePassword;
+                                          // });
+                                        },
+                                        color: Colors.white,
+                                        hoverColor: Colors.white,
+                                        splashColor: Colors.white,
+                                        highlightColor: Colors.white,
+                                        child: Icon(
+                                          _hidePassword
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PhoneAuthVerify()/*AccountScreen()*/,
+                                      ),
+                                    );
+                                  } /*async {}*/,
+                                  child: Text(
+                                    "Далее",
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Color(0xFF2295C1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
