@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-Size screenSize(BuildContext context){
-  return MediaQuery.of(context).size;
-}
-
 class JsonUtils {
   static String mapJson = '''
   {
@@ -60,8 +56,6 @@ class JsonUtils {
 ''';
 }
 
-
-
 List<String> cities = [
   'Ақтау қаласы',
   'Жаңаөзен қаласы',
@@ -90,6 +84,9 @@ List<CameraPosition> positions = [
 
 Set<Marker> markers = {
   Marker(
+    onTap: () {
+      showModalBottomSheet(context: context, builder: builder)
+    },
     markerId: MarkerId('id-1'),
     position: LatLng(43.667631, 51.150840),
     infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
