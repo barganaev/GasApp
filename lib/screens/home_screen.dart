@@ -62,16 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
     Set<Marker> markers;
     markers.add(
       Marker(
-    onTap: () {
-      showModalBottomSheet(context: context, builder: builder){
-
-      }
-    },
     markerId: MarkerId('id-1'),
     position: LatLng(43.667631, 51.150840),
     infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
   ),);
+    return markers;
   }
 
   @override
@@ -101,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
         myLocationButtonEnabled: true,
         mapType: mapTypeHybrid ? MapType.hybrid : MapType.normal,
         onMapCreated: _onMapCreated,
-        markers: markers,
+        markers: markers(context),
         initialCameraPosition: positions[indexOfCity],
         mapToolbarEnabled: true,
         zoomControlsEnabled: true,
