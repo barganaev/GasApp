@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gasapp/screens/drawer/about_app.dart';
 import 'package:gasapp/utils/constants.dart';
 
 import '../login.dart';
@@ -159,7 +160,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => GasBalance()),
+                MaterialPageRoute(builder: (context) => AboutApp()),
               );
             },
             leading: Image.asset(
