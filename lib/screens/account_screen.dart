@@ -26,8 +26,9 @@ class _AccountScreenState extends State<AccountScreen> {
           IconButton(
             icon: Icon(Icons.location_city, color: Colors.white),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
+              Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => HomeScreen()));
             },
           ),
           // Padding(
