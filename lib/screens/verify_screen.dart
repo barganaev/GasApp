@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gasapp/screens/account_screen.dart';
 import 'package:gasapp/screens/home_screen.dart';
+import 'package:gasapp/utils/constants.dart';
 //import 'package:flutter_firebase/chat/lets_text.dart';
 //import 'package:flutter_firebase/providers/phone_auth.dart';
 //import 'package:flutter_firebase/utils/constants.dart';
@@ -69,8 +70,6 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
     children: <Widget>[
       Padding(
         padding: EdgeInsets.all(_fixedPadding),
-        // child: PhoneAuthWidgets.getLogo(
-        //     logoPath: widget.logo, height: _height * 0.2),
       ),
 
       // AppName:
@@ -122,7 +121,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'VERIFY',
+            'Подтвердить',
             style: TextStyle(
                 color: widget.cardBackgroundColor, fontSize: 18.0),
           ),
@@ -130,7 +129,26 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
         color: Colors.white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0)),
+      ),
+      Padding(
+        padding: EdgeInsets.only(top: screenSize(context).height * 0.1),
+        child: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Text(
+            'Назад',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
       )
+      // RaisedButton(
+      //   color: Color(0xFF5897cf),
+      //   child: Text('Назад', style: TextStyle(color: Colors.white),),
+      //   onPressed: (){
+      //     Navigator.pop(context);
+      //   }
+      // )
     ],
   );
 

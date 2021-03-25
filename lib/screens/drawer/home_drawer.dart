@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gasapp/screens/drawer/about_app.dart';
 import 'package:gasapp/screens/drawer/feedback.dart';
+import 'package:gasapp/screens/drawer/list_of_stations.dart';
 import 'package:gasapp/screens/drawer/report_about_problem.dart';
 import 'package:gasapp/utils/constants.dart';
 import '../login.dart';
@@ -98,7 +99,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutApp()),
+                MaterialPageRoute(builder: (context) => ListOfStations()),
               );
             },
             leading: Image.asset(
