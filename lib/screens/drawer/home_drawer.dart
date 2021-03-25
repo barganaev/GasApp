@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gasapp/screens/drawer/about_app.dart';
+import 'package:gasapp/screens/drawer/feedback.dart';
+import 'package:gasapp/screens/drawer/report_about_problem.dart';
 import 'package:gasapp/utils/constants.dart';
-
 import '../login.dart';
-import 'about_company.dart';
-import 'about_project.dart';
-import 'balance_gas.dart';
+
 
 class HomeDrawer extends StatefulWidget {
   @override
@@ -71,7 +70,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutCompany()),
+                MaterialPageRoute(builder: (context) => AboutApp()),
               );
             },
             leading: Image.asset(
@@ -85,7 +84,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutProject()),
+                MaterialPageRoute(builder: (context) => AboutApp()),
               );
             },
             leading: Image.asset(
@@ -99,7 +98,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => GasBalance()),
+                MaterialPageRoute(builder: (context) => AboutApp()),
               );
             },
             leading: Image.asset(
@@ -132,7 +131,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutCompany()),
+                MaterialPageRoute(builder: (context) => ReportAboutProblem()),
               );
             },
             leading: Image.asset(
@@ -144,10 +143,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AboutProject()),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Feedbackk()),);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => Feedback()),
+              // );
             },
             leading: Image.asset(
               'assets/icon_6.png',
