@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gasapp/screens/account_screen.dart';
 import 'package:gasapp/screens/verify_screen.dart';
+import 'package:gasapp/utils/constants.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -13,6 +17,8 @@ class _LogInState extends State<LogIn> {
   double screenHeight;
 //  RegExp iinexp = new RegExp(r"^[0-9]{12}$"); //TODO REGEX VALIDATION FORM
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  // var maskFormatter = new MaskTextInputFormatter(mask: '+7 (7**) ***-**-**', filter: { "*": RegExp(r'[0-9]')}, );
+  // var maskFormatter = new MaskTextInputFormatter(mask: '+7 (7**)*** ** **', filter: { "*": RegExp(r'[0-9]')}, );
   TextEditingController iinController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   final FocusNode _nodeText1 = FocusNode();
@@ -93,11 +99,13 @@ class _LogInState extends State<LogIn> {
                           child: Column(
                             children: <Widget>[
                               TextFormField(
+                                // inputFormatters: [maskFormatter],
                                 controller: iinController,
                                 autofocus: false,
                                 maxLines: 1,
                                 focusNode: _nodeText1,
                                 keyboardType: TextInputType.number,
+                                //keyboardType: TextInputType.phone,
                                 autocorrect: false,
                                 validator: (String inValue) {},
                                 onSaved: (String inValue) {},
@@ -146,6 +154,19 @@ class _LogInState extends State<LogIn> {
                                       color: Color(0xFF2295C1),
                                     ),
                                   ),
+                                ),
+                              ),
+
+                              Padding(
+                                padding: EdgeInsets.only(top: screenSize(context).height * 0.05),
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF2295C1)),
+                                  ),
+                                    onPressed: (){
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('вернуться на карту')
                                 ),
                               ),
                             ],
