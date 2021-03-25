@@ -303,11 +303,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   items: cities.map((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Flexible(
-                                        child: Text(
-                                          value,
-                                          style: TextStyle(color: Colors.black),
-                                        ),
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                     );
                                   }).toList(),

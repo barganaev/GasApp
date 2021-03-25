@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:gasapp/screens/account_screen.dart';
 import 'package:gasapp/screens/home_screen.dart';
 //import 'package:flutter_firebase/chat/lets_text.dart';
 //import 'package:flutter_firebase/providers/phone_auth.dart';
 //import 'package:flutter_firebase/utils/constants.dart';
 //import 'package:flutter_firebase/utils/widgets.dart';
+import 'package:provider/provider.dart';
 
 class PhoneAuthVerify extends StatefulWidget {
-  final Color cardBackgroundColor = Color(0xFFFCA967);
+  PhoneAuthVerify({this.phoneNumber});
+
+  String phoneNumber;
+  final Color cardBackgroundColor = Color(0xFF5897cf) /*Color(0xFFFCA967)*/;
   //final String logo = Assets.firebase;
   final String appName = "Вход";
 
@@ -28,12 +33,6 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
   @override
   void initState() {
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    FocusScope.of(context).unfocus();
-    super.dispose();
   }
 
   final scaffoldKey =
@@ -73,14 +72,20 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(_fixedPadding),
+            // child: PhoneAuthWidgets.getLogo(
+            //     logoPath: widget.logo, height: _height * 0.2),
           ),
+
+          // AppName:
           Text(widget.appName,
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 24.0,
                   fontWeight: FontWeight.w700)),
+
           SizedBox(height: 20.0),
+
           Row(
             children: <Widget>[
               SizedBox(width: 16.0),
@@ -93,7 +98,9 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
               SizedBox(width: 16.0),
             ],
           ),
+
           SizedBox(height: 16.0),
+
           Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -111,10 +118,15 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
               SizedBox(width: 5.0),
             ],
           ),
+
           SizedBox(height: 32.0),
+
           RaisedButton(
             elevation: 16.0,
-            onPressed: signIn,
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AccountScreen()));
+            } /*signIn*/,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -201,8 +213,8 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
 
   onVerified() async {
     await Future.delayed(Duration(seconds: 1));
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => HomeScreen() /*LetsChat()*/));
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) => AccountScreen()));
   }
 
   onAutoRetrievalTimeOut() {
