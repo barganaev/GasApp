@@ -57,27 +57,42 @@ class JsonUtils {
 }
 
 List<String> cities = [
-  'Ақтау қаласы',
-  'Жаңаөзен қаласы',
-  'Құрық ауданы',
-  'Бейнеу ауданы'
+  'город Актау',
+  'город Жанаозен',
+  'Бейнеуский район',
+  'Каракиянский район',
+  'Мангистауский район',
+  'Мунайлинский район',
+  'Тупкараганский район',
 ];
 
 List<CameraPosition> positions = [
   CameraPosition(
-    target: LatLng(43.655357, 51.156099),
+    target: LatLng(43.653482, 51.178438),
+    zoom: 12,
+  ),
+  CameraPosition(
+    target: LatLng(43.345590, 52.855986),
     zoom: 13,
   ),
   CameraPosition(
-    target: LatLng(43.342015, 52.857237),
+    target: LatLng(45.323931, 55.173259),
     zoom: 13,
   ),
   CameraPosition(
-    target: LatLng(43.178096, 51.680373),
-    zoom: 14,
+    target: LatLng(43.179964, 51.678460),
+    zoom: 13,
   ),
   CameraPosition(
-    target: LatLng(45.307847, 55.183664),
+    target: LatLng(44.138225, 52.164204),
+    zoom: 13,
+  ),
+  CameraPosition(
+    target: LatLng(43.694123, 51.304449),
+    zoom: 13,
+  ),
+  CameraPosition(
+    target: LatLng(44.501865, 50.264099),
     zoom: 13,
   ),
 ];

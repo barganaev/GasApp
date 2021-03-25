@@ -5,7 +5,7 @@ class AboutCompany extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About company"),
+        title: Text("О Компании"),
       ),
       body: Center(
         child: Text("About Company"),

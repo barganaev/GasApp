@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
 import 'package:gasapp/screens/home_screen.dart';
 import 'package:gasapp/utils/constants.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(MyApp());
 }
 
@@ -27,7 +33,7 @@ class LoadingScreen extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<MapBloc, MapState>(
         listener: (context, state) {
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (newcontext) => BlocProvider.value(
@@ -35,6 +41,7 @@ class LoadingScreen extends StatelessWidget {
                 child: HomeScreen(),
               ),
             ),
+            (Route<dynamic> route) => false,
           );
         },
         builder: (context, state) {

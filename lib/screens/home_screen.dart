@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool mapTypeHybrid = true;
 
   int indexOfCity = 0;
-  String selectedCountry = 'Ақтау қаласы';
+  String selectedCountry = 'город Актау';
   String selectedProvince;
 
   @override
@@ -270,8 +270,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.07,
-                      // left: MediaQuery.of(context).size.width * 0.05,
-                      // right: MediaQuery.of(context).size.width * 0.05,
                     ),
                     child: Row(
                       children: [
@@ -290,8 +288,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                           height: MediaQuery.of(context).size.height * 0.08,
-                          // width: MediaQuery.of(context).size.width * 0.75,
-                          //color: Colors.white,
                           child: Row(
                             children: [
                               Padding(
@@ -299,11 +295,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Icon(Icons.search),
                               ),
                               Container(
-                                // color: Colors.amber,
                                 width: screenSize(context).width * 0.65,
                                 child: DropdownButton<String>(
                                   underline: Container(),
-                                  // dropdownColor: Colors.lightBlue,
                                   value: selectedCountry,
                                   isExpanded: true,
                                   items: cities.map((String value) {
@@ -322,18 +316,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-
-                          // Center(
-                          //   child: TextField(
-                          //     decoration: InputDecoration(
-                          //         border: InputBorder.none,
-                          //         prefixIcon: Icon(Icons.search),
-                          //         hintText: 'Where are you going to?',
-                          //         hintStyle: TextStyle(
-                          //             fontWeight: FontWeight.bold,
-                          //             color: Colors.black)),
-                          //   ),
-                          // ),
                         ),
                       ],
                     ),
@@ -368,9 +350,11 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            mapTypeHybrid = !mapTypeHybrid;
-          });
+          setState(
+            () {
+              mapTypeHybrid = !mapTypeHybrid;
+            },
+          );
         },
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,

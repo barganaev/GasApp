@@ -68,10 +68,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AboutCompany()),
-              );
+              Navigator.of(context).pop();
+              // Scaffold.of(context).draw
             },
             leading: Image.asset(
               'assets/icon_2.png',
@@ -84,7 +82,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutProject()),
+                MaterialPageRoute(
+                    builder: (context) => GasBalance(
+                          title: "Объемы поставок газа",
+                        )),
               );
             },
             leading: Image.asset(
@@ -98,7 +99,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => GasBalance()),
+                MaterialPageRoute(
+                  builder: (context) => GasBalance(
+                    title: "Перечень станций",
+                  ),
+                ),
               );
             },
             leading: Image.asset(
@@ -131,7 +136,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutCompany()),
+                MaterialPageRoute(
+                  builder: (context) => GasBalance(
+                    title: "Сообщить о проблеме",
+                  ),
+                ),
               );
             },
             leading: Image.asset(
@@ -145,7 +154,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutProject()),
+                MaterialPageRoute(
+                  builder: (context) => GasBalance(
+                    title: "Обратнаяя связь",
+                  ),
+                ),
               );
             },
             leading: Image.asset(
@@ -159,7 +172,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => GasBalance()),
+                MaterialPageRoute(
+                  builder: (context) => GasBalance(
+                    title: "О приложении",
+                  ),
+                ),
               );
             },
             leading: Image.asset(
@@ -167,29 +184,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               width: MediaQuery.of(context).size.width * 0.07,
             ),
             title: Text("О приложении"),
-            //trailing: Icon(Icons.arrow_right_sharp),
           ),
-
-          // SizedBox(
-          //   height: 40,
-          // ),
-          // Container(
-          //   height: screenSize(context).height * 0.5,
-          //   color: Colors.orangeAccent,
-          //   child: Center(
-          //     child: Text("Ads"),
-          //   ),
-          // )
-
-          // Container(
-          //   height: MediaQuery.of(context).size.height,
-          //   color: Colors.white,
-          //   child: Column(
-          //     children: <Widget>[
-          //       // List items goes here...
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

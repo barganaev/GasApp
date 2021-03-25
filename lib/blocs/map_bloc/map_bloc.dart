@@ -12,7 +12,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   @override
   Stream<MapState> mapEventToState(MapEvent event) async* {
     if (event is MapGetMarkersEvent) {
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(Duration(seconds: 2));
       yield MapLoadedState();
     }
   }
