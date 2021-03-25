@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gasapp/screens/account_screen.dart';
 import 'package:gasapp/screens/home_screen.dart';
 //import 'package:flutter_firebase/chat/lets_text.dart';
 //import 'package:flutter_firebase/providers/phone_auth.dart';
@@ -7,7 +8,7 @@ import 'package:gasapp/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class PhoneAuthVerify extends StatefulWidget {
-  final Color cardBackgroundColor = Color(0xFFFCA967);
+  final Color cardBackgroundColor = Color(0xFF5897cf)/*Color(0xFFFCA967)*/;
   //final String logo = Assets.firebase;
   final String appName = "Вход";
 
@@ -117,7 +118,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
 
       RaisedButton(
         elevation: 16.0,
-        onPressed: signIn,
+        onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));}/*signIn*/,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -205,7 +206,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
   onVerified() async {
     await Future.delayed(Duration(seconds: 1));
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) => HomeScreen()/*LetsChat()*/));
+        .push(MaterialPageRoute(builder: (BuildContext context) => AccountScreen()));
   }
 
 

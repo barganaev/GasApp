@@ -128,67 +128,6 @@ class _LogInState extends State<LogIn> {
                                   fontSize: 18.0,
                                 ),
                               ),
-                              Stack(
-                                children: [
-                                  TextFormField(
-                                    controller: passwordController,
-                                    obscureText: _hidePassword,
-                                    autofocus: false,
-                                    focusNode: _nodeText2,
-                                    validator: (String inValue) {
-                                      if (inValue.length < 3) {}
-                                      return null;
-                                    },
-                                    onSaved: (String inValue) {},
-                                    cursorColor: Color(0xFF172F6B),
-                                    decoration: InputDecoration(
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFDDDDDD),
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFFDBC4E),
-                                        ),
-                                      ),
-                                      labelText: "Пароль",
-                                      hintStyle: TextStyle(
-                                        color: Color(0xFFDDDDDD),
-                                      ),
-                                      labelStyle: TextStyle(
-                                        color: Color(0xFFDDDDDD),
-                                      ),
-                                    ),
-                                    style: TextStyle(
-                                      color: Color(0xFF172F6B),
-                                      fontSize: 18.0,
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 10),
-                                      child: FlatButton(
-                                        onPressed: () {
-                                          // setState(() {
-                                          //   _hidePassword = !_hidePassword;
-                                          // });
-                                        },
-                                        color: Colors.white,
-                                        hoverColor: Colors.white,
-                                        splashColor: Colors.white,
-                                        highlightColor: Colors.white,
-                                        child: Icon(
-                                          _hidePassword
-                                              ? Icons.visibility_off
-                                              : Icons.visibility,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: TextButton(
