@@ -27,7 +27,6 @@ class _FeedbackkState extends State<Feedbackk> {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(left: screenSize(context).width * 0.1, right: screenSize(context).width * 0.1, bottom: screenSize(context).height * 0.1),
-          //padding: EdgeInsets.symmetric(vertical: screenSize(context).height * 0.1, horizontal: screenSize(context).width * 0.1),
           child: Column(
             children: [
               Container(
@@ -79,15 +78,28 @@ class _FeedbackkState extends State<Feedbackk> {
                 child: Align(alignment: Alignment.centerLeft, child: Text('Текст сообщения')),
               ),
               Container(
+                //color: Colors.red,
+                //margin: EdgeInsets.symmetric(vertical: screenSize(context).height * 0.1),
                 // height: screenSize(context).height * 0.15,
-                child: TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)
-                        )
+                child: TextFormField(
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black)
                     )
-                ),
+                  ),
+                )
               ),
+              Padding(
+                padding: EdgeInsets.only(top: screenSize(context).height * 0.03),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF2295C1)),
+                  ),
+                  onPressed: (){},
+                  child: Text('Отправить')
+                ),
+              )
             ],
           ),
         ),

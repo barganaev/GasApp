@@ -39,11 +39,9 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
               left: screenSize(context).width * 0.1,
               right: screenSize(context).width * 0.1,
               bottom: screenSize(context).height * 0.1),
-          //padding: EdgeInsets.symmetric(vertical: screenSize(context).height * 0.1, horizontal: screenSize(context).width * 0.1),
           child: Column(
             children: [
               Container(
-                //padding: EdgeInsets.only(left: screenSize(context).width * 0.1, right: screenSize(context).width * 0.1, top: screenSize(context).height * 0.1, bottom: screenSize(context).height * 0.02),
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -98,11 +96,25 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
               ),
               Container(
                 // height: screenSize(context).height * 0.15,
-                child: TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)))),
+                child: TextFormField(
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)
+                      )
+                  ),
+                )
               ),
+              Padding(
+                padding: EdgeInsets.only(top: screenSize(context).height * 0.03),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF2295C1)),
+                  ),
+                    onPressed: (){},
+                    child: Text('Отправить')
+                ),
+              )
             ],
           ),
         ),
