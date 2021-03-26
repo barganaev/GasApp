@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await curLocation();
   }
 
-  void getBottomSheet() {
+  void getBottomSheet(BuildContext context) {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -186,48 +186,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Set<Marker> markers(BuildContext context) {
     Set<Marker> markers = {};
-    BlocProvider.of<MapBloc>(context).state;
-    markers.add(
-      Marker(
-        onTap: () {
-          getBottomSheet();
-        },
-        markerId: MarkerId('id-1'),
-        position: LatLng(43.667631, 51.150840),
-        icon: widget.customIconActive,
-        // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      ),
-    );
-    markers.add(
-      Marker(
-        onTap: () {
-          getBottomSheet();
-        },
-        markerId: MarkerId('id-2'),
-        position: LatLng(43.668038, 51.194485),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      ),
-    );
-    markers.add(
-      Marker(
-        onTap: () {
-          getBottomSheet();
-        },
-        markerId: MarkerId('id-3'),
-        position: LatLng(43.666453, 51.154716),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-      ),
-    );
-    markers.add(
-      Marker(
-        onTap: () {
-          getBottomSheet();
-        },
-        markerId: MarkerId('id-4'),
-        position: LatLng(43.641045, 51.181734),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-      ),
-    );
+    for (int i = 1; i <= widget.list.length; i++) {
+      markers.add(
+        Marker(
+          onTap: () {
+            getBottomSheet(context);
+          },
+          markerId: MarkerId('id-$i'),
+          position: LatLng(
+            double.parse(widget.list[i - 1].coordX),
+            double.parse(widget.list[i - 1].coordY),
+          ),
+          icon: widget.list[i - 1].isOpen == "0"
+              ? widget.customIconNotActive
+              : widget.customIconActive,
+          // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        ),
+      );
+    }
     return markers;
   }
 
