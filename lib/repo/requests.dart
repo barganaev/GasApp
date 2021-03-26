@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:gasapp/models/check_login_model.dart';
 import 'package:gasapp/models/login_model.dart';
 import 'package:gasapp/models/regions_model.dart';
+import 'package:gasapp/models/stations_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiProvider {
@@ -21,9 +23,34 @@ class ApiProvider {
         var responseJson = await _regionsReq();
         return responseJson;
         break;
+      case "stations":
+        var responseJson = await _stationsReq();
+        return responseJson;
+        break;
       default:
-        throw Exception();
+        print("JAKE JAKS");
+        return Exception();
+      // throw Exception();
     }
+  }
+
+  Future _stationsReq() async {
+    final String _baseUrl = "https://agzs.process.kz/api/public/api/stations";
+    String requestName = "stations";
+    var responseJson;
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{}),
+      );
+      print(response.statusCode);
+      print(response.body);
+      responseJson = _response(response, requestName);
+    } catch (e) {}
+    return responseJson;
   }
 
   Future _regionsReq() async {
@@ -36,10 +63,7 @@ class ApiProvider {
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        // body: jsonEncode(<String, String>{
-        //   'phone_number': phoneNumber,
-        //   'password': password,
-        // }),
+        body: jsonEncode(<String, String>{}),
       );
       responseJson = _response(response, requestName);
     } catch (e) {}
@@ -101,6 +125,11 @@ class ApiProvider {
           var responseJson = json.decode(response.body);
           RegionsModel regionsModel = RegionsModel.fromJson(responseJson);
           return regionsModel;
+        } else if (requestname == "stations") {
+          // var responseJson = json.decode(response.body);
+          List<StationsModel> stationsModel =
+              stationsModelFromJson(response.body);
+          return stationsModel;
         }
         break;
       // case 400:

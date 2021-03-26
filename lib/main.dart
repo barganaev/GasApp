@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
 import 'package:gasapp/screens/home_screen.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'blocs/regions_bloc/regions_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<MapBloc>(
             create: (context) => MapBloc()..add(MapGetMarkersEvent()),
           ),
-          BlocProvider<RegionsBloc>(
-            create: (context) => RegionsBloc()..add(RegionsGetEvent()),
-          ),
+          // BlocProvider<RegionsBloc>(
+          //   create: (context) => RegionsBloc()..add(RegionsGetEvent()),
+          // ),
         ],
         child: LoadingScreen(),
       ),
@@ -36,22 +36,62 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class LoadingScreen extends StatelessWidget {
+class LoadingScreen extends StatefulWidget {
+  @override
+  _LoadingScreenState createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen> {
+  BitmapDescriptor customIconActive;
+  BitmapDescriptor customIconNotActive;
+  @override
+  void initState() {
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(), 'assets/ico_agzs_green.png')
+        .then((onValue) {
+      customIconActive = onValue;
+    });
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(), 'assets/ico_agzs_gray.png')
+        .then((onValue) {
+      customIconNotActive = onValue;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<MapBloc, MapState>(
         listener: (context, state) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (newcontext) => BlocProvider.value(
-                value: BlocProvider.of<MapBloc>(context),
-                child: HomeScreen(),
+          if (state is MapLoadedState) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (newcontext) => BlocProvider.value(
+                  value: BlocProvider.of<MapBloc>(context),
+                  child: HomeScreen(
+                    list: state.stationsModel,
+                    customIconActive: customIconActive,
+                    customIconNotActive: customIconNotActive,
+                  ),
+                ),
               ),
-            ),
-            (Route<dynamic> route) => false,
-          );
+              (Route<dynamic> route) => false,
+            );
+          } else if (state is MapErrorState) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (newcontext) => BlocProvider(
+                  create: (context) => MapBloc(),
+                  child: HomeScreen(
+                    list: [],
+                  ),
+                ),
+              ),
+            );
+          }
         },
         builder: (context, state) {
           return Stack(

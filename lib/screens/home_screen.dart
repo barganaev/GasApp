@@ -1,17 +1,25 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
+import 'package:gasapp/models/stations_model.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:gasapp/utils/cur_position.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gasapp/utils/utils.dart';
 import 'drawer/home_drawer.dart';
-//import 'package:wakelock/wakelock.dart';
 
 class HomeScreen extends StatefulWidget {
+  List<StationsModel> list;
+  BitmapDescriptor customIconActive;
+  BitmapDescriptor customIconNotActive;
+
+  HomeScreen({this.list, this.customIconActive, this.customIconNotActive});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -24,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int indexOfCity = 0;
   String selectedCountry = 'город Актау';
   String selectedProvince;
+
+  BitmapDescriptor pinLocationIcon;
 
   @override
   void initState() {
@@ -176,6 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Set<Marker> markers(BuildContext context) {
     Set<Marker> markers = {};
+    BlocProvider.of<MapBloc>(context).state;
     markers.add(
       Marker(
         onTap: () {
@@ -183,8 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         markerId: MarkerId('id-1'),
         position: LatLng(43.667631, 51.150840),
-        // infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        icon: widget.customIconActive,
+        // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       ),
     );
     markers.add(
