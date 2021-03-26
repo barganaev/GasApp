@@ -8,9 +8,9 @@ abstract class LoginEvent extends Equatable {
 }
 
 class AuthLoginEvent extends LoginEvent {
-  final String login;
+  final String phoneNumber;
   final String password;
-  AuthLoginEvent({@required this.login, @required this.password});
+  AuthLoginEvent({@required this.phoneNumber, @required this.password});
 }
 
 class AuthLogoutEvent extends LoginEvent {}

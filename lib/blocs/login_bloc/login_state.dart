@@ -7,13 +7,13 @@ abstract class LoginState extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginInitial extends LoginState {}
+class LoginInitialState extends LoginState {}
 
-class LoginLoading extends LoginState {}
+class LoginLoadingState extends LoginState {}
 
-class LoginLoaded extends LoginState {
+class LoginLoadedState extends LoginState {
   final LoginModel loginModel;
-  LoginLoaded({@required this.loginModel}) : assert(loginModel != null);
+  LoginLoadedState({@required this.loginModel}) : assert(loginModel != null);
 }
 
 class LoginErrorState extends LoginState {}

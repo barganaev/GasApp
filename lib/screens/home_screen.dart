@@ -9,6 +9,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gasapp/utils/utils.dart';
 import 'drawer/home_drawer.dart';
+import 'package:wakelock/wakelock.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -72,112 +73,103 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-            height: 300,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("ASAN GAS",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Flexible(
-                        child: Text("Address"),
-                      ),
-                    ),
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Text("27a - 14"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Flexible(
-                        child: Text("Work Time"),
-                      ),
-                    ),
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Text("10:00 - 22:00"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Flexible(
-                        child: Text("Status"),
-                      ),
-                    ),
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Text("Gaz bar"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Flexible(
-                        child: Text("Объем запаса"),
-                      ),
-                    ),
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Text("10 тонна"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Flexible(
-                        child: Text(
-                            "Ориентировочные даты, в котовых газ должен быть"),
-                      ),
-                    ),
-                    Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Text("25.03 - 22.04"),
-                    ),
-                  ],
-                ),
-              ],
-            ));
+          height: 300,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("ASAN GAS",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("Address"),
+                  ),
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("27a - 14"),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("Work Time"),
+                  ),
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("10:00 - 22:00"),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("Status"),
+                  ),
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("Gaz bar"),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("Объем запаса"),
+                  ),
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("10 тонна"),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child:
+                        Text("Ориентировочные даты, в котовых газ должен быть"),
+                  ),
+                  Container(
+                    width: screenSize(context).width * 0.4,
+                    child: Text("25.03 - 22.04"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
       },
     );
   }

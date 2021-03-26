@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
 import 'package:gasapp/screens/account_screen.dart';
-import 'package:gasapp/screens/home_screen.dart';
 //import 'package:flutter_firebase/chat/lets_text.dart';
 //import 'package:flutter_firebase/providers/phone_auth.dart';
 //import 'package:flutter_firebase/utils/constants.dart';
 //import 'package:flutter_firebase/utils/widgets.dart';
-import 'package:provider/provider.dart';
 
 class PhoneAuthVerify extends StatefulWidget {
   PhoneAuthVerify({this.phoneNumber});
@@ -45,12 +45,14 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
     _fixedPadding = _height * 0.025;
 
     return Scaffold(
-      key: scaffoldKey,
       backgroundColor: Colors.white.withOpacity(0.95),
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: _getBody(),
+      body: BlocProvider<LoginBloc>(
+        create: (context) => LoginBloc(),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: _getBody(),
+            ),
           ),
         ),
       ),
@@ -124,13 +126,20 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
           RaisedButton(
             elevation: 16.0,
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AccountScreen()));
+              print(code);
+              print(code);
+              print(code);
+              print(code);
+              print(code);
+              // BlocProvider.of<LoginBloc>(context).add(AuthLoginEvent(
+              //     phoneNumber: widget.phoneNumber, password: code));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => AccountScreen()));
             } /*signIn*/,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'VERIFY',
+                'Подтвердить',
                 style: TextStyle(
                     color: widget.cardBackgroundColor, fontSize: 18.0),
               ),

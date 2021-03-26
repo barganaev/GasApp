@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gasapp/screens/drawer/about_app.dart';
+import 'package:gasapp/screens/drawer/feedback.dart';
+import 'package:gasapp/screens/drawer/report_about_problem.dart';
 import 'package:gasapp/utils/constants.dart';
-
 import '../login.dart';
-import 'about_company.dart';
-import 'about_project.dart';
-import 'balance_gas.dart';
 
 class HomeDrawer extends StatefulWidget {
   @override
@@ -68,8 +67,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             onTap: () {
-              Navigator.of(context).pop();
-              // Scaffold.of(context).draw
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutApp()),
+              );
             },
             leading: Image.asset(
               'assets/icon_2.png',
@@ -82,10 +83,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => GasBalance(
-                          title: "Объемы поставок газа",
-                        )),
+                MaterialPageRoute(builder: (context) => AboutApp()),
               );
             },
             leading: Image.asset(
@@ -99,11 +97,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => GasBalance(
-                    title: "Перечень станций",
-                  ),
-                ),
+                MaterialPageRoute(builder: (context) => AboutApp()),
               );
             },
             leading: Image.asset(
@@ -136,11 +130,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => GasBalance(
-                    title: "Сообщить о проблеме",
-                  ),
-                ),
+                MaterialPageRoute(builder: (context) => ReportAboutProblem()),
               );
             },
             leading: Image.asset(
@@ -154,11 +144,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => GasBalance(
-                    title: "Обратнаяя связь",
-                  ),
-                ),
+                MaterialPageRoute(builder: (context) => Feedbackk()),
               );
             },
             leading: Image.asset(
@@ -172,11 +158,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => GasBalance(
-                    title: "О приложении",
-                  ),
-                ),
+                MaterialPageRoute(builder: (context) => AboutApp()),
               );
             },
             leading: Image.asset(

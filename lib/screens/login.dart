@@ -1,8 +1,11 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/check_number_bloc/check_number_bloc.dart';
 import 'package:gasapp/screens/verify_screen.dart';
+import 'package:gasapp/utils/constants.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -15,6 +18,8 @@ class _LogInState extends State<LogIn> {
 //  RegExp iinexp = new RegExp(r"^[0-9]{12}$"); //TODO REGEX VALIDATION FORM
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   TextEditingController phoneController = new TextEditingController();
+  // var maskFormatter = new MaskTextInputFormatter(mask: '+7 (7**) ***-**-**', filter: { "*": RegExp(r'[0-9]')}, );
+  // var maskFormatter = new MaskTextInputFormatter(mask: '+7 (7**)*** ** **', filter: { "*": RegExp(r'[0-9]')}, );
   final FocusNode _nodeText1 = FocusNode();
   bool autovalidate = false;
 
@@ -23,11 +28,11 @@ class _LogInState extends State<LogIn> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    FocusScope.of(context).unfocus();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // FocusScope.of(context).unfocus();
+  //   // super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -130,16 +135,25 @@ class _LogInState extends State<LogIn> {
                                 ),
                                 BlocConsumer<CheckNumberBloc, CheckNumberState>(
                                   listener: (context, state) {
-                                    // if (state is CheckNumberLoadedState) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PhoneAuthVerify(
-                                          phoneNumber: phoneController.text,
+                                    if (state is CheckNumberLoadedState) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PhoneAuthVerify(
+                                            phoneNumber: phoneController.text,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                    // }
+                                      );
+                                    } else if (state is CheckNumberErrorState) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PhoneAuthVerify(
+                                            phoneNumber: phoneController.text,
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   },
                                   builder: (context, state) {
                                     if (state is CheckNumberLoadingState) {
@@ -155,6 +169,7 @@ class _LogInState extends State<LogIn> {
                                       alignment: Alignment.bottomRight,
                                       child: TextButton(
                                         onPressed: () {
+                                          FocusScope.of(context).unfocus();
                                           if (_formKey.currentState
                                               .validate()) {
                                             print(phoneController.text);
@@ -180,6 +195,20 @@ class _LogInState extends State<LogIn> {
                                       ),
                                     );
                                   },
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: screenSize(context).height * 0.05),
+                                  child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Color(0xFF2295C1)),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('вернуться на карту')),
                                 ),
                               ],
                             ),
