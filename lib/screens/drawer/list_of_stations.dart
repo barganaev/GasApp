@@ -45,10 +45,24 @@ class _ListOfStationsState extends State<ListOfStations> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.blue,
+            )),
+      ),
       body: Container(
         padding: EdgeInsets.only(
-            top: screenSize(context).height * 0.1,
+            top: screenSize(context).height * 0.01,
             left: screenSize(context).width * 0.1,
+            bottom: screenSize(context).height * 0.01,
             right: screenSize(context).width * 0.1),
         child: Column(
           children: [
@@ -99,16 +113,17 @@ class _ListOfStationsState extends State<ListOfStations> {
                         child: Column(
                           children: [
                             Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Заправочная станция LPG Trade',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                )),
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Заправочная станция LPG Trade',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                            ),
                             Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text('Владелец: TOO LPG Trade')),
+                              alignment: Alignment.centerLeft,
+                              child: Text('Владелец: TOO LPG Trade'),
+                            ),
                             Text(
                               'Местонахождение: город Актау, микрорайон 21, промышленная база',
                               style: TextStyle(fontSize: 15),

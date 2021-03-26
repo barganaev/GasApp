@@ -9,7 +9,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gasapp/utils/utils.dart';
 import 'drawer/home_drawer.dart';
-import 'package:wakelock/wakelock.dart';
+//import 'package:wakelock/wakelock.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //     onChanged: onChangedCallback,
       //   ),
       // ),
-      backgroundColor: Colors.grey.shade500,
+      backgroundColor: Colors.white,
       drawer: HomeDrawer(),
       body: SafeArea(
         child: BlocBuilder<MapBloc, MapState>(
@@ -261,17 +261,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.07,
+                      top: MediaQuery.of(context).size.height * 0.04,
                     ),
                     child: Row(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: EdgeInsets.symmetric(horizontal: 5),
                           child: IconButton(
                             onPressed: () {
                               Scaffold.of(context).openDrawer();
                             },
-                            icon: Icon(Icons.menu),
+                            icon: Icon(
+                              Icons.menu,
+                              size: 30,
+                              // color: Colors.white,
+                            ),
                           ),
                         ),
                         Container(
@@ -279,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                           ),
-                          height: MediaQuery.of(context).size.height * 0.08,
+                          height: MediaQuery.of(context).size.height * 0.05,
                           child: Row(
                             children: [
                               Padding(
@@ -287,6 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Icon(Icons.search),
                               ),
                               Container(
+                                padding: EdgeInsets.only(right: 10),
                                 width: screenSize(context).width * 0.65,
                                 child: DropdownButton<String>(
                                   underline: Container(),

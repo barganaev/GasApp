@@ -60,10 +60,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AboutApp()),
-              );
+              Navigator.pop(context);
             },
             leading: Image.asset(
               'assets/icon_2.png',
@@ -84,7 +81,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
               width: MediaQuery.of(context).size.width * 0.07,
             ),
             title: Text("Объемы поставок газа"),
-            //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
             onTap: () {
