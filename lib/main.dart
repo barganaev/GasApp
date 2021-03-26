@@ -6,6 +6,7 @@ import 'package:gasapp/screens/home_screen.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'dart:io' show Platform;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,16 +47,29 @@ class _LoadingScreenState extends State<LoadingScreen> {
   BitmapDescriptor customIconNotActive;
   @override
   void initState() {
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(), 'assets/ico_agzs_green.png')
-        .then((onValue) {
-      customIconActive = onValue;
-    });
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(), 'assets/ico_agzs_gray.png')
-        .then((onValue) {
-      customIconNotActive = onValue;
-    });
+    if (Platform.isAndroid) {
+      BitmapDescriptor.fromAssetImage(
+              ImageConfiguration(), 'assets/ico_agzs_green.png')
+          .then((onValue) {
+        customIconActive = onValue;
+      });
+      BitmapDescriptor.fromAssetImage(
+              ImageConfiguration(), 'assets/ico_agzs_gray.png')
+          .then((onValue) {
+        customIconNotActive = onValue;
+      });
+    } else {
+      BitmapDescriptor.fromAssetImage(
+              ImageConfiguration(), 'assets/ico_agzs_green_ios.png')
+          .then((onValue) {
+        customIconActive = onValue;
+      });
+      BitmapDescriptor.fromAssetImage(
+              ImageConfiguration(), 'assets/ico_agzs_gray_ios.png')
+          .then((onValue) {
+        customIconNotActive = onValue;
+      });
+    }
     super.initState();
   }
 
