@@ -9,6 +9,8 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
 
+
+
   bool switchState = false;
 
   bool falseBooleanCreatedForCheckingTheStation = false;
@@ -80,7 +82,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
                                   //color: Colors.green,
@@ -111,14 +113,29 @@ class _AccountScreenState extends State<AccountScreen> {
                                     ],
                                   ),
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    // width: 200,
-                                    //color: Colors.blue,
-                                    child: Text('Сейчас: ')
+
+                                Padding(
+                                  padding: EdgeInsets.only(right: screenSize(context).width * 0.03),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        // width: 200,
+                                        //color: Colors.blue,
+                                          child: Text('Сейчас: ')
+                                      ),
+                                      Status()
+                                    ],
                                   ),
                                 ),
-                                Status()
+
+                                // Expanded(
+                                //   child: Container(
+                                //     // width: 200,
+                                //     //color: Colors.blue,
+                                //     child: Text('Сейчас: ')
+                                //   ),
+                                // ),
+                                // Status()
                               ],
                             ),
                             Padding(

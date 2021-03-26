@@ -101,7 +101,7 @@ class _LogInState extends State<LogIn> {
                                   autocorrect: false,
                                   validator: (String inValue) {
                                     if (inValue == null || inValue.isEmpty) {
-                                      return 'Please enter some text';
+                                      return 'Пожалуйста, введите ваш номер';
                                     }
                                     return null;
                                   },

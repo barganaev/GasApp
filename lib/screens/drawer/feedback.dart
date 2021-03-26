@@ -10,9 +10,24 @@ class _FeedbackkState extends State<Feedbackk> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.blue,
+            )
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: screenSize(context).height * 0.1, horizontal: screenSize(context).width * 0.1),
+          padding: EdgeInsets.only(left: screenSize(context).width * 0.1, right: screenSize(context).width * 0.1, bottom: screenSize(context).height * 0.1),
+          //padding: EdgeInsets.symmetric(vertical: screenSize(context).height * 0.1, horizontal: screenSize(context).width * 0.1),
           child: Column(
             children: [
               Container(
