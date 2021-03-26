@@ -15,11 +15,13 @@ class LoginModel {
         accessToken: json["access_token"],
         tokenType: json["token_type"],
         expiresIn: json["expires_in"],
+        code: json["code"],
       );
 
   Map<String, dynamic> toJson() => {
         "access_token": accessToken,
         "token_type": tokenType,
         "expires_in": expiresIn,
+        "code": code,
       };
 }

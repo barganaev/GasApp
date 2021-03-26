@@ -32,6 +32,11 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
   FocusNode focusNode6 = FocusNode();
   String code = "";
 
+  TextEditingController textEditingController1 = TextEditingController();
+  TextEditingController textEditingController2 = TextEditingController();
+  TextEditingController textEditingController3 = TextEditingController();
+  TextEditingController textEditingController4 = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -48,14 +53,43 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
 
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(0.95),
-      body: BlocProvider<LoginBloc>(
-        create: (context) => LoginBloc(),
-        child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: _getBody(),
-            ),
-          ),
+      body: SafeArea(
+        child: BlocConsumer<LoginBloc, LoginState>(
+          listener: (context, state) {
+            if (state is LoginLoadedState) {
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => AccountScreen()));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => AccountScreen()),
+                  (Route<dynamic> route) => route.isFirst);
+            } else if (state is LoginErrorState) {
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text('Неверный номер'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is LoginInitialState) {
+              return Center(
+                child: SingleChildScrollView(
+                  child: _getBody(),
+                ),
+              );
+            } else if (state is LoginLoadingState) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return Center(
+              child: SingleChildScrollView(
+                child: _getBody(),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -68,7 +102,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
         child: SizedBox(
           height: _height * 8 / 10,
           width: _width * 8 / 10,
-          child: _getColumnBody(),
+          child: Builder(builder: (BuildContext context) => _getColumnBody()),
         ),
       );
 
@@ -107,18 +141,30 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              getPinField(key: "1", focusNode: focusNode1),
+              getPinField(
+                  key: "1",
+                  focusNode: focusNode1,
+                  controller: textEditingController1),
               SizedBox(width: 5.0),
-              getPinField(key: "2", focusNode: focusNode2),
+              getPinField(
+                  key: "2",
+                  focusNode: focusNode2,
+                  controller: textEditingController2),
               SizedBox(width: 5.0),
-              getPinField(key: "3", focusNode: focusNode3),
+              getPinField(
+                  key: "3",
+                  focusNode: focusNode3,
+                  controller: textEditingController3),
               SizedBox(width: 5.0),
-              getPinField(key: "4", focusNode: focusNode4),
+              getPinField(
+                  key: "4",
+                  focusNode: focusNode4,
+                  controller: textEditingController4),
               SizedBox(width: 5.0),
-              getPinField(key: "5", focusNode: focusNode5),
-              SizedBox(width: 5.0),
-              getPinField(key: "6", focusNode: focusNode6),
-              SizedBox(width: 5.0),
+              // getPinField(key: "5", focusNode: focusNode5),
+              // SizedBox(width: 5.0),
+              // getPinField(key: "6", focusNode: focusNode6),
+              // SizedBox(width: 5.0),
             ],
           ),
 
@@ -126,10 +172,23 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
           RaisedButton(
             elevation: 16.0,
             onPressed: () {
-              // BlocProvider.of<LoginBloc>(context).add(AuthLoginEvent(
-              //     phoneNumber: widget.phoneNumber, password: code));
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AccountScreen()));
+              print(textEditingController1.text);
+              print(textEditingController2.text);
+              print(textEditingController3.text);
+              print(textEditingController4.text);
+              print(code);
+              print(code);
+              print(code);
+              print(code);
+              print(code);
+              String codeNumber = textEditingController1.text +
+                  textEditingController2.text +
+                  textEditingController3.text +
+                  textEditingController4.text;
+              BlocProvider.of<LoginBloc>(context).add(
+                AuthLoginEvent(
+                    phoneNumber: "+77078891693", password: codeNumber),
+              ); //+77078891693 widget.phoneNumber
             } /*signIn*/,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -179,7 +238,11 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
     }
   }
 
-  Widget getPinField({String key, FocusNode focusNode}) => SizedBox(
+  Widget getPinField(
+          {String key,
+          FocusNode focusNode,
+          TextEditingController controller}) =>
+      SizedBox(
         height: 40.0,
         width: 35.0,
         child: TextField(
@@ -188,6 +251,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
 //          autofocus: key.contains("1") ? true : false,
           autofocus: false,
           focusNode: focusNode,
+          controller: controller,
           onChanged: (String value) {
             if (value.length == 1) {
               code += value;
@@ -201,12 +265,12 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
                 case 3:
                   FocusScope.of(context).requestFocus(focusNode4);
                   break;
-                case 4:
-                  FocusScope.of(context).requestFocus(focusNode5);
-                  break;
-                case 5:
-                  FocusScope.of(context).requestFocus(focusNode6);
-                  break;
+                // case 4:
+                //   FocusScope.of(context).requestFocus(focusNode5);
+                //   break;
+                // case 5:
+                //   FocusScope.of(context).requestFocus(focusNode6);
+                //   break;
                 default:
                   FocusScope.of(context).requestFocus(FocusNode());
                   break;
@@ -235,9 +299,12 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
   }
 
   onVerified() async {
-    await Future.delayed(Duration(seconds: 1));
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) => AccountScreen()));
+    // await Future.delayed(Duration(seconds: 1));
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (BuildContext context) => AccountScreen(),
+    //   ),
+    // );
   }
 
   onAutoRetrievalTimeOut() {

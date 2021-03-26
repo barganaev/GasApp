@@ -4,6 +4,8 @@ import 'package:gasapp/screens/drawer/feedback.dart';
 import 'package:gasapp/screens/drawer/list_of_stations.dart';
 import 'package:gasapp/screens/drawer/report_about_problem.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../account_screen.dart';
 import '../login.dart';
 
 class HomeDrawer extends StatefulWidget {
@@ -17,46 +19,36 @@ class _HomeDrawerState extends State<HomeDrawer> {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LogIn(),
-                ),
-              );
-            },
-            child: Container(
-              height: screenSize(context).height * 0.13,
-              //color: Colors.red,
-              //color: Colors.white,
-              child: ListTile(
-                contentPadding: EdgeInsets.only(
-                  top: 20,
-                  left: 10,
-                  right: 10,
-                  bottom: 0,
-                ),
-                leading: Image.asset(
-                  "assets/logo_blue.png",
-                  //width: screenSize(context).width * 0.2,
-                  // height: 50,
-                  fit: BoxFit.fill,
-                ),
-                title: Text(
-                  "АГЗС",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                      color: Color(0xFF5897cf) /*Colors.black87*/,
-                      fontSize: 20),
-                ),
-                subtitle: Text(
-                  "Газозаправочные станции Мангистауской области",
-                  style: TextStyle(color: Color(0xFF5897cf), fontSize: 12),
-                ),
-                //trailing: Icon(Icons.arrow_right_sharp),
+          Container(
+            height: screenSize(context).height * 0.13,
+            //color: Colors.red,
+            //color: Colors.white,
+            child: ListTile(
+              contentPadding: EdgeInsets.only(
+                top: 20,
+                left: 10,
+                right: 10,
+                bottom: 0,
               ),
+              leading: Image.asset(
+                "assets/logo_blue.png",
+                //width: screenSize(context).width * 0.2,
+                // height: 50,
+                fit: BoxFit.fill,
+              ),
+              title: Text(
+                "АГЗС",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat',
+                    color: Color(0xFF5897cf) /*Colors.black87*/,
+                    fontSize: 20),
+              ),
+              subtitle: Text(
+                "Газозаправочные станции Мангистауской области",
+                style: TextStyle(color: Color(0xFF5897cf), fontSize: 12),
+              ),
+              //trailing: Icon(Icons.arrow_right_sharp),
             ),
           ),
           Divider(
@@ -109,9 +101,20 @@ class _HomeDrawerState extends State<HomeDrawer> {
             //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => LogIn()));
+            onTap: () async {
+              final prefs = await SharedPreferences.getInstance();
+
+              if (prefs.containsKey("token")) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AccountScreen()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LogIn()),
+                );
+              }
             },
             leading: Image.asset(
               'assets/icon_4.png',

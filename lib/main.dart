@@ -5,6 +5,8 @@ import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
 import 'package:gasapp/screens/home_screen.dart';
 import 'package:gasapp/utils/constants.dart';
 
+import 'blocs/regions_bloc/regions_bloc.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -19,8 +21,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BlocProvider<MapBloc>(
-        create: (context) => MapBloc()..add(MapGetMarkersEvent()),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<MapBloc>(
+            create: (context) => MapBloc()..add(MapGetMarkersEvent()),
+          ),
+          BlocProvider<RegionsBloc>(
+            create: (context) => RegionsBloc()..add(RegionsGetEvent()),
+          ),
+        ],
         child: LoadingScreen(),
       ),
     );

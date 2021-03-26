@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/check_number_bloc/check_number_bloc.dart';
+import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
 import 'package:gasapp/screens/verify_screen.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -25,6 +26,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   void initState() {
+    phoneController.text = "+770788916931";
     super.initState();
   }
 
@@ -145,11 +147,23 @@ class _LogInState extends State<LogIn> {
                                         ),
                                       );
                                     } else if (state is CheckNumberErrorState) {
+                                      // Scaffold.of(context).showSnackBar(
+                                      //   SnackBar(
+                                      //     backgroundColor: Colors.red,
+                                      //     content:
+                                      //         Text('Неверный номер'),
+                                      //     duration: Duration(seconds: 2),
+                                      //   ),
+                                      // );
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => PhoneAuthVerify(
-                                            phoneNumber: phoneController.text,
+                                          builder: (context) =>
+                                              BlocProvider<LoginBloc>(
+                                            create: (context) => LoginBloc(),
+                                            child: PhoneAuthVerify(
+                                              phoneNumber: phoneController.text,
+                                            ),
                                           ),
                                         ),
                                       );

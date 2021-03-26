@@ -58,43 +58,36 @@ class _ListOfStationsState extends State<ListOfStations> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Перечень заправочных станций',
-                    style: TextStyle(color: Color(0xFF2295C1), fontSize: 30),
+                    style: TextStyle(color: Color(0xFF2295C1), fontSize: 28),
                   )),
             ),
-            Container(
-              decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
-              child: DropdownButton<String>(
-                underline: Container(),
-                // dropdownColor: Colors.lightBlue,
-                value: selectedCountry,
-                isExpanded: true,
-                items: cities.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child:
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     Icon(Icons.keyboard_arrow_down),
-                        //     SizedBox(width: 10,),
-                        //     Text(value, style: TextStyle(color: Colors.black),)
-                        //   ],
-                        // )
-                        Flexible(
-                      child: Center(
-                        child: Text(
-                          value,
-                          style: TextStyle(color: Colors.black),
-                        ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                width: screenSize(context).width * 0.7,
+                padding: EdgeInsets.only(left: 10),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.grey)),
+                child: DropdownButton<String>(
+                  underline: Container(),
+                  // dropdownColor: Colors.lightBlue,
+                  value: selectedCountry,
+                  isExpanded: true,
+                  items: cities.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: Colors.black),
                       ),
-                    ),
-                  );
-                }).toList(),
-                onChanged: onChangedCallback,
+                    );
+                  }).toList(),
+                  onChanged: onChangedCallback,
+                ),
               ),
             ),
             SizedBox(
-              height: screenSize(context).height * 0.05,
+              height: screenSize(context).height * 0.03,
             ),
             Expanded(
               child: Container(
