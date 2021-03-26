@@ -196,6 +196,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                               .then((value) {
                                             setState(() {});
                                           });
+                                          print(value);
                                         }),
                                   ),
                                 ],
