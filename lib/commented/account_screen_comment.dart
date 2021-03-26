@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gasapp/utils/constants.dart';
 
-class AccountScreen extends StatefulWidget {
+class AccountScreenCardVersion extends StatefulWidget {
   @override
-  _AccountScreenState createState() => _AccountScreenState();
+  _AccountScreenCardVersionState createState() => _AccountScreenCardVersionState();
 }
 
-class _AccountScreenState extends State<AccountScreen> {
+class _AccountScreenCardVersionState extends State<AccountScreenCardVersion> {
 
   List<int> isOpen = [0, 1, 0, 1];
 

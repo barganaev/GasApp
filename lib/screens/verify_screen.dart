@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
+import 'package:gasapp/commented/account_screen_comment.dart';
 import 'package:gasapp/screens/account_screen.dart';
 import 'package:gasapp/screens/home_screen.dart';
 import 'package:gasapp/utils/constants.dart';
@@ -129,7 +130,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
               // BlocProvider.of<LoginBloc>(context).add(AuthLoginEvent(
               //     phoneNumber: widget.phoneNumber, password: code));
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AccountScreen()));
+                  MaterialPageRoute(builder: (context) => /*AccountScreenCardVersion()*/AccountScreen()));
             } /*signIn*/,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
