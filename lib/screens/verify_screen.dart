@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
 import 'package:gasapp/screens/account_screen.dart';
+import 'package:gasapp/screens/home_screen.dart';
+import 'package:gasapp/utils/constants.dart';
 //import 'package:flutter_firebase/chat/lets_text.dart';
 //import 'package:flutter_firebase/providers/phone_auth.dart';
 //import 'package:flutter_firebase/utils/constants.dart';
@@ -100,7 +102,6 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
               SizedBox(width: 16.0),
             ],
           ),
-
           SizedBox(height: 16.0),
 
           Row(
@@ -122,19 +123,13 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
           ),
 
           SizedBox(height: 32.0),
-
           RaisedButton(
             elevation: 16.0,
             onPressed: () {
-              print(code);
-              print(code);
-              print(code);
-              print(code);
-              print(code);
               // BlocProvider.of<LoginBloc>(context).add(AuthLoginEvent(
               //     phoneNumber: widget.phoneNumber, password: code));
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => AccountScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AccountScreen()));
             } /*signIn*/,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -147,7 +142,26 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
             color: Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0)),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: screenSize(context).height * 0.1),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Назад',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           )
+          // RaisedButton(
+          //   color: Color(0xFF5897cf),
+          //   child: Text('Назад', style: TextStyle(color: Colors.white),),
+          //   onPressed: (){
+          //     Navigator.pop(context);
+          //   }
+          // )
         ],
       );
 
