@@ -35,7 +35,6 @@ class _AboutAppState extends State<AboutApp> {
               child: CircularProgressIndicator(),
             );
           } else if (state is InfoLoaded) {
-            //
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -116,6 +115,8 @@ class _AboutAppState extends State<AboutApp> {
                 ],
               ),
             );
+          }else{
+            return Text('Error in screen -> drawer -> about-app');
           }
         },
       ),

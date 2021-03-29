@@ -49,6 +49,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     if (Platform.isAndroid) {
+      print('Android is true');
       BitmapDescriptor.fromAssetImage(
               ImageConfiguration(), 'assets/ico_agzs_green.png')
           .then((onValue) {
@@ -60,6 +61,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         customIconNotActive = onValue;
       });
     } else {
+      print('IOS is true');
       BitmapDescriptor.fromAssetImage(
               ImageConfiguration(), 'assets/ico_agzs_green_ios.png')
           .then((onValue) {
