@@ -59,7 +59,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         customIconActive = onValue;
       });
       BitmapDescriptor.fromAssetImage(
-              ImageConfiguration(), 'assets/ico_agzs_gray_android.png')
+              ImageConfiguration(), /*'assets/ico_agzs_gray_android.png'*/ 'assets/ico_agzs_gray_22_32_android.png')
           .then((onValue) {
         customIconNotActive = onValue;
       });
