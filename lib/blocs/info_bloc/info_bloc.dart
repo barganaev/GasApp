@@ -15,14 +15,19 @@ class InfoBloc extends Bloc<InfoEvent, InfoState> {
   Stream<InfoState> mapEventToState(InfoEvent event) async* {
     if (event is InfoGetEvent) {
       yield InfoLoading();
+      print("STARTED INFO BLOC");
       try {
         List<InfoModel> list = await ApiProvider().requestPost("information");
-        if (list != null) {
+        if (list != null && list.isNotEmpty) {
+          print(list.first.text);
           yield InfoLoaded(infoModel: list[0]);
         } else {
+          print("ERROR");
           yield InfoError();
         }
       } catch (e) {
+        print("ERRORvERROR");
+        print(e);
         yield InfoError();
       }
     }

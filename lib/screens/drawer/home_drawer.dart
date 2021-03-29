@@ -162,7 +162,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 context,
                 MaterialPageRoute(
                   builder: (newcontext) => BlocProvider<InfoBloc>.value(
-                    value: BlocProvider.of<InfoBloc>(context),
+                    // create: (context) => InfoBloc()..add(InfoGetEvent()),
+                    value: BlocProvider.of<InfoBloc>(context)
+                      ..add(InfoGetEvent()),
                     child: AboutApp(),
                   ),
                 ),

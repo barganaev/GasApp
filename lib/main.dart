@@ -85,6 +85,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: BlocConsumer<MapBloc, MapState>(
         listener: (context, state) {
           if (state is MapLoadedState) {
+            print('here1');
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -92,6 +93,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   value: BlocProvider.of<MapBloc>(context),
                   child: BlocProvider<InfoBloc>.value(
                     value: BlocProvider.of<InfoBloc>(context),
+                    // create: (ncontext) => InfoBloc()..add(InfoGetEvent()),
                     child: HomeScreen(
                       list: state.stationsModel,
                       customIconActive: customIconActive,
@@ -102,19 +104,20 @@ class _LoadingScreenState extends State<LoadingScreen> {
               ),
               (Route<dynamic> route) => false,
             );
-          } else if (state is MapErrorState) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (newcontext) => BlocProvider(
-                  create: (context) => MapBloc(),
-                  child: HomeScreen(
-                    list: [],
-                  ),
-                ),
-              ),
-            );
           }
+          // else if (state is MapErrorState) {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (newcontext) => BlocProvider(
+          //         create: (context) => MapBloc(),
+          //         child: HomeScreen(
+          //           list: [],
+          //         ),
+          //       ),
+          //     ),
+          //   );
+          // }
         },
         builder: (context, state) {
           return Stack(

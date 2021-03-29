@@ -44,15 +44,11 @@ class ApiProvider {
     String requestName = "information";
     var responseJson;
     try {
-      final response = await http.post(
-        Uri.parse(_baseUrl),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{}),
-      );
+      final response = await http.get(Uri.parse(_baseUrl));
       responseJson = _response(response, requestName);
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
     return responseJson;
   }
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
 import 'package:gasapp/models/stations_model.dart';
 import 'package:gasapp/utils/constants.dart';
@@ -27,7 +28,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Completer<GoogleMapController> _controller = Completer();
   GoogleMapController mapController;
-  bool mapTypeHybrid = true;
+  bool mapTypeNormal = true;
 
   int indexOfCity = 0;
   String selectedCountry = 'город Актау';
@@ -209,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('here2');
     return Scaffold(
       // appBar: AppBar(
       //   centerTitle: true,
@@ -229,7 +231,11 @@ class _HomeScreenState extends State<HomeScreen> {
       //   ),
       // ),
       backgroundColor: Colors.white,
-      drawer: HomeDrawer(),
+      drawer: BlocProvider<InfoBloc>.value(
+        value: BlocProvider.of<InfoBloc>(context),
+        // create: (context) => InfoBloc()..add(InfoGetEvent()),
+        child: HomeDrawer(),
+      ),
       body: BlocBuilder<MapBloc, MapState>(
         builder: (context, state) {
           if (state is MapLoadedState) {
@@ -238,11 +244,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 GoogleMap(
                   myLocationEnabled: true,
                   myLocationButtonEnabled: false,
-                  mapType: mapTypeHybrid ? MapType.normal : MapType.hybrid,
+                  mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
                   onMapCreated: _onMapCreated,
                   markers: markers(context),
                   initialCameraPosition: positions[indexOfCity],
-                  mapToolbarEnabled: true,
+                  mapToolbarEnabled: false,
                   zoomControlsEnabled: true,
                 ),
                 Padding(
@@ -309,7 +315,7 @@ class _HomeScreenState extends State<HomeScreen> {
               GoogleMap(
                 myLocationEnabled: true,
                 myLocationButtonEnabled: false,
-                mapType: mapTypeHybrid ? MapType.normal : MapType.hybrid,
+                mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
                 onMapCreated: _onMapCreated,
                 // markers: markers(context),
                 initialCameraPosition: positions[indexOfCity],
@@ -375,27 +381,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           );
 
-          // return Stack(
-          //   children: [
-          //     Image.asset(
-          //       'assets/scr_1.png',
-          //       fit: BoxFit.fill,
-          //       height: screenSize(context).height,
-          //       width: screenSize(context).width,
-          //     ),
-          //     Padding(
-          //       padding: EdgeInsets.only(
-          //         top: screenSize(context).height * 0.8,
-          //         left: screenSize(context).width * 0.45,
-          //       ),
-          //       child: CircularProgressIndicator(
-          //         valueColor:
-          //             AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
-          //         backgroundColor: Colors.white,
-          //       ),
-          //     ),
-          //   ],
-          // );
+          return Stack(
+            children: [
+              Image.asset(
+                'assets/scr_1.png',
+                fit: BoxFit.fill,
+                height: screenSize(context).height,
+                width: screenSize(context).width,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: screenSize(context).height * 0.8,
+                  left: screenSize(context).width * 0.45,
+                ),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
+                  backgroundColor: Colors.white,
+                ),
+              ),
+            ],
+          );
         },
       ),
 
@@ -404,7 +409,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           setState(
             () {
-              mapTypeHybrid = !mapTypeHybrid;
+              mapTypeNormal = !mapTypeNormal;
             },
           );
         },
