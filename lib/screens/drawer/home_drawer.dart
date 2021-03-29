@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gasapp/blocs/add_feedback_bloc/add_feedback_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
@@ -159,7 +160,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Feedbackk()),
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider<AddFeedbackBloc>(
+                    create: (context) => AddFeedbackBloc(),
+                    child: Feedbackk(),
+                  ),
+                ),
               );
             },
             leading: Image.asset(

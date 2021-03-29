@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:gasapp/models/add_feedback.dart';
 import 'package:gasapp/models/check_login_model.dart';
 import 'package:gasapp/models/info_model.dart';
 import 'package:gasapp/models/list_of_stations_model.dart';
@@ -9,8 +10,16 @@ import 'package:gasapp/models/stations_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiProvider {
-  Future<dynamic> requestPost(String requestName,
-      {String phoneNumber, String password, String regionId}) async {
+  Future<dynamic> requestPost(
+    String requestName, {
+    String phoneNumber,
+    String password,
+    String regionId,
+    String username,
+    String email,
+    String phone,
+    String text,
+  }) async {
     switch (requestName) {
       case "check":
         var responseJson = await _checkReq(phoneNumber);
@@ -36,11 +45,73 @@ class ApiProvider {
         var responseJson = await _listOfStationsReq(regionId);
         return responseJson;
         break;
+      case "addFeedbackSupport":
+        var responseJson =
+            await _addFeedbackSupportReq(username, email, phone, text);
+        return responseJson;
+        break;
+      case "addFeedbackMessage":
+        var responseJson =
+            await _addFeedbackMessageReq(username, email, phone, text);
+        return responseJson;
+        break;
       default:
         print("JAKE JAKS");
         return Exception();
       // throw Exception();
     }
+  }
+
+  Future _addFeedbackMessageReq(
+      String username, String email, String phone, String text) async {
+    final String _baseUrl =
+        "https://agzs.process.kz/api/public/api/addFeedbackMessage";
+    String requestName = "addFeedbackMessage";
+    var responseJson;
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'username': username,
+          'email': email,
+          'phone': phone,
+          'text': text,
+        }),
+      );
+      print(response.statusCode);
+      print(response.body);
+      responseJson = _response(response, requestName);
+    } catch (e) {}
+    return responseJson;
+  }
+
+  Future _addFeedbackSupportReq(
+      String username, String email, String phone, String text) async {
+    final String _baseUrl =
+        "https://agzs.process.kz/api/public/api/addFeedbackSupport";
+    String requestName = "addFeedbackSupport";
+    var responseJson;
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'username': username,
+          'email': email,
+          'phone': phone,
+          'text': text,
+        }),
+      );
+      print(response.statusCode);
+      print(response.body);
+      responseJson = _response(response, requestName);
+    } catch (e) {}
+    return responseJson;
   }
 
   Future _listOfStationsReq(String regionId) async {
@@ -183,6 +254,12 @@ class ApiProvider {
         } else if (requestname == "listOfStations") {
           final listModel = listOfStationsModelFromJson(response.body);
           return listModel;
+        } else if (requestname == "addFeedbackSupport") {
+          final addFeedback = addFeedbackFromJson(response.body);
+          return addFeedback;
+        } else if (requestname == "addFeedbackMessage") {
+          final addFeedback = addFeedbackFromJson(response.body);
+          return addFeedback;
         }
         break;
       // case 400:
