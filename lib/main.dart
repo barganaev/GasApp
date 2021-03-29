@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
+import 'package:gasapp/models/info_model.dart';
 import 'package:gasapp/screens/home_screen.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -27,9 +29,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<MapBloc>(
             create: (context) => MapBloc()..add(MapGetMarkersEvent()),
           ),
-          // BlocProvider<RegionsBloc>(
-          //   create: (context) => RegionsBloc()..add(RegionsGetEvent()),
-          // ),
+          BlocProvider<InfoBloc>(
+            create: (context) => InfoBloc()..add(InfoGetEvent()),
+          ),
         ],
         child: LoadingScreen(),
       ),
@@ -84,10 +86,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
               MaterialPageRoute(
                 builder: (newcontext) => BlocProvider.value(
                   value: BlocProvider.of<MapBloc>(context),
-                  child: HomeScreen(
-                    list: state.stationsModel,
-                    customIconActive: customIconActive,
-                    customIconNotActive: customIconNotActive,
+                  child: BlocProvider<InfoBloc>.value(
+                    value: BlocProvider.of<InfoBloc>(context),
+                    child: HomeScreen(
+                      list: state.stationsModel,
+                      customIconActive: customIconActive,
+                      customIconNotActive: customIconNotActive,
+                    ),
                   ),
                 ),
               ),

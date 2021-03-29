@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:gasapp/models/check_login_model.dart';
+import 'package:gasapp/models/info_model.dart';
 import 'package:gasapp/models/login_model.dart';
 import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/models/stations_model.dart';
@@ -27,11 +27,33 @@ class ApiProvider {
         var responseJson = await _stationsReq();
         return responseJson;
         break;
+      case "information":
+        var responseJson = await _infoReq();
+        return responseJson;
+        break;
       default:
         print("JAKE JAKS");
         return Exception();
       // throw Exception();
     }
+  }
+
+  Future _infoReq() async {
+    final String _baseUrl =
+        "https://agzs.process.kz/api/public/api/information";
+    String requestName = "information";
+    var responseJson;
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{}),
+      );
+      responseJson = _response(response, requestName);
+    } catch (e) {}
+    return responseJson;
   }
 
   Future _stationsReq() async {
@@ -130,6 +152,10 @@ class ApiProvider {
           List<StationsModel> stationsModel =
               stationsModelFromJson(response.body);
           return stationsModel;
+        } else if (requestname == "information") {
+          print(response.body);
+          final infoModel = infoModelFromJson(response.body);
+          return infoModel;
         }
         break;
       // case 400:

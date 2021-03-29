@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/screens/drawer/about_app.dart';
 import 'package:gasapp/screens/drawer/feedback.dart';
 import 'package:gasapp/screens/drawer/list_of_stations.dart';
@@ -158,7 +160,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutApp()),
+                MaterialPageRoute(
+                  builder: (newcontext) => BlocProvider<InfoBloc>.value(
+                    value: BlocProvider.of<InfoBloc>(context),
+                    child: AboutApp(),
+                  ),
+                ),
               );
             },
             leading: Image.asset(
