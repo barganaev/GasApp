@@ -7,6 +7,7 @@ import 'package:gasapp/screens/drawer/about_app.dart';
 import 'package:gasapp/screens/drawer/feedback.dart';
 import 'package:gasapp/screens/drawer/list_of_stations.dart';
 import 'package:gasapp/screens/drawer/report_about_problem.dart';
+import 'package:gasapp/screens/drawer/volume_of_deliveries.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../account_screen.dart';
@@ -78,10 +79,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => AboutApp()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => VolumeOfDeliveries()),
+              );
             },
             leading: Image.asset(
               'assets/icon_1.png',
