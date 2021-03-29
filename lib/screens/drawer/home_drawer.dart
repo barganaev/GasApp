@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
+import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
+import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/screens/drawer/about_app.dart';
 import 'package:gasapp/screens/drawer/feedback.dart';
 import 'package:gasapp/screens/drawer/list_of_stations.dart';
@@ -11,6 +13,9 @@ import '../account_screen.dart';
 import '../login.dart';
 
 class HomeDrawer extends StatefulWidget {
+  List<RegionsModel> list;
+
+  HomeDrawer({this.list});
   @override
   _HomeDrawerState createState() => _HomeDrawerState();
 }
@@ -88,7 +93,14 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ListOfStations()),
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider<ListOfStationsBloc>(
+                    create: (context) => ListOfStationsBloc()
+                      ..add(ListOfStationsGetEvent(regionId: "1")),
+                    lazy: false,
+                    child: ListOfStations(list: widget.list),
+                  ),
+                ),
               );
             },
             leading: Image.asset(

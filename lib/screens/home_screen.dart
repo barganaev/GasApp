@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
+import 'package:gasapp/blocs/regions_bloc/regions_bloc.dart';
+import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/models/stations_model.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:gasapp/utils/cur_position.dart';
@@ -31,10 +33,13 @@ class _HomeScreenState extends State<HomeScreen> {
   bool mapTypeNormal = true;
 
   int indexOfCity = 0;
-  String selectedCountry = 'город Актау';
+  String selectedCountry;
   String selectedProvince;
 
   BitmapDescriptor pinLocationIcon;
+  List<RegionsModel> regions;
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -42,9 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onChangedCallback(city) async {
+    print("HERE YOU ARE");
+    print(city);
     selectedCountry = city;
-    for (int i = 0; i < cities.length; i++) {
-      if (city == cities[i]) {
+    for (int i = 0; i < regions.length; i++) {
+      if (city == regions[i].name) {
         setState(() {
           indexOfCity = i;
         });
@@ -211,39 +218,27 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('here2');
-    return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   backgroundColor: Colors.lightBlue, //lightBlue,
-      //   title: DropdownButton<String>(
-      //     dropdownColor: Colors.lightBlue,
-      //     value: selectedCountry,
-      //     items: cities.map((String value) {
-      //       return DropdownMenuItem<String>(
-      //         value: value,
-      //         child: Text(
-      //           value,
-      //           style: TextStyle(color: Colors.white),
-      //         ),
-      //       );
-      //     }).toList(),
-      //     onChanged: onChangedCallback,
-      //   ),
-      // ),
-      backgroundColor: Colors.white,
-      drawer: BlocProvider<InfoBloc>.value(
-        value: BlocProvider.of<InfoBloc>(context),
-        // create: (context) => InfoBloc()..add(InfoGetEvent()),
-        child: HomeDrawer(),
-      ),
-      body: BlocBuilder<MapBloc, MapState>(
-        builder: (context, state) {
-          if (state is MapLoadedState) {
-            return Stack(
+    return BlocBuilder<RegionsBloc, RegionsState>(
+      builder: (context, state) {
+        if (state is RegionsLoadedState) {
+          regions = state.regionsModel;
+          selectedCountry = state.regionsModel[indexOfCity].name;
+          print(selectedCountry);
+          return Scaffold(
+            key: _scaffoldKey,
+            backgroundColor: Colors.white,
+            drawer: BlocProvider<InfoBloc>.value(
+              value: BlocProvider.of<InfoBloc>(context),
+              // create: (context) => InfoBloc()..add(InfoGetEvent()),
+              child: HomeDrawer(
+                list: state.regionsModel ?? [],
+              ),
+            ),
+            body: Stack(
               children: [
                 GoogleMap(
                   myLocationEnabled: true,
-                  myLocationButtonEnabled: false,
+                  myLocationButtonEnabled: true,
                   mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
                   onMapCreated: _onMapCreated,
                   markers: markers(context),
@@ -261,7 +256,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 5),
                         child: IconButton(
                           onPressed: () {
-                            Scaffold.of(context).openDrawer();
+                            // Scaffold.of(context).openDrawer();
+                            _scaffoldKey.currentState.openDrawer();
                           },
                           icon: Icon(
                             Icons.menu,
@@ -289,11 +285,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 underline: Container(),
                                 value: selectedCountry,
                                 isExpanded: true,
-                                items: cities.map((String value) {
+                                items: regions.map((RegionsModel value) {
                                   return DropdownMenuItem<String>(
-                                    value: value,
+                                    value: value.name,
                                     child: Text(
-                                      value,
+                                      value.name,
                                       style: TextStyle(color: Colors.black),
                                     ),
                                   );
@@ -308,115 +304,215 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ],
-            );
-          }
-          return Stack(
-            children: [
-              GoogleMap(
-                myLocationEnabled: true,
-                myLocationButtonEnabled: false,
-                mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
-                onMapCreated: _onMapCreated,
-                // markers: markers(context),
-                initialCameraPosition: positions[indexOfCity],
-                mapToolbarEnabled: true,
-                zoomControlsEnabled: true,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.04,
-                ),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: IconButton(
-                        onPressed: () {
-                          Scaffold.of(context).openDrawer();
-                        },
-                        icon: Icon(
-                          Icons.menu,
-                          size: 30,
-                          // color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: Icon(Icons.search),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(right: 10),
-                            width: screenSize(context).width * 0.65,
-                            child: DropdownButton<String>(
-                              underline: Container(),
-                              value: selectedCountry,
-                              isExpanded: true,
-                              items: cities.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                );
-                              }).toList(),
-                              onChanged: onChangedCallback,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.startFloat,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                setState(
+                  () {
+                    mapTypeNormal = !mapTypeNormal;
+                  },
+                );
+              },
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              child: const Icon(Icons.map),
+            ),
           );
-
-          return Stack(
-            children: [
-              Image.asset(
-                'assets/scr_1.png',
-                fit: BoxFit.fill,
-                height: screenSize(context).height,
-                width: screenSize(context).width,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: screenSize(context).height * 0.8,
-                  left: screenSize(context).width * 0.45,
-                ),
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
-                  backgroundColor: Colors.white,
-                ),
-              ),
-            ],
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        },
-      ),
-
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(
-            () {
-              mapTypeNormal = !mapTypeNormal;
-            },
-          );
-        },
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        child: const Icon(Icons.map),
-      ),
+        }
+      },
     );
   }
 }
+
+
+
+// body
+
+// BlocBuilder<MapBloc, MapState>(
+//             builder: (context, state) {
+//               if (state is MapLoadedState) {
+                // return 
+// Stack(
+//                   children: [
+//                     GoogleMap(
+//                       myLocationEnabled: true,
+//                       myLocationButtonEnabled: false,
+//                       mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
+//                       onMapCreated: _onMapCreated,
+//                       markers: markers(context),
+//                       initialCameraPosition: positions[indexOfCity],
+//                       mapToolbarEnabled: false,
+//                       zoomControlsEnabled: true,
+//                     ),
+//                     Padding(
+//                       padding: EdgeInsets.only(
+//                         top: MediaQuery.of(context).size.height * 0.04,
+//                       ),
+//                       child: Row(
+//                         children: [
+//                           Padding(
+//                             padding: EdgeInsets.symmetric(horizontal: 5),
+//                             child: IconButton(
+//                               onPressed: () {
+//                                 Scaffold.of(context).openDrawer();
+//                               },
+//                               icon: Icon(
+//                                 Icons.menu,
+//                                 size: 30,
+//                                 // color: Colors.white,
+//                               ),
+//                             ),
+//                           ),
+//                           Container(
+//                             decoration: BoxDecoration(
+//                               borderRadius: BorderRadius.circular(10),
+//                               color: Colors.white,
+//                             ),
+//                             height: MediaQuery.of(context).size.height * 0.05,
+//                             child: Row(
+//                               children: [
+//                                 Padding(
+//                                   padding: EdgeInsets.symmetric(horizontal: 10),
+//                                   child: Icon(Icons.search),
+//                                 ),
+//                                 Container(
+//                                   padding: EdgeInsets.only(right: 10),
+//                                   width: screenSize(context).width * 0.65,
+//                                   child: DropdownButton<String>(
+//                                     underline: Container(),
+//                                     value: selectedCountry,
+//                                     isExpanded: true,
+//                                     items: cities.map((String value) {
+//                                       return DropdownMenuItem<String>(
+//                                         value: value,
+//                                         child: Text(
+//                                           value,
+//                                           style: TextStyle(color: Colors.black),
+//                                         ),
+//                                       );
+//                                     }).toList(),
+//                                     onChanged: onChangedCallback,
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ],
+//                 );
+//               } else {
+//                 return Center(
+//                   child: CircularProgressIndicator(),
+//                 );
+//               }
+//             },
+//           ),
+
+//floating
+
+
+
+
+
+// after body
+
+//     return Stack(
+      //       children: [
+      //         GoogleMap(
+      //           myLocationEnabled: true,
+      //           myLocationButtonEnabled: false,
+      //           mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
+      //           onMapCreated: _onMapCreated,
+      //           // markers: markers(context),
+      //           initialCameraPosition: positions[indexOfCity],
+      //           mapToolbarEnabled: true,
+      //           zoomControlsEnabled: true,
+      //         ),
+      //         Padding(
+      //           padding: EdgeInsets.only(
+      //             top: MediaQuery.of(context).size.height * 0.04,
+      //           ),
+      //           child: Row(
+      //             children: [
+      //               Padding(
+      //                 padding: EdgeInsets.symmetric(horizontal: 5),
+      //                 child: IconButton(
+      //                   onPressed: () {
+      //                     Scaffold.of(context).openDrawer();
+      //                   },
+      //                   icon: Icon(
+      //                     Icons.menu,
+      //                     size: 30,
+      //                     // color: Colors.white,
+      //                   ),
+      //                 ),
+      //               ),
+      //               Container(
+      //                 decoration: BoxDecoration(
+      //                   borderRadius: BorderRadius.circular(10),
+      //                   color: Colors.white,
+      //                 ),
+      //                 height: MediaQuery.of(context).size.height * 0.05,
+      //                 child: Row(
+      //                   children: [
+      //                     Padding(
+      //                       padding: EdgeInsets.symmetric(horizontal: 10),
+      //                       child: Icon(Icons.search),
+      //                     ),
+      //                     Container(
+      //                       padding: EdgeInsets.only(right: 10),
+      //                       width: screenSize(context).width * 0.65,
+      //                       child: DropdownButton<String>(
+      //                         underline: Container(),
+      //                         value: selectedCountry,
+      //                         isExpanded: true,
+      //                         items: cities.map((String value) {
+      //                           return DropdownMenuItem<String>(
+      //                             value: value,
+      //                             child: Text(
+      //                               value,
+      //                               style: TextStyle(color: Colors.black),
+      //                             ),
+      //                           );
+      //                         }).toList(),
+      //                         onChanged: onChangedCallback,
+      //                       ),
+      //                     ),
+      //                   ],
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ],
+      //     );
+      //     return Stack(
+      //       children: [
+      //         Image.asset(
+      //           'assets/scr_1.png',
+      //           fit: BoxFit.fill,
+      //           height: screenSize(context).height,
+      //           width: screenSize(context).width,
+      //         ),
+      //         Padding(
+      //           padding: EdgeInsets.only(
+      //             top: screenSize(context).height * 0.8,
+      //             left: screenSize(context).width * 0.45,
+      //           ),
+      //           child: CircularProgressIndicator(
+      //             valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
+      //             backgroundColor: Colors.white,
+      //           ),
+      //         ),
+      //       ],
+      //     );
+      //   },
+      // ),

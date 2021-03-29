@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:gasapp/models/check_login_model.dart';
 import 'package:gasapp/models/info_model.dart';
+import 'package:gasapp/models/list_of_stations_model.dart';
 import 'package:gasapp/models/login_model.dart';
 import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/models/stations_model.dart';
@@ -9,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class ApiProvider {
   Future<dynamic> requestPost(String requestName,
-      {String phoneNumber, String password}) async {
+      {String phoneNumber, String password, String regionId}) async {
     switch (requestName) {
       case "check":
         var responseJson = await _checkReq(phoneNumber);
@@ -31,11 +32,37 @@ class ApiProvider {
         var responseJson = await _infoReq();
         return responseJson;
         break;
+      case "listOfStations":
+        var responseJson = await _listOfStationsReq(regionId);
+        return responseJson;
+        break;
       default:
         print("JAKE JAKS");
         return Exception();
       // throw Exception();
     }
+  }
+
+  Future _listOfStationsReq(String regionId) async {
+    final String _baseUrl =
+        "https://agzs.process.kz/api/public/api/listOfStations";
+    String requestName = "listOfStations";
+    var responseJson;
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'region_id': regionId,
+        }),
+      );
+      print(response.statusCode);
+      print(response.body);
+      responseJson = _response(response, requestName);
+    } catch (e) {}
+    return responseJson;
   }
 
   Future _infoReq() async {
@@ -140,8 +167,9 @@ class ApiProvider {
           LoginModel _loginModel = LoginModel.fromJson(responseJson);
           return _loginModel;
         } else if (requestname == "regions") {
-          var responseJson = json.decode(response.body);
-          RegionsModel regionsModel = RegionsModel.fromJson(responseJson);
+          final regionsModel = regionsModelFromJson(response.body);
+          // var responseJson = json.decode(response.body);
+          // RegionsModel regionsModel = RegionsModel.fromJson(responseJson);
           return regionsModel;
         } else if (requestname == "stations") {
           // var responseJson = json.decode(response.body);
@@ -152,6 +180,9 @@ class ApiProvider {
           print(response.body);
           final infoModel = infoModelFromJson(response.body);
           return infoModel;
+        } else if (requestname == "listOfStations") {
+          final listModel = listOfStationsModelFromJson(response.body);
+          return listModel;
         }
         break;
       // case 400:

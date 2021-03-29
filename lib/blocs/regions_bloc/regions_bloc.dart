@@ -16,7 +16,7 @@ class RegionsBloc extends Bloc<RegionsEvent, RegionsState> {
     if (event is RegionsGetEvent) {
       yield RegionsLoadingState();
       try {
-        RegionsModel regionsModel = await ApiProvider().requestPost("regions");
+        List<RegionsModel> regionsModel = await ApiProvider().requestPost("regions");
         if (regionsModel != null) {
           yield RegionsLoadedState(regionsModel: regionsModel);
         } else {

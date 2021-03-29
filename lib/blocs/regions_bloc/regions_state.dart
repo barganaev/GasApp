@@ -12,7 +12,7 @@ class RegionsInitialState extends RegionsState {}
 class RegionsLoadingState extends RegionsState {}
 
 class RegionsLoadedState extends RegionsState {
-  RegionsModel regionsModel;
+  final List<RegionsModel> regionsModel;
   RegionsLoadedState({this.regionsModel});
 }
 

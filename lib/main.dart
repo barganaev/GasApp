@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
+import 'package:gasapp/blocs/regions_bloc/regions_bloc.dart';
 import 'package:gasapp/screens/home_screen.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -26,10 +27,16 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider<MapBloc>(
+            lazy: false,
             create: (context) => MapBloc()..add(MapGetMarkersEvent()),
           ),
           BlocProvider<InfoBloc>(
+            lazy: false,
             create: (context) => InfoBloc()..add(InfoGetEvent()),
+          ),
+          BlocProvider<RegionsBloc>(
+            lazy: false,
+            create: (context) => RegionsBloc()..add(RegionsGetEvent()),
           ),
         ],
         child: LoadingScreen(),
@@ -85,7 +92,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: BlocConsumer<MapBloc, MapState>(
         listener: (context, state) {
           if (state is MapLoadedState) {
-            print('here1');
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -94,10 +100,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   child: BlocProvider<InfoBloc>.value(
                     value: BlocProvider.of<InfoBloc>(context),
                     // create: (ncontext) => InfoBloc()..add(InfoGetEvent()),
-                    child: HomeScreen(
-                      list: state.stationsModel,
-                      customIconActive: customIconActive,
-                      customIconNotActive: customIconNotActive,
+                    child: BlocProvider<RegionsBloc>.value(
+                      value: BlocProvider.of<RegionsBloc>(context),
+                      child: HomeScreen(
+                        list: state.stationsModel,
+                        customIconActive: customIconActive,
+                        customIconNotActive: customIconNotActive,
+                      ),
                     ),
                   ),
                 ),
