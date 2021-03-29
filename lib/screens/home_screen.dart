@@ -18,9 +18,7 @@ class HomeScreen extends StatefulWidget {
   final BitmapDescriptor customIconNotActive;
 
   HomeScreen(
-      {@required this.list,
-      @required this.customIconActive,
-      @required this.customIconNotActive});
+      {@required this.list, this.customIconActive, this.customIconNotActive});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();

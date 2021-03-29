@@ -43,6 +43,9 @@ class LoadingScreen extends StatefulWidget {
   _LoadingScreenState createState() => _LoadingScreenState();
 }
 
+//    <key>NSLocationAlwaysUsageDescription</key>
+// <string>Your location is required</string>
+
 class _LoadingScreenState extends State<LoadingScreen> {
   BitmapDescriptor customIconActive;
   BitmapDescriptor customIconNotActive;
@@ -51,12 +54,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
     if (Platform.isAndroid) {
       print('Android is true');
       BitmapDescriptor.fromAssetImage(
-              ImageConfiguration(), 'assets/ico_agzs_green.png')
+              ImageConfiguration(), 'assets/ico_agzs_green_android.png')
           .then((onValue) {
         customIconActive = onValue;
       });
       BitmapDescriptor.fromAssetImage(
-              ImageConfiguration(), 'assets/ico_agzs_gray.png')
+              ImageConfiguration(), 'assets/ico_agzs_gray_android.png')
           .then((onValue) {
         customIconNotActive = onValue;
       });
