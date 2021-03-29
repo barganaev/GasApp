@@ -173,15 +173,6 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
           RaisedButton(
             elevation: 16.0,
             onPressed: () {
-              print(textEditingController1.text);
-              print(textEditingController2.text);
-              print(textEditingController3.text);
-              print(textEditingController4.text);
-              print(code);
-              print(code);
-              print(code);
-              print(code);
-              print(code);
               String codeNumber = textEditingController1.text +
                   textEditingController2.text +
                   textEditingController3.text +

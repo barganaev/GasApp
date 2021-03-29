@@ -1,17 +1,25 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
+import 'package:gasapp/models/stations_model.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:gasapp/utils/cur_position.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gasapp/utils/utils.dart';
 import 'drawer/home_drawer.dart';
-//import 'package:wakelock/wakelock.dart';
 
 class HomeScreen extends StatefulWidget {
+  List<StationsModel> list;
+  BitmapDescriptor customIconActive;
+  BitmapDescriptor customIconNotActive;
+
+  HomeScreen({this.list, this.customIconActive, this.customIconNotActive});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -24,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int indexOfCity = 0;
   String selectedCountry = 'город Актау';
   String selectedProvince;
+
+  BitmapDescriptor pinLocationIcon;
 
   @override
   void initState() {
@@ -62,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await curLocation();
   }
 
-  void getBottomSheet() {
+  void getBottomSheet(BuildContext context) {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -176,47 +186,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Set<Marker> markers(BuildContext context) {
     Set<Marker> markers = {};
-    markers.add(
-      Marker(
-        onTap: () {
-          getBottomSheet();
-        },
-        markerId: MarkerId('id-1'),
-        position: LatLng(43.667631, 51.150840),
-        // infoWindow: InfoWindow(title: 'aaaasdnad', snippet: 'AZadsaS'),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      ),
-    );
-    markers.add(
-      Marker(
-        onTap: () {
-          getBottomSheet();
-        },
-        markerId: MarkerId('id-2'),
-        position: LatLng(43.668038, 51.194485),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      ),
-    );
-    markers.add(
-      Marker(
-        onTap: () {
-          getBottomSheet();
-        },
-        markerId: MarkerId('id-3'),
-        position: LatLng(43.666453, 51.154716),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-      ),
-    );
-    markers.add(
-      Marker(
-        onTap: () {
-          getBottomSheet();
-        },
-        markerId: MarkerId('id-4'),
-        position: LatLng(43.641045, 51.181734),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-      ),
-    );
+    for (int i = 1; i <= widget.list.length; i++) {
+      markers.add(
+        Marker(
+          onTap: () {
+            getBottomSheet(context);
+          },
+          markerId: MarkerId('id-$i'),
+          position: LatLng(
+            double.parse(widget.list[i - 1].coordX),
+            double.parse(widget.list[i - 1].coordY),
+          ),
+          icon: widget.list[i - 1].isOpen == "0"
+              ? widget.customIconNotActive
+              : widget.customIconActive,
+          // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        ),
+      );
+    }
     return markers;
   }
 
@@ -320,25 +307,96 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             return Stack(
               children: [
-                Image.asset(
-                  'assets/scr_1.png',
-                  fit: BoxFit.fill,
-                  height: screenSize(context).height,
-                  width: screenSize(context).width,
+                GoogleMap(
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  mapType: mapTypeHybrid ? MapType.normal : MapType.hybrid,
+                  onMapCreated: _onMapCreated,
+                  // markers: markers(context),
+                  initialCameraPosition: positions[indexOfCity],
+                  mapToolbarEnabled: true,
+                  zoomControlsEnabled: true,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: screenSize(context).height * 0.8,
-                    left: screenSize(context).width * 0.45,
+                    top: MediaQuery.of(context).size.height * 0.04,
                   ),
-                  child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
-                    backgroundColor: Colors.white,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: IconButton(
+                          onPressed: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                          icon: Icon(
+                            Icons.menu,
+                            size: 30,
+                            // color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Icon(Icons.search),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(right: 10),
+                              width: screenSize(context).width * 0.65,
+                              child: DropdownButton<String>(
+                                underline: Container(),
+                                value: selectedCountry,
+                                isExpanded: true,
+                                items: cities.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: onChangedCallback,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             );
+
+            // return Stack(
+            //   children: [
+            //     Image.asset(
+            //       'assets/scr_1.png',
+            //       fit: BoxFit.fill,
+            //       height: screenSize(context).height,
+            //       width: screenSize(context).width,
+            //     ),
+            //     Padding(
+            //       padding: EdgeInsets.only(
+            //         top: screenSize(context).height * 0.8,
+            //         left: screenSize(context).width * 0.45,
+            //       ),
+            //       child: CircularProgressIndicator(
+            //         valueColor:
+            //             AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
+            //         backgroundColor: Colors.white,
+            //       ),
+            //     ),
+            //   ],
+            // );
           },
         ),
       ),
