@@ -205,7 +205,45 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                   ),
                                                                 ),
                                                                 GestureDetector(
-                                                                  onTap: () {
+                                                                  onTap:
+                                                                      () async {
+                                                                    final prefs =
+                                                                        await SharedPreferences
+                                                                            .getInstance();
+                                                                    String
+                                                                        token =
+                                                                        prefs.getString(
+                                                                            "token");
+                                                                    String
+                                                                        isOpen;
+                                                                    if (state
+                                                                            .selfStationModel
+                                                                            .message[i]
+                                                                            .isOpen ==
+                                                                        "0") {
+                                                                      isOpen =
+                                                                          "true";
+                                                                    } else {
+                                                                      isOpen =
+                                                                          "false";
+                                                                    }
+                                                                    BlocProvider.of<SelfStationBloc>(
+                                                                            context)
+                                                                        .add(
+                                                                      SelfStationToggleEvent(
+                                                                        token:
+                                                                            token,
+                                                                        stationId: state
+                                                                            .selfStationModel
+                                                                            .message[i]
+                                                                            .id
+                                                                            .toString(),
+                                                                        isOpen:
+                                                                            isOpen,
+                                                                        regionId:
+                                                                            "1",
+                                                                      ),
+                                                                    );
                                                                     Navigator.pop(
                                                                         context);
                                                                     valuesOfButton[
