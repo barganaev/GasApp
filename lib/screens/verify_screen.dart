@@ -191,8 +191,8 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
                   textEditingController4.text;
               BlocProvider.of<LoginBloc>(context).add(
                 AuthLoginEvent(
-                    phoneNumber: "+77756697236", password: codeNumber),
-              ); //+77078891693 widget.phoneNumber
+                    phoneNumber: widget.phoneNumber, password: codeNumber),
+              ); //+77078891693 widget.phoneNumber +77756697236
             } /*signIn*/,
             child: Padding(
               padding: const EdgeInsets.all(8.0),

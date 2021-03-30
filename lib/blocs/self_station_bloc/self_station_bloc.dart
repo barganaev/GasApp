@@ -15,6 +15,7 @@ class SelfStationBloc extends Bloc<SelfStationEvent, SelfStationState> {
   @override
   Stream<SelfStationState> mapEventToState(SelfStationEvent event) async* {
     if (event is SelfStationGetEvent) {
+      print('ASDASDASDASD22');
       yield SelfStationLoading();
       try {
         SelfStationModel selfStationModel = await ApiProvider().requestPost(
@@ -32,6 +33,7 @@ class SelfStationBloc extends Bloc<SelfStationEvent, SelfStationState> {
         yield SelfStationError();
       }
     } else if (event is SelfStationToggleEvent) {
+      print('ASDASDASDASD');
       yield SelfStationLoading();
       try {
         AddFeedbackModule switcher = await ApiProvider().requestPost(

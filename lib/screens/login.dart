@@ -26,7 +26,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   void initState() {
-    phoneController.text = "+770788916931";
+    phoneController.text = "+7";
     super.initState();
   }
 

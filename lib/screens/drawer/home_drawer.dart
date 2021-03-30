@@ -97,10 +97,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BlocProvider<ListOfStationsBloc>(
-                    create: (context) => ListOfStationsBloc()
-                      ..add(ListOfStationsGetEvent(regionId: "1")),
-                    lazy: false,
+                  builder: (newcontext) =>
+                      BlocProvider<ListOfStationsBloc>.value(
+                    value: BlocProvider.of<ListOfStationsBloc>(context),
                     child: ListOfStations(list: widget.list),
                   ),
                 ),

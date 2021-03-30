@@ -18,6 +18,7 @@ class _AccountScreenState extends State<AccountScreen> {
   bool switchState = false;
 
   bool falseBooleanCreatedForCheckingTheStation = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   Widget Status(String isOpen) {
     if (isOpen == "1") {
@@ -38,6 +39,7 @@ class _AccountScreenState extends State<AccountScreen> {
     print('token');
     print(widget.token);
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -227,6 +229,39 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                       isOpen =
                                                                           "false";
                                                                     }
+                                                                    // BlocProvider
+                                                                    //     .value(
+                                                                    //   value: BlocProvider.of<
+                                                                    //           SelfStationBloc>(
+                                                                    //       context)
+                                                                    //     ..add(
+                                                                    //       SelfStationToggleEvent(
+                                                                    //         token:
+                                                                    //             token,
+                                                                    //         stationId:
+                                                                    //             state.selfStationModel.message[i].id.toString(),
+                                                                    //         isOpen:
+                                                                    //             isOpen,
+                                                                    //         regionId:
+                                                                    //             "1",
+                                                                    //       ),
+                                                                    //     ),
+                                                                    // );
+                                                                    // bloc.add(
+                                                                    //   SelfStationToggleEvent(
+                                                                    //     token:
+                                                                    //         token,
+                                                                    //     stationId: state
+                                                                    //         .selfStationModel
+                                                                    //         .message[i]
+                                                                    //         .id
+                                                                    //         .toString(),
+                                                                    //     isOpen:
+                                                                    //         isOpen,
+                                                                    //     regionId:
+                                                                    //         "1",
+                                                                    //   ),
+                                                                    // );
                                                                     BlocProvider.of<SelfStationBloc>(
                                                                             context)
                                                                         .add(
@@ -246,11 +281,11 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                     );
                                                                     Navigator.pop(
                                                                         context);
-                                                                    valuesOfButton[
-                                                                            i] =
-                                                                        value;
-                                                                    falseBooleanCreatedForCheckingTheStation =
-                                                                        value;
+                                                                    // valuesOfButton[
+                                                                    //         i] =
+                                                                    //     value;
+                                                                    // falseBooleanCreatedForCheckingTheStation =
+                                                                    //     value;
                                                                   },
                                                                   child:
                                                                       CupertinoDialogAction(

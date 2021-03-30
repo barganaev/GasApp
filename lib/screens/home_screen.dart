@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
+import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
 import 'package:gasapp/blocs/regions_bloc/regions_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
@@ -230,8 +231,11 @@ class _HomeScreenState extends State<HomeScreen> {
             drawer: BlocProvider<InfoBloc>.value(
               value: BlocProvider.of<InfoBloc>(context),
               // create: (context) => InfoBloc()..add(InfoGetEvent()),
-              child: HomeDrawer(
-                list: state.regionsModel ?? [],
+              child: BlocProvider<ListOfStationsBloc>.value(
+                value: BlocProvider.of<ListOfStationsBloc>(context),
+                child: HomeDrawer(
+                  list: state.regionsModel ?? [],
+                ),
               ),
             ),
             body: Stack(
