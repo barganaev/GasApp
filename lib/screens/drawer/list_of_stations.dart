@@ -132,8 +132,21 @@ class _ListOfStationsState extends State<ListOfStations> {
                             child: Column(
                               children: [
                                 GestureDetector(
-                                  onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ShowInMapScreen(x: double.parse(state.listOfStationsModel[i].coordX),y: double.parse(state.listOfStationsModel[i].coordY,))));
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ShowInMapScreen(
+                                                    x: double.parse(state
+                                                        .listOfStationsModel[i]
+                                                        .coordX),
+                                                    y: double.parse(
+                                                      state
+                                                          .listOfStationsModel[
+                                                              i]
+                                                          .coordY,
+                                                    ))));
                                   },
                                   child: Text(
                                     'Показать на карте',
@@ -169,16 +182,67 @@ class _ListOfStationsState extends State<ListOfStations> {
                                 ),
                                 Row(
                                   children: [
-                                    // Text(
-                                    //   'Показать на карте',
-                                    //   style: TextStyle(
-                                    //       decoration: TextDecoration.underline,
-                                    //       color: Colors.blue),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ShowInMapScreen(
+                                                        x: double.parse(state
+                                                            .listOfStationsModel[
+                                                                i]
+                                                            .coordX),
+                                                        y: double.parse(
+                                                          state
+                                                              .listOfStationsModel[
+                                                                  i]
+                                                              .coordY,
+                                                        ))));
+                                      },
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          'Показать на карте',
+                                          style: TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              color: Colors.blue),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left:
+                                              screenSize(context).width * 0.05),
+                                      child: Text('Статус: '),
+                                    ),
+                                    //   onTap: () {
+                                    //     Navigator.push(
+                                    //       context,
+                                    //       MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             ShowInMapScreen(
+                                    //           x: double.parse(state
+                                    //               .listOfStationsModel[i]
+                                    //               .coordX),
+                                    //           y: double.parse(
+                                    //             state.listOfStationsModel[i]
+                                    //                 .coordY,
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     );
+                                    //   },
+                                    //   child: Text(
+                                    //     'Показать на карте',
+                                    //     style: TextStyle(
+                                    //         decoration:
+                                    //             TextDecoration.underline,
+                                    //         color: Colors.blue),
+                                    //   ),
                                     // ),
-                                    // SizedBox(
-                                    //   width: screenSize(context).width * 0.05,
-                                    // ),
-                                    Text('Статус: '),
+                                    // Text('Статус: '),
                                     Status(state.listOfStationsModel[i].isOpen),
                                     //Text(falseBooleanCreatedForCheckingTheStation ? 'Открыт' : 'Закрыт')
                                   ],
