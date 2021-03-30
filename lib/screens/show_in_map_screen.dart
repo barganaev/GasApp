@@ -9,11 +9,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 class ShowInMapScreen extends StatefulWidget {
+  double x;
+  double y;
+  ShowInMapScreen({this.x, this.y});
   @override
   _ShowInMapScreenState createState() => _ShowInMapScreenState();
 }
 
 class _ShowInMapScreenState extends State<ShowInMapScreen> {
+
+
 
   static LatLng _initialPosition;
   final Set<Marker> _markers = {};
@@ -42,7 +47,7 @@ class _ShowInMapScreenState extends State<ShowInMapScreen> {
     LatLng latLatPosition = LatLng(position.latitude, position.longitude);
 
     CameraPosition cameraPosition =
-    new CameraPosition(target: latLatPosition, zoom: 13);
+    new CameraPosition(target: LatLng(widget.x, widget.y), zoom: 13);
 
     mapController = await _controller.future;
     mapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
@@ -56,27 +61,22 @@ class _ShowInMapScreenState extends State<ShowInMapScreen> {
 
   bool mapTypeNormal = true;
 
- LatLng latLatPosition = LatLng(43.653482, 51.178438);
+ //LatLng latLatPosition = LatLng(43.653482, 51.178438);
 
-  // Set<Marker> markers(BuildContext context) {
-  //   Set<Marker> markers = {};
-  //   for (int i = 1; i <= widget.list.length; i++) {
-  //     markers.add(
-  //       Marker(
-  //         markerId: MarkerId('id-$i'),
-  //         position: LatLng(
-  //           double.parse(widget.list[i - 1].coordX),
-  //           double.parse(widget.list[i - 1].coordY),
-  //         ),
-  //         icon: widget.list[i - 1].isOpen == "0"
-  //             ? widget.customIconNotActive
-  //             : widget.customIconActive,
-  //         // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-  //       ),
-  //     );
-  //   }
-  //   return markers;
-  // }
+  Set<Marker> markers(BuildContext context) {
+    Set<Marker> markers = {};
+      markers.add(
+        Marker(
+          markerId: MarkerId('id-1'),
+          position: LatLng(widget.x, widget.y),
+          // icon: widget.list[i - 1].isOpen == "0"
+          //     ? widget.customIconNotActive
+          //     : widget.customIconActive,
+          // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        ),
+      );
+    return markers;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class _ShowInMapScreenState extends State<ShowInMapScreen> {
         children: [
           GoogleMap(
             myLocationEnabled: true,
-            // markers: markers(context),
+            markers: markers(context),
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(target: _initialPosition, zoom: 13),
             mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,

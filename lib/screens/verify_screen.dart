@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
+import 'package:gasapp/blocs/self_station_bloc/self_station_bloc.dart';
 import 'package:gasapp/commented/account_screen_comment.dart';
 import 'package:gasapp/screens/account_screen.dart';
 import 'package:gasapp/screens/home_screen.dart';
@@ -61,7 +62,18 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (context) => AccountScreen()));
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => AccountScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (context) => SelfStationBloc()
+                        ..add(
+                          SelfStationGetEvent(
+                            token: state.token,
+                            regionId: "1",
+                          ),
+                        ),
+                      child: AccountScreen(),
+                    ),
+                  ),
                   (Route<dynamic> route) => route.isFirst);
             } else if (state is LoginErrorState) {
               Scaffold.of(context).showSnackBar(

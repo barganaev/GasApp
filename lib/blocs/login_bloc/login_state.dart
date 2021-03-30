@@ -13,7 +13,9 @@ class LoginLoadingState extends LoginState {}
 
 class LoginLoadedState extends LoginState {
   final LoginModel loginModel;
-  LoginLoadedState({@required this.loginModel}) : assert(loginModel != null);
+  String token;
+  LoginLoadedState({@required this.loginModel, this.token})
+      : assert(loginModel != null);
 }
 
 class LoginErrorState extends LoginState {}

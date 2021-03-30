@@ -1,3 +1,15 @@
+// To parse this JSON data, do
+//
+//     final regionsModel = regionsModelFromJson(jsonString);
+
+import 'dart:convert';
+
+List<RegionsModel> regionsModelFromJson(String str) => List<RegionsModel>.from(
+    json.decode(str).map((x) => RegionsModel.fromJson(x)));
+
+String regionsModelToJson(List<RegionsModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class RegionsModel {
   RegionsModel({
     this.id,
@@ -5,6 +17,7 @@ class RegionsModel {
     this.name,
     this.description,
     this.abbr,
+    this.excelSheetName,
     this.coordX,
     this.coordY,
     this.createdAt,
@@ -16,10 +29,11 @@ class RegionsModel {
   String name;
   String description;
   String abbr;
+  String excelSheetName;
   String coordX;
   String coordY;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
 
   factory RegionsModel.fromJson(Map<String, dynamic> json) => RegionsModel(
         id: json["id"],
@@ -27,12 +41,11 @@ class RegionsModel {
         name: json["name"],
         description: json["description"],
         abbr: json["abbr"],
+        excelSheetName: json["excel_sheet_name"],
         coordX: json["coord_x"],
         coordY: json["coord_y"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,9 +54,10 @@ class RegionsModel {
         "name": name,
         "description": description,
         "abbr": abbr,
+        "excel_sheet_name": excelSheetName,
         "coord_x": coordX,
         "coord_y": coordY,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt == null ? null : updatedAt.toIso8601String(),
+        "created_at": createdAt,
+        "updated_at": updatedAt,
       };
 }
