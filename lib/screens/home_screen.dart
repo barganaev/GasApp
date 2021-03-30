@@ -91,9 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       context: context,
       builder: (BuildContext context) {
-        return Expanded(
-          child: Container(
-            height: screenSize(context).height * 0.25,
+        return Container(
+          height: screenSize(context).height * 0.25,
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
@@ -244,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GoogleMap(
                   myLocationEnabled: true,
-                  //myLocationButtonEnabled: true,
+                  myLocationButtonEnabled: false,
                   mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
                   onMapCreated: _onMapCreated,
                   markers: markers(context),

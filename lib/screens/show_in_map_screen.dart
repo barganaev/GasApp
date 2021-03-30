@@ -82,6 +82,7 @@ class _ShowInMapScreenState extends State<ShowInMapScreen> {
         children: [
           GoogleMap(
             myLocationEnabled: true,
+            myLocationButtonEnabled: false,
             markers: markers(context),
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(target: LatLng(widget.x, widget.y), zoom: 13),

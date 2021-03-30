@@ -68,11 +68,15 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
 
   Future<void> _selectedDate(BuildContext context) async {
+    print('Show-дамыз');
+    print(DateTime.now());
+    final DateTime tomorrow = DateTime.now().add(Duration(days: 1));
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
-        firstDate: DateTime(2021),
-        lastDate: DateTime(2022));
+        firstDate: DateTime(DateTime.now().year),
+        lastDate:  DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+    );
 
     if (picked != null && picked != selectedDate)
       setState(() {
