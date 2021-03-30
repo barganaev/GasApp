@@ -131,30 +131,6 @@ class _ListOfStationsState extends State<ListOfStations> {
                             //height: screenSize(context).height * 0.1,
                             child: Column(
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ShowInMapScreen(
-                                                    x: double.parse(state
-                                                        .listOfStationsModel[i]
-                                                        .coordX),
-                                                    y: double.parse(
-                                                      state
-                                                          .listOfStationsModel[
-                                                              i]
-                                                          .coordY,
-                                                    ))));
-                                  },
-                                  child: Text(
-                                    'Показать на карте',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: Colors.blue),
-                                  ),
-                                ),
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
