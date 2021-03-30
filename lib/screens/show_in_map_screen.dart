@@ -18,25 +18,11 @@ class ShowInMapScreen extends StatefulWidget {
 
 class _ShowInMapScreenState extends State<ShowInMapScreen> {
 
-
-
-  static LatLng _initialPosition;
   final Set<Marker> _markers = {};
-  static  LatLng _lastMapPosition = _initialPosition;
 
   @override
   void initState() {
     super.initState();
-    _getUserLocation();
-  }
-
-  void _getUserLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    // List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(position.latitude, position.longitude);
-    setState(() {
-      _initialPosition = LatLng(position.latitude, position.longitude);
-      // print('${placemark[0].name}');
-    });
   }
 
   Completer<GoogleMapController> _controller = Completer();
@@ -80,6 +66,7 @@ class _ShowInMapScreenState extends State<ShowInMapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('show map');
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
@@ -97,7 +84,7 @@ class _ShowInMapScreenState extends State<ShowInMapScreen> {
             myLocationEnabled: true,
             markers: markers(context),
             onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(target: _initialPosition, zoom: 13),
+            initialCameraPosition: CameraPosition(target: LatLng(widget.x, widget.y), zoom: 13),
             mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
             zoomControlsEnabled: true,
             mapToolbarEnabled: false,

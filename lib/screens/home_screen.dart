@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await curLocation();
   }
 
-  void getBottomSheet(BuildContext context) {
+  void getBottomSheet(BuildContext context, StationsModel stationsModel) {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -90,102 +90,107 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          height: 300,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("ASAN GAS",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("Address"),
-                  ),
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("27a - 14"),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("Work Time"),
-                  ),
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("10:00 - 22:00"),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("Status"),
-                  ),
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("Gaz bar"),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("Объем запаса"),
-                  ),
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("10 тонна"),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child:
-                        Text("Ориентировочные даты, в котовых газ должен быть"),
-                  ),
-                  Container(
-                    width: screenSize(context).width * 0.4,
-                    child: Text("25.03 - 22.04"),
-                  ),
-                ],
-              ),
-            ],
+        return Expanded(
+          child: Container(
+            height: screenSize(context).height * 0.25,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: screenSize(context).height * 0.02,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(stationsModel.name ?? " ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold
+                      )
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: screenSize(context).height * 0.03,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.4,
+                      child: Text("Адрес:"),
+                    ),
+                    Container(
+                      width: screenSize(context).width * 0.4,
+                      child: Text(stationsModel.comment),
+                    ),
+                  ],
+                ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //   children: [
+                //     Container(
+                //       width: screenSize(context).width * 0.4,
+                //       child: Text("Рабочее время: "),
+                //     ),
+                //     Container(
+                //       width: screenSize(context).width * 0.4,
+                //       child: Text("10:00 - 22:00"),
+                //     ),
+                //   ],
+                // ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.4,
+                      child: Text("Статус: "),
+                    ),
+                    Container(
+                      width: screenSize(context).width * 0.4,
+                      child: Text(stationsModel.isOpen == "1" ? 'Газ есть' : 'Газа нет')
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //   children: [
+                //     Container(
+                //       width: screenSize(context).width * 0.4,
+                //       child: Text("Объем запаса"),
+                //     ),
+                //     Container(
+                //       width: screenSize(context).width * 0.4,
+                //       child: Text("10 тонна"),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //   children: [
+                //     Container(
+                //       width: screenSize(context).width * 0.4,
+                //       child:
+                //           Text("Ориентировочные даты, в котовых газ должен быть"),
+                //     ),
+                //     Container(
+                //       width: screenSize(context).width * 0.4,
+                //       child: Text("25.03 - 22.04"),
+                //     ),
+                //   ],
+                // ),
+              ],
+            ),
           ),
         );
       },
@@ -198,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
       markers.add(
         Marker(
           onTap: () {
-            getBottomSheet(context);
+            getBottomSheet(context, widget.list[i - 1]);
           },
           markerId: MarkerId('id-$i'),
           position: LatLng(
@@ -238,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GoogleMap(
                   myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
+                  //myLocationButtonEnabled: true,
                   mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
                   onMapCreated: _onMapCreated,
                   markers: markers(context),
