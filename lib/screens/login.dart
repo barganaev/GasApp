@@ -26,7 +26,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   void initState() {
-    phoneController.text = "+770788916931";
+    phoneController.text = "+7";
     super.initState();
   }
 
@@ -139,8 +139,11 @@ class _LogInState extends State<LogIn> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => PhoneAuthVerify(
-                                          phoneNumber: phoneController.text,
+                                        builder: (context) => BlocProvider(
+                                          create: (context) => LoginBloc(),
+                                          child: PhoneAuthVerify(
+                                            phoneNumber: phoneController.text,
+                                          ),
                                         ),
                                       ),
                                     );

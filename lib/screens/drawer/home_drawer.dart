@@ -97,10 +97,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BlocProvider<ListOfStationsBloc>(
-                    create: (context) => ListOfStationsBloc()
-                      ..add(ListOfStationsGetEvent(regionId: "1")),
-                    lazy: false,
+                  builder: (newcontext) =>
+                      BlocProvider<ListOfStationsBloc>.value(
+                    value: BlocProvider.of<ListOfStationsBloc>(context),
                     child: ListOfStations(list: widget.list),
                   ),
                 ),
@@ -125,9 +124,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                       create: (context) => SelfStationBloc()
                         ..add(
                           SelfStationGetEvent(
-                            token:
-                                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYWd6cy5wcm9jZXNzLmt6XC9hcGlcL3B1YmxpY1wvYXBpXC9sb2dpbiIsImlhdCI6MTYxNzA1NjYwNCwiZXhwIjoxNjE3MDYwMjA0LCJuYmYiOjE2MTcwNTY2MDQsImp0aSI6InZyRTZ6MGZmRlRTVDR6a3YiLCJzdWIiOjQsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.9INN81Mvp5fmpykShFdJVdf8cvFDFd1iiL0O0w8CFEo",
-                            // token: prefs.getString("token"),
+                            token: prefs.getString("token"),
                             regionId: "1",
                           ),
                         ),

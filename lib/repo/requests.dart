@@ -20,6 +20,8 @@ class ApiProvider {
     String email,
     String text,
     String token,
+    String stationId,
+    String isOpen,
   }) async {
     switch (requestName) {
       case "check":
@@ -60,11 +62,38 @@ class ApiProvider {
         var responseJson = await _selfStationReq(token, regionId);
         return responseJson;
         break;
+      case "logStation":
+        var responseJson = await _switcherReq(token, stationId, isOpen);
+        return responseJson;
+        break;
       default:
         print("JAKE JAKS");
         return Exception();
       // throw Exception();
     }
+  }
+
+  Future _switcherReq(String token, String stationId, String isOpen) async {
+    final String _baseUrl = "https://agzs.process.kz/api/public/api/logStation";
+    String requestName = "logStation";
+    var responseJson;
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'token': token,
+          'station_id': stationId,
+          'is_open': isOpen,
+        }),
+      );
+      print(response.statusCode);
+      print(response.body);
+      responseJson = _response(response, requestName);
+    } catch (e) {}
+    return responseJson;
   }
 
   Future _selfStationReq(String token, String regionId) async {
@@ -292,6 +321,10 @@ class ApiProvider {
           print(json.decode(response.body));
           final selfStation = selfStationModelFromJson(response.body);
           return selfStation;
+        } else if (requestname == "logStation") {
+          print(json.decode(response.body));
+          final switcher = addFeedbackFromJson(response.body);
+          return switcher;
         }
         break;
       // case 400:

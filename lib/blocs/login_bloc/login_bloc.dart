@@ -22,6 +22,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             phoneNumber: event.phoneNumber, password: event.password);
         if (loginModel.code == 0) {
           final prefs = await SharedPreferences.getInstance();
+          print(loginModel.accessToken);
           prefs.setString("token", loginModel.accessToken);
           yield LoginLoadedState(
               loginModel: loginModel, token: loginModel.accessToken);

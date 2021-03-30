@@ -13,6 +13,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'dart:io' show Platform;
 
+import 'blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -51,6 +53,11 @@ class MyApp extends StatelessWidget {
             lazy: false,
             create: (context) => RegionsBloc()..add(RegionsGetEvent()),
           ),
+          BlocProvider<ListOfStationsBloc>(
+            lazy: false,
+            create: (context) => ListOfStationsBloc()
+              ..add(ListOfStationsGetEvent(regionId: "1")),
+          ),
         ],
         child: LoadingScreen(),
       ),
@@ -73,9 +80,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     if (Platform.isAndroid) {
       print('Android is true');
-      if(ViewConfiguration(devicePixelRatio: )){
+      //if(ViewConfiguration(devicePixelRatio: )){
 
-      }
+      //}
       BitmapDescriptor.fromAssetImage(
               ImageConfiguration(), 'assets/ico_agzs_green_android.png')
           .then((onValue) {
@@ -118,10 +125,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     // create: (ncontext) => InfoBloc()..add(InfoGetEvent()),
                     child: BlocProvider<RegionsBloc>.value(
                       value: BlocProvider.of<RegionsBloc>(context),
-                      child: HomeScreen(
-                        list: state.stationsModel,
-                        customIconActive: customIconActive,
-                        customIconNotActive: customIconNotActive,
+                      child: BlocProvider<ListOfStationsBloc>.value(
+                        value: BlocProvider.of<ListOfStationsBloc>(context),
+                        child: HomeScreen(
+                          list: state.stationsModel,
+                          customIconActive: customIconActive,
+                          customIconNotActive: customIconNotActive,
+                        ),
                       ),
                     ),
                   ),
