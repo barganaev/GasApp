@@ -231,11 +231,8 @@ class _HomeScreenState extends State<HomeScreen> {
             drawer: BlocProvider<InfoBloc>.value(
               value: BlocProvider.of<InfoBloc>(context),
               // create: (context) => InfoBloc()..add(InfoGetEvent()),
-              child: BlocProvider<ListOfStationsBloc>.value(
-                value: BlocProvider.of<ListOfStationsBloc>(context),
-                child: HomeDrawer(
-                  list: state.regionsModel ?? [],
-                ),
+              child: HomeDrawer(
+                list: state.regionsModel ?? [],
               ),
             ),
             body: Stack(

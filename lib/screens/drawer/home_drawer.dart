@@ -4,6 +4,7 @@ import 'package:gasapp/blocs/add_feedback_bloc/add_feedback_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
 import 'package:gasapp/blocs/self_station_bloc/self_station_bloc.dart';
+import 'package:gasapp/blocs/shipment_bloc/shipment_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/screens/drawer/about_app.dart';
 import 'package:gasapp/screens/drawer/feedback.dart';
@@ -11,6 +12,7 @@ import 'package:gasapp/screens/drawer/list_of_stations.dart';
 import 'package:gasapp/screens/drawer/report_about_problem.dart';
 import 'package:gasapp/screens/drawer/volume_of_deliveries.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../account_screen.dart';
 import '../login.dart';
@@ -81,9 +83,25 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             onTap: () {
+              final DateTime now = DateTime.now();
+              final DateFormat formatter = DateFormat('yyyy-MM-dd');
+              final String formatted = formatter.format(now);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => VolumeOfDeliveries()),
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider<ShipmentBloc>(
+                    create: (context) => ShipmentBloc()
+                      ..add(
+                        ShipmentGetEvent(
+                          date: formatted,
+                          regionId: "1",
+                        ),
+                      ),
+                    child: VolumeOfDeliveries(
+                      list: widget.list,
+                    ),
+                  ),
+                ),
               );
             },
             leading: Image.asset(
@@ -97,9 +115,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (newcontext) =>
-                      BlocProvider<ListOfStationsBloc>.value(
-                    value: BlocProvider.of<ListOfStationsBloc>(context),
+                  builder: (context) => BlocProvider<ListOfStationsBloc>(
+                    create: (context) => ListOfStationsBloc()
+                      ..add(ListOfStationsGetEvent(regionId: "1")),
+                    lazy: false,
                     child: ListOfStations(list: widget.list),
                   ),
                 ),

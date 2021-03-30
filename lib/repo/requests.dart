@@ -7,6 +7,7 @@ import 'package:gasapp/models/list_of_stations_model.dart';
 import 'package:gasapp/models/login_model.dart';
 import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/models/self_station.dart';
+import 'package:gasapp/models/shipment_model.dart';
 import 'package:gasapp/models/stations_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,6 +23,7 @@ class ApiProvider {
     String token,
     String stationId,
     String isOpen,
+    String date,
   }) async {
     switch (requestName) {
       case "check":
@@ -66,11 +68,38 @@ class ApiProvider {
         var responseJson = await _switcherReq(token, stationId, isOpen);
         return responseJson;
         break;
+      case "planShipment":
+        var responseJson = await _shipmentReq(regionId, date);
+        return responseJson;
+        break;
       default:
         print("JAKE JAKS");
         return Exception();
       // throw Exception();
     }
+  }
+
+  Future _shipmentReq(String regionId, String date) async {
+    final String _baseUrl =
+        "https://agzs.process.kz/api/public/api/planShipment";
+    String requestName = "planShipment";
+    var responseJson;
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'region_id': regionId,
+          'date': date,
+        }),
+      );
+      print(response.statusCode);
+      print(response.body);
+      responseJson = _response(response, requestName);
+    } catch (e) {}
+    return responseJson;
   }
 
   Future _switcherReq(String token, String stationId, String isOpen) async {
@@ -325,6 +354,10 @@ class ApiProvider {
           print(json.decode(response.body));
           final switcher = addFeedbackFromJson(response.body);
           return switcher;
+        } else if (requestname == "planShipment") {
+          print(json.decode(response.body));
+          final shipment = shipmentModelFromJson(response.body);
+          return shipment;
         }
         break;
       // case 400:

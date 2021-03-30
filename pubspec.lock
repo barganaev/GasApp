@@ -150,7 +150,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   flutter_svg:
     dependency: transitive
     description:
@@ -188,7 +188,7 @@ packages:
       name: geolocator_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   google_maps_flutter:
     dependency: "direct main"
     description:
@@ -202,7 +202,7 @@ packages:
       name: google_maps_flutter_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   html:
     dependency: transitive
     description:
@@ -232,7 +232,7 @@ packages:
     source: hosted
     version: "1.0.2"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -349,7 +349,7 @@ packages:
       name: process
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.1"
+    version: "4.2.1"
   provider:
     dependency: transitive
     description:
@@ -529,7 +529,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   xdg_directories:
     dependency: transitive
     description:
