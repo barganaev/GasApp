@@ -23,7 +23,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (loginModel.code == 0) {
           final prefs = await SharedPreferences.getInstance();
           prefs.setString("token", loginModel.accessToken);
-          yield LoginLoadedState(loginModel: loginModel);
+          yield LoginLoadedState(
+              loginModel: loginModel, token: loginModel.accessToken);
         } else {
           yield LoginErrorState();
         }

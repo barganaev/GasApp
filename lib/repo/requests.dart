@@ -6,6 +6,7 @@ import 'package:gasapp/models/info_model.dart';
 import 'package:gasapp/models/list_of_stations_model.dart';
 import 'package:gasapp/models/login_model.dart';
 import 'package:gasapp/models/regions_model.dart';
+import 'package:gasapp/models/self_station.dart';
 import 'package:gasapp/models/stations_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,8 +18,8 @@ class ApiProvider {
     String regionId,
     String username,
     String email,
-    String phone,
     String text,
+    String token,
   }) async {
     switch (requestName) {
       case "check":
@@ -47,12 +48,16 @@ class ApiProvider {
         break;
       case "addFeedbackSupport":
         var responseJson =
-            await _addFeedbackSupportReq(username, email, phone, text);
+            await _addFeedbackSupportReq(username, email, phoneNumber, text);
         return responseJson;
         break;
       case "addFeedbackMessage":
         var responseJson =
-            await _addFeedbackMessageReq(username, email, phone, text);
+            await _addFeedbackMessageReq(username, email, phoneNumber, text);
+        return responseJson;
+        break;
+      case "selfStation":
+        var responseJson = await _selfStationReq(token, regionId);
         return responseJson;
         break;
       default:
@@ -60,6 +65,29 @@ class ApiProvider {
         return Exception();
       // throw Exception();
     }
+  }
+
+  Future _selfStationReq(String token, String regionId) async {
+    final String _baseUrl =
+        "https://agzs.process.kz/api/public/api/selfStation";
+    String requestName = "selfStation";
+    var responseJson;
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'token': token,
+          'region_id': regionId,
+        }),
+      );
+      print(response.statusCode);
+      print(response.body);
+      responseJson = _response(response, requestName);
+    } catch (e) {}
+    return responseJson;
   }
 
   Future _addFeedbackMessageReq(
@@ -260,6 +288,10 @@ class ApiProvider {
         } else if (requestname == "addFeedbackMessage") {
           final addFeedback = addFeedbackFromJson(response.body);
           return addFeedback;
+        } else if (requestname == "selfStation") {
+          print(json.decode(response.body));
+          final selfStation = selfStationModelFromJson(response.body);
+          return selfStation;
         }
         break;
       // case 400:

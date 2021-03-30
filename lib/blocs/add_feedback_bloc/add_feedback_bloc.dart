@@ -16,8 +16,13 @@ class AddFeedbackBloc extends Bloc<AddFeedbackEvent, AddFeedbackState> {
     if (event is AddFeedbackGetMessage) {
       yield AddFeedbackLoading();
       try {
-        AddFeedbackModule feedbackModule =
-            await ApiProvider().requestPost("addFeedbackMessage");
+        AddFeedbackModule feedbackModule = await ApiProvider().requestPost(
+          "addFeedbackMessage",
+          username: event.name,
+          email: event.email,
+          phoneNumber: event.phone,
+          text: event.text,
+        );
         if (feedbackModule != null) {
           yield AddFeedbackLoaded();
         } else {
@@ -29,8 +34,13 @@ class AddFeedbackBloc extends Bloc<AddFeedbackEvent, AddFeedbackState> {
     } else if (event is AddFeedbackGetSupport) {
       yield AddFeedbackLoading();
       try {
-        AddFeedbackModule feedbackModule =
-            await ApiProvider().requestPost("addFeedbackSupport");
+        AddFeedbackModule feedbackModule = await ApiProvider().requestPost(
+          "addFeedbackSupport",
+          username: event.name,
+          email: event.email,
+          phoneNumber: event.phone,
+          text: event.text,
+        );
         if (feedbackModule != null) {
           yield AddFeedbackLoaded();
         } else {

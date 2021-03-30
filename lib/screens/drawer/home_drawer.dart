@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/add_feedback_bloc/add_feedback_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
+import 'package:gasapp/blocs/self_station_bloc/self_station_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/screens/drawer/about_app.dart';
 import 'package:gasapp/screens/drawer/feedback.dart';
@@ -119,7 +120,22 @@ class _HomeDrawerState extends State<HomeDrawer> {
               if (prefs.containsKey("token")) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AccountScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (context) => SelfStationBloc()
+                        ..add(
+                          SelfStationGetEvent(
+                            token:
+                                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYWd6cy5wcm9jZXNzLmt6XC9hcGlcL3B1YmxpY1wvYXBpXC9sb2dpbiIsImlhdCI6MTYxNzA1NjYwNCwiZXhwIjoxNjE3MDYwMjA0LCJuYmYiOjE2MTcwNTY2MDQsImp0aSI6InZyRTZ6MGZmRlRTVDR6a3YiLCJzdWIiOjQsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.9INN81Mvp5fmpykShFdJVdf8cvFDFd1iiL0O0w8CFEo",
+                            // token: prefs.getString("token"),
+                            regionId: "1",
+                          ),
+                        ),
+                      child: AccountScreen(
+                        token: prefs.getString("token"),
+                      ),
+                    ),
+                  ),
                 );
               } else {
                 Navigator.push(
@@ -146,7 +162,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ReportAboutProblem()),
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider<AddFeedbackBloc>(
+                    create: (context) => AddFeedbackBloc(),
+                    child: ReportAboutProblem(),
+                  ),
+                ),
               );
             },
             leading: Image.asset(

@@ -31,9 +31,22 @@ class _FeedbackkState extends State<Feedbackk> {
         ),
       ),
       body: BlocConsumer<AddFeedbackBloc, AddFeedbackState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AddFeedbackLoaded) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Успешно отправлено!",
+                  style: TextStyle(
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+            );
+          }
+        },
         builder: (context, state) {
-          if (state is AddFeedbackInitial) {
+          if (state is AddFeedbackInitial || state is AddFeedbackLoaded) {
             return SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
@@ -128,7 +141,19 @@ class _FeedbackkState extends State<Feedbackk> {
                             Color(0xFF2295C1),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          print(nameController.text);
+                          print(emailController.text);
+                          print(textController.text);
+                          BlocProvider.of<AddFeedbackBloc>(context).add(
+                            AddFeedbackGetMessage(
+                              name: nameController.text,
+                              email: emailController.text,
+                              text: textController.text,
+                              phone: "+77777777777",
+                            ),
+                          );
+                        },
                         child: Text('Отправить'),
                       ),
                     )
@@ -136,8 +161,12 @@ class _FeedbackkState extends State<Feedbackk> {
                 ),
               ),
             );
+          } else if (state is AddFeedbackLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           } else {
-            return Text('1');
+            return Text('Error');
           }
         },
       ),
