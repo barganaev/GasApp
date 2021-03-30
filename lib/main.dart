@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,6 +80,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     if (Platform.isAndroid) {
       print('Android is true');
+      //if(ViewConfiguration(devicePixelRatio: )){
+
+      //}
       BitmapDescriptor.fromAssetImage(
               ImageConfiguration(), 'assets/ico_agzs_green_android.png')
           .then((onValue) {

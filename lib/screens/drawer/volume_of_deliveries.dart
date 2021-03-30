@@ -307,7 +307,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                       width: screenSize(context).width * 0.6,
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
-                        child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+                        child: Text('TOO "АДМ ГАЗ"', style: TextStyle(fontSize: 18),),
                       ),
                     ),
                     Row(
@@ -335,7 +335,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                       width: screenSize(context).width * 0.6,
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
-                        child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+                        child: Text('TOO "Тана ГАЗ"', style: TextStyle(fontSize: 18),),
                       ),
                     ),
                     Row(
@@ -363,7 +363,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                       width: screenSize(context).width * 0.6,
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
-                        child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+                        child: Text('АГЗС "ҚазМұнайГаз"', style: TextStyle(fontSize: 18),),
                       ),
                     ),
                     Row(
