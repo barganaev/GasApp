@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gasapp/screens/show_in_map_screen.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:gasapp/utils/utils.dart';
 
@@ -130,11 +131,16 @@ class _ListOfStationsState extends State<ListOfStations> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                  'Показать на карте',
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.blue),
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ShowInMapScreen()));
+                                  },
+                                  child: Text(
+                                    'Показать на карте',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.blue),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: screenSize(context).width * 0.05,
