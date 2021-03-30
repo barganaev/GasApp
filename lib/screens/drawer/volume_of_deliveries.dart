@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:gasapp/utils/utils.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class VolumeOfDeliveries extends StatefulWidget {
   @override
   _VolumeOfDeliveriesState createState() => _VolumeOfDeliveriesState();
 }
+
+// DateTime selectedDate = DateTime.now();
 
 class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
 
@@ -73,6 +74,8 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
 
   @override
   Widget build(BuildContext context) {
+    print(selectedDate.day);
+    print('selectedDate.day');
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -211,45 +214,493 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
             SizedBox(
               height: screenSize(context).height * 0.01,
             ),
-            Expanded(
-              child: Container(
-                child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, i) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black)
-                        ),
-                        //height: screenSize(context).height * 0.1,
-                        child: IntrinsicHeight(
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: screenSize(context).width * 0.6,
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
-                                  child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
-                                  Container(
-                                    width: screenSize(context).width * 0.19,
-                                    child: Align( alignment: Alignment.center, child: Text('7.5', style: TextStyle(fontSize: 18),))),
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      );
-                    }),
-              ),
-            )
+
+            // TODO: starting from here, until Expanded widget, there are static Container widgets.
+            SelectedDateWidget(context)
+            // TODO: This is the last line of Container widgets.
+
+
+            // Expanded(
+            //   child: Container(
+            //     child: ListView.builder(
+            //         itemCount: 10,
+            //         itemBuilder: (context, i) {
+            //           return Container(
+            //             decoration: BoxDecoration(
+            //               border: Border.all(color: Colors.black)
+            //             ),
+            //             //height: screenSize(context).height * 0.1,
+            //             child: IntrinsicHeight(
+            //               child: Row(
+            //                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                 children: [
+            //                   Container(
+            //                     width: screenSize(context).width * 0.6,
+            //                     child: Padding(
+            //                       padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+            //                       child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+            //                     ),
+            //                   ),
+            //                   Row(
+            //                     children: [
+            //                       Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+            //                       Container(
+            //                         width: screenSize(context).width * 0.19,
+            //                         child: Align( alignment: Alignment.center, child: Text('7.5', style: TextStyle(fontSize: 18),))),
+            //                     ],
+            //                   )
+            //                 ],
+            //               ),
+            //             )
+            //           );
+            //         }),
+            //   ),
+            // )
           ],
         ),
       ),
     );
   }
+
+  Widget SelectedDateWidget(BuildContext context) {
+    if(selectedDate.day == 30){
+      return Column(
+        children: [
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('7.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('7.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('7.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('7.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('TOO LPG Trade', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('7.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+        ],
+      );
+    }else if(selectedDate.day == 1){ // if(selectedDate.day == 1)
+      // print('bas bas');
+      return Column(
+        children: [
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «АДМ ГАЗ', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('7.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «АДМ ГАЗ', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('8', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «АДМ ГАЗ', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('7', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «АДМ ГАЗ', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('4.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «АДМ ГАЗ', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('8.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+        ],
+      );
+    }else{
+      return Column(
+        children: [
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «TanaGasCom»', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «TanaGasCom»', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('8.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «TanaGasCom»', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('5.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «TanaGasCom»', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('4.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black)
+              ),
+              //height: screenSize(context).height * 0.1,
+              child: IntrinsicHeight(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenSize(context).width * 0.6,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.03, vertical: screenSize(context).height * 0.03),
+                        child: Text('ТОО «TanaGasCom»', style: TextStyle(fontSize: 18),),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(child: VerticalDivider(thickness: 1, width: 1, color: Colors.black)),
+                        Container(
+                            width: screenSize(context).width * 0.19,
+                            child: Align( alignment: Alignment.center, child: Text('9.5', style: TextStyle(fontSize: 18),))),
+                      ],
+                    )
+                  ],
+                ),
+              )
+          ),
+        ],
+      );
+    }
+  }
 }
+
+

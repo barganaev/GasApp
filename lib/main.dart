@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
 import 'package:gasapp/blocs/regions_bloc/regions_bloc.dart';
@@ -25,6 +26,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''), // English, no country code
+        const Locale('ru', ''), // Russian, no country code
+      ],
+      locale: const Locale('ru'),
       debugShowCheckedModeBanner: false,
       home: MultiBlocProvider(
         providers: [
@@ -73,8 +84,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         customIconActive = onValue;
       });
       BitmapDescriptor.fromAssetImage(
-              ImageConfiguration(),
-              /*'assets/ico_agzs_gray_android.png'*/ 'assets/ico_agzs_gray_22_32_android.png')
+              ImageConfiguration(), 'assets/ico_agzs_gray_android.png' /*'assets/ico_agzs_gray_22_32_android.png'*/)
           .then((onValue) {
         customIconNotActive = onValue;
       });
