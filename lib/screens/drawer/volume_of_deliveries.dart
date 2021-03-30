@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:gasapp/utils/utils.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class VolumeOfDeliveries extends StatefulWidget {
   @override
@@ -8,6 +9,54 @@ class VolumeOfDeliveries extends StatefulWidget {
 }
 
 class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
+
+  List<String> months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+
+  String selectedMonthName(int selectedMonth) {
+    for (int i = 1; i <= 12; i++) {
+      if(selectedMonth == 1) {
+        return months[0];
+      } else if(selectedMonth == 2) {
+        return months[1];
+      } else if(selectedMonth == 3) {
+        return months[2];
+      } else if(selectedMonth == 4) {
+        return months[3];
+      } else if(selectedMonth == 5) {
+        return months[4];
+      } else if(selectedMonth == 6) {
+        return months[5];
+      } else if(selectedMonth == 7) {
+        return months[6];
+      } else if(selectedMonth == 8) {
+        return months[7];
+      } else if(selectedMonth == 9) {
+        return months[8];
+      } else if(selectedMonth == 10) {
+        return months[9];
+      } else if(selectedMonth == 11) {
+        return months[10];
+      } else if(selectedMonth == 12) {
+        return months[11];
+      }
+    }
+  }
+
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectedDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101)
+    );
+
+    if(picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
   String selectedCountry = 'город Актау';
   int indexOfCity = 0;
 
@@ -65,7 +114,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          '28 марта 2021',
+                          '${selectedDate.day} ${selectedMonthName(selectedDate.month)}',
                           style: TextStyle(
                             color: Color(0xFFe40000), fontSize: 20,
                           ),
@@ -74,16 +123,21 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Container(
-                      child: Text('Другая дата', style: TextStyle(fontSize: 10, color: Color(0xFF2295C1)),),
-                    ),
-                    Image.asset(
-                      'assets/icon_1.png',
-                      width: MediaQuery.of(context).size.width * 0.07,
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: (){
+                    _selectedDate(context);
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Text('Другая дата', style: TextStyle(fontSize: 10, color: Color(0xFF2295C1)),),
+                      ),
+                      Image.asset(
+                        'assets/icon_1.png',
+                        width: MediaQuery.of(context).size.width * 0.07,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
