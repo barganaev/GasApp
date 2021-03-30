@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gasapp/screens/show_in_map_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/utils/constants.dart';
-import 'package:gasapp/utils/utils.dart';
 
 class ListOfStations extends StatefulWidget {
   List<RegionsModel> list;
@@ -131,6 +131,17 @@ class _ListOfStationsState extends State<ListOfStations> {
                             //height: screenSize(context).height * 0.1,
                             child: Column(
                               children: [
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ShowInMapScreen(x: double.parse(state.listOfStationsModel[i].coordX),y: double.parse(state.listOfStationsModel[i].coordY,))));
+                                  },
+                                  child: Text(
+                                    'Показать на карте',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.blue),
+                                  ),
+                                ),
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
