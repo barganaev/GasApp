@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +5,6 @@ import 'package:gasapp/blocs/check_number_bloc/check_number_bloc.dart';
 import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
 import 'package:gasapp/screens/verify_screen.dart';
 import 'package:gasapp/utils/constants.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LogIn extends StatefulWidget {
   @override
