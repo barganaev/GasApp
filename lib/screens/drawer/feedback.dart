@@ -214,9 +214,6 @@ class _FeedbackkState extends State<Feedbackk> {
                             print(nameController.text);
                             print(emailController.text);
                             print(textController.text);
-                            //  &&
-                            //     _formKey2.currentState.validate() &&
-                            //     _formKey3.currentState.validate()
                             if (_formKey1.currentState.validate()) {
                               BlocProvider.of<AddFeedbackBloc>(context).add(
                                 AddFeedbackGetMessage(
