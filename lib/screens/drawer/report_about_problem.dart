@@ -98,7 +98,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                             child: Text('Ваше имя')),
                       ),
                       Container(
-                        height: screenSize(context).height * 0.05,
+                        // height: screenSize(context).height * 0.05,
                         child: TextFormField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -108,6 +108,8 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                           },
                           controller: nameController,
                           decoration: InputDecoration(
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: 10.0),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFDDDDDD),
@@ -135,7 +137,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                             child: Text('Электронная почта')),
                       ),
                       Container(
-                        height: screenSize(context).height * 0.05,
+                        // height: screenSize(context).height * 0.05,
                         child: TextFormField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -145,6 +147,8 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                           },
                           controller: emailController,
                           decoration: InputDecoration(
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: 10.0),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFDDDDDD),
