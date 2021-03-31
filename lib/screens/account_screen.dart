@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/self_station_bloc/self_station_bloc.dart';
+import 'package:gasapp/screens/show_in_map_screen.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -143,12 +144,25 @@ class _AccountScreenState extends State<AccountScreen> {
                                                 "address",
                                             style: TextStyle(fontSize: 15),
                                           ),
-                                          Text(
-                                            'Показать на карте',
-                                            style: TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                color: Colors.blue),
+                                          GestureDetector(
+                                            onTap: (){
+                                              Navigator.push(
+                                                context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) => ShowInMapScreen(
+                                                      x: double.parse(state.selfStationModel.message[i].coordX),
+                                                      y: double.parse(state.selfStationModel.message[i].coordY,)
+                                                    ),
+                                                  ),
+                                              );
+                                            },
+                                            child: Text(
+                                              'Показать на карте',
+                                              style: TextStyle(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  color: Colors.blue),
+                                            ),
                                           ),
                                         ],
                                       ),

@@ -249,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onMapCreated: _onMapCreated,
                   markers: markers(context),
                   initialCameraPosition: positions[indexOfCity],
-                  mapToolbarEnabled: false,
+                  mapToolbarEnabled: true,
                   zoomControlsEnabled: true,
                 ),
                 Padding(
