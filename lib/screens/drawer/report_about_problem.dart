@@ -12,6 +12,9 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController textController = TextEditingController();
+  final _formKey1 = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
+  final _formKey3 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,109 +65,179 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                     left: screenSize(context).width * 0.1,
                     right: screenSize(context).width * 0.1,
                     bottom: screenSize(context).height * 0.1),
-                child: Column(
-                  children: [
-                    Container(
-                      child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Сообщить о несоответствии',
-                            style: TextStyle(
-                                color: Color(0xFF2295C1), fontSize: 30),
-                          )),
-                    ),
-                    Container(
+                child: Form(
+                  key: this._formKey1,
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Сообщить о несоответствии',
+                              style: TextStyle(
+                                  color: Color(0xFF2295C1), fontSize: 30),
+                            )),
+                      ),
+                      Container(
                         //padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.1),
                         child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                bottom: screenSize(context).height * 0.1),
+                            child: Text(
+                                'Вы можете отправить сообщения по работе газозаправочных станций. Ваше сообщение поможет нам изучить ситуацию и улучшить взаимодействие.'),
+                          ),
+                        ),
+                      ),
+                      Padding(
                         padding: EdgeInsets.only(
-                            bottom: screenSize(context).height * 0.1),
-                        child: Text(
-                            'Вы можете отправить сообщения по работе газозаправочных станций. Ваше сообщение поможет нам изучить ситуацию и улучшить взаимодействие.'),
+                            top: screenSize(context).height * 0.02),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Ваше имя')),
                       ),
-                    )),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: screenSize(context).height * 0.02),
-                      child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Ваше имя')),
-                    ),
-                    Container(
-                      height: screenSize(context).height * 0.05,
-                      child: TextField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: screenSize(context).height * 0.02),
-                      child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Электронная почта')),
-                    ),
-                    Container(
-                      height: screenSize(context).height * 0.05,
-                      child: TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: screenSize(context).height * 0.02),
-                      child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Текст сообщения')),
-                    ),
-                    Container(
-                      // height: screenSize(context).height * 0.15,
-                      child: TextFormField(
-                        maxLines: 5,
-                        controller: textController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: screenSize(context).height * 0.03),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFF2295C1),
-                          ),
-                        ),
-                        onPressed: () {
-                          print(nameController.text);
-                          print(emailController.text);
-                          print(textController.text);
-                          BlocProvider.of<AddFeedbackBloc>(context).add(
-                            AddFeedbackGetSupport(
-                              name: nameController.text,
-                              email: emailController.text,
-                              text: textController.text,
-                              phone: "+77777777777",
+                      Container(
+                        height: screenSize(context).height * 0.05,
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Введите текст';
+                            }
+                            return null;
+                          },
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFDDDDDD),
+                              ),
                             ),
-                          );
-                        },
-                        child: Text('Отправить'),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFFDBC4E),
+                              ),
+                            ),
+                            errorStyle: TextStyle(
+                              color: Color(0xFFE04146),
+                            ),
+                            labelStyle: TextStyle(
+                              color: Color(0xFFDDDDDD),
+                            ),
+                          ),
+                        ),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: screenSize(context).height * 0.02),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Электронная почта')),
+                      ),
+                      Container(
+                        height: screenSize(context).height * 0.05,
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Введите текст';
+                            }
+                            return null;
+                          },
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFDDDDDD),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFFDBC4E),
+                              ),
+                            ),
+                            errorStyle: TextStyle(
+                              color: Color(0xFFE04146),
+                            ),
+                            labelStyle: TextStyle(
+                              color: Color(0xFFDDDDDD),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: screenSize(context).height * 0.02),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Текст сообщения')),
+                      ),
+                      Container(
+                        // height: screenSize(context).height * 0.15,
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          maxLines: 5,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Введите текст';
+                            }
+                            return null;
+                          },
+                          controller: textController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFDDDDDD),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFFDBC4E),
+                              ),
+                            ),
+                            errorStyle: TextStyle(
+                              color: Color(0xFFE04146),
+                            ),
+                            labelStyle: TextStyle(
+                              color: Color(0xFFDDDDDD),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: screenSize(context).height * 0.03),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF2295C1),
+                            ),
+                          ),
+                          onPressed: () {
+                            print(nameController.text);
+                            print(emailController.text);
+                            print(textController.text);
+                            //  &&
+                            //     _formKey2.currentState.validate() &&
+                            //     _formKey3.currentState.validate()
+                            if (_formKey1.currentState.validate()) {
+                              BlocProvider.of<AddFeedbackBloc>(context).add(
+                                AddFeedbackGetSupport(
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  text: textController.text,
+                                  phone: "+77777777777",
+                                ),
+                              );
+                              nameController.text = "";
+                              textController.text = "";
+                              emailController.text = "";
+                            }
+                          },
+                          child: Text('Отправить'),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             );
