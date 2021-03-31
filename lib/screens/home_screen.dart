@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
-import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
-import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
 import 'package:gasapp/blocs/regions_bloc/regions_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
 import 'package:gasapp/models/stations_model.dart';
@@ -103,10 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(stationsModel.name ?? " ",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
                 SizedBox(
@@ -152,9 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text("Статус: "),
                     ),
                     Container(
-                      width: screenSize(context).width * 0.4,
-                      child: Text(stationsModel.isOpen == "1" ? 'Газ есть' : 'Газа нет')
-                    ),
+                        width: screenSize(context).width * 0.4,
+                        child: Text(
+                            stationsModel.isOpen == "1" ? 'Открыт' : 'Закрыт')),
                   ],
                 ),
                 SizedBox(

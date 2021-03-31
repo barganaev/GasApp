@@ -13,8 +13,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'dart:io' show Platform;
 
-import 'blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -53,11 +51,6 @@ class MyApp extends StatelessWidget {
             lazy: false,
             create: (context) => RegionsBloc()..add(RegionsGetEvent()),
           ),
-          // BlocProvider<ListOfStationsBloc>(
-          //   lazy: false,
-          //   create: (context) => ListOfStationsBloc()
-          //     ..add(ListOfStationsGetEvent(regionId: "1")),
-          // ),
         ],
         child: LoadingScreen(),
       ),
@@ -70,9 +63,6 @@ class LoadingScreen extends StatefulWidget {
   _LoadingScreenState createState() => _LoadingScreenState();
 }
 
-//    <key>NSLocationAlwaysUsageDescription</key>
-// <string>Your location is required</string>
-
 class _LoadingScreenState extends State<LoadingScreen> {
   BitmapDescriptor customIconActive;
   BitmapDescriptor customIconNotActive;
@@ -80,9 +70,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     if (Platform.isAndroid) {
       print('Android is true');
-      //if(ViewConfiguration(devicePixelRatio: )){
-
-      //}
       BitmapDescriptor.fromAssetImage(
               ImageConfiguration(), 'assets/ico_agzs_green_android.png')
           .then((onValue) {
@@ -122,7 +109,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   value: BlocProvider.of<MapBloc>(context),
                   child: BlocProvider<InfoBloc>.value(
                     value: BlocProvider.of<InfoBloc>(context),
-                    // create: (ncontext) => InfoBloc()..add(InfoGetEvent()),
                     child: BlocProvider<RegionsBloc>.value(
                       value: BlocProvider.of<RegionsBloc>(context),
                       child: HomeScreen(
@@ -137,19 +123,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
               (Route<dynamic> route) => false,
             );
           }
-          // else if (state is MapErrorState) {
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (newcontext) => BlocProvider(
-          //         create: (context) => MapBloc(),
-          //         child: HomeScreen(
-          //           list: [],
-          //         ),
-          //       ),
-          //     ),
-          //   );
-          // }
         },
         builder: (context, state) {
           return Stack(

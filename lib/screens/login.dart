@@ -68,7 +68,7 @@ class _LogInState extends State<LogIn> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Чтобы продолжить\nпожалуйста авторизуйтесь",
+                          "Личный кабинет для персонала заправочных станций чтобы продолжить пожалуйста авторизуйтесь",
                           style: TextStyle(
                             fontSize: 18.0,
                           ),
@@ -151,7 +151,7 @@ class _LogInState extends State<LogIn> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         backgroundColor: Colors.red,
-                                        content: Text('Неверный номер'),
+                                        content: Text('Номер не определен'),
                                         duration: Duration(seconds: 2),
                                       ),
                                     );
