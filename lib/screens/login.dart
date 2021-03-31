@@ -150,13 +150,13 @@ class _LogInState extends State<LogIn> {
                                     );
                                     // );
                                   } else if (state is CheckNumberErrorState) {
-                                    // ScaffoldMessenger.of(context).showSnackBar(
-                                    //   SnackBar(
-                                    //     backgroundColor: Colors.red,
-                                    //     content: Text('Неверный номер'),
-                                    //     duration: Duration(seconds: 2),
-                                    //   ),
-                                    // );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text('Неверный номер'),
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
                                     // Scaffold.of(context).showSnackBar(
                                     //   SnackBar(
                                     //     backgroundColor: Colors.red,
@@ -165,18 +165,18 @@ class _LogInState extends State<LogIn> {
                                     //   ),
                                     // );
 
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            BlocProvider<LoginBloc>(
-                                          create: (context) => LoginBloc(),
-                                          child: PhoneAuthVerify(
-                                            phoneNumber: phoneController.text,
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) =>
+                                    //         BlocProvider<LoginBloc>(
+                                    //       create: (context) => LoginBloc(),
+                                    //       child: PhoneAuthVerify(
+                                    //         phoneNumber: phoneController.text,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // );
                                   }
                                 },
                                 builder: (context, state) {
