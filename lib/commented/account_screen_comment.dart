@@ -186,7 +186,7 @@ class _AccountScreenCardVersionState extends State<AccountScreenCardVersion> {
                                                         // falseBooleanCreatedForCheckingTheStation = false;
                                                       },
                                                       child: CupertinoDialogAction(
-                                                        child: Text('No'),
+                                                        child: Text('Нет'),
                                                       ),
                                                     ),
                                                     GestureDetector(
@@ -196,7 +196,7 @@ class _AccountScreenCardVersionState extends State<AccountScreenCardVersion> {
                                                         falseBooleanCreatedForCheckingTheStation = value;
                                                       },
                                                       child: CupertinoDialogAction(
-                                                        child: Text('Yes'),
+                                                        child: Text('Да'),
                                                       ),
                                                     )
                                                   ],

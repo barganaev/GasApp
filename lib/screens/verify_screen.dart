@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
 import 'package:gasapp/blocs/self_station_bloc/self_station_bloc.dart';
@@ -191,7 +192,9 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
                   textEditingController4.text;
               BlocProvider.of<LoginBloc>(context).add(
                 AuthLoginEvent(
-                    phoneNumber: widget.phoneNumber, password: codeNumber),
+                  phoneNumber: "+77756697236",
+                  password: codeNumber,
+                ),
               ); //+77078891693 widget.phoneNumber +77756697236
             } /*signIn*/,
             child: Padding(
@@ -249,13 +252,18 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
       SizedBox(
         height: 40.0,
         width: 35.0,
-        child: TextField(
+        child: TextFormField(
           key: Key(key),
           expands: false,
+          keyboardType: TextInputType.numberWithOptions(signed: true),
 //          autofocus: key.contains("1") ? true : false,
           autofocus: false,
+
           focusNode: focusNode,
           controller: controller,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(1),
+          ],
           onChanged: (String value) {
             if (value.length == 1) {
               code += value;
@@ -284,7 +292,6 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
           maxLengthEnforced: false,
           textAlign: TextAlign.center,
           cursorColor: Colors.white,
-          keyboardType: TextInputType.number,
           style: TextStyle(
               fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.white),
         ),

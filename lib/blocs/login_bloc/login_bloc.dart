@@ -25,7 +25,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           print(loginModel.accessToken);
           prefs.setString("token", loginModel.accessToken);
           yield LoginLoadedState(
-              loginModel: loginModel, token: loginModel.accessToken);
+            loginModel: loginModel,
+            token: loginModel.accessToken,
+          );
         } else {
           yield LoginErrorState();
         }

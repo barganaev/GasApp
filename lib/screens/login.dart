@@ -97,7 +97,8 @@ class _LogInState extends State<LogIn> {
                                 autofocus: false,
                                 maxLines: 1,
                                 focusNode: _nodeText1,
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.numberWithOptions(
+                                    signed: true),
                                 autocorrect: false,
                                 validator: (String inValue) {
                                   if (inValue == null || inValue.isEmpty) {
@@ -149,14 +150,21 @@ class _LogInState extends State<LogIn> {
                                     );
                                     // );
                                   } else if (state is CheckNumberErrorState) {
-                                    // Scaffold.of(context).showSnackBar(
+                                    // ScaffoldMessenger.of(context).showSnackBar(
                                     //   SnackBar(
                                     //     backgroundColor: Colors.red,
-                                    //     content:
-                                    //         Text('Неверный номер'),
+                                    //     content: Text('Неверный номер'),
                                     //     duration: Duration(seconds: 2),
                                     //   ),
                                     // );
+                                    // Scaffold.of(context).showSnackBar(
+                                    //   SnackBar(
+                                    //     backgroundColor: Colors.red,
+                                    //     content: Text('Неверный номер'),
+                                    //     duration: Duration(seconds: 2),
+                                    //   ),
+                                    // );
+
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

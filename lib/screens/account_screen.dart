@@ -59,18 +59,26 @@ class _AccountScreenState extends State<AccountScreen> {
           style: TextStyle(color: Colors.blue),
         ),
         actions: [
-          IconButton(
+          TextButton(
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
               await prefs.clear();
               Navigator.of(context).popUntil((route) => route.isFirst);
             },
-            icon: Icon(
-              Icons.logout,
-              color: Colors.blue,
-            ),
-            tooltip: "Выйти из аккаунта",
+            child: Text('Выход'),
           ),
+          // IconButton(
+          //   onPressed: () async {
+          // final prefs = await SharedPreferences.getInstance();
+          // await prefs.clear();
+          // Navigator.of(context).popUntil((route) => route.isFirst);
+          //   },
+          //   icon: Icon(
+          //     Icons.logout,
+          //     color: Colors.blue,
+          //   ),
+          //   tooltip: "Выйти из аккаунта",
+          // ),
         ],
       ),
       body: BlocBuilder<SelfStationBloc, SelfStationState>(
@@ -203,7 +211,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                   child:
                                                                       TextButton(
                                                                     child: Text(
-                                                                        'No', style: TextStyle(color: Colors.black),),
+                                                                        'Нет', style: TextStyle(color: Colors.black),),
                                                                   ),
                                                                 ),
                                                                 GestureDetector(
@@ -252,10 +260,10 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                   child:
                                                                       TextButton(
                                                                     child: Text(
-                                                                        'Yes',
+                                                                        'Да',
                                                                         style: TextStyle(color: Colors.black),),
                                                                   ),
-                                                                )
+                                                                ),
                                                               ],
                                                             ),
                                                         barrierDismissible:
