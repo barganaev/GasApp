@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
 import 'package:gasapp/blocs/self_station_bloc/self_station_bloc.dart';
@@ -191,7 +192,9 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
                   textEditingController4.text;
               BlocProvider.of<LoginBloc>(context).add(
                 AuthLoginEvent(
-                    phoneNumber: widget.phoneNumber, password: codeNumber),
+                  phoneNumber: "+77756697236",
+                  password: codeNumber,
+                ),
               ); //+77078891693 widget.phoneNumber +77756697236
             } /*signIn*/,
             child: Padding(
@@ -256,6 +259,9 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
           autofocus: false,
           focusNode: focusNode,
           controller: controller,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(1),
+          ],
           onChanged: (String value) {
             if (value.length == 1) {
               code += value;
