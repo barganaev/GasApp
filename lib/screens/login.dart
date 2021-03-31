@@ -135,6 +135,8 @@ class _LogInState extends State<LogIn> {
                               BlocConsumer<CheckNumberBloc, CheckNumberState>(
                                 listener: (context, state) {
                                   if (state is CheckNumberLoadedState) {
+                                    print("phoneController.text");
+                                    print(phoneController.text);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -148,6 +150,8 @@ class _LogInState extends State<LogIn> {
                                     );
                                     // );
                                   } else if (state is CheckNumberErrorState) {
+                                    print("phoneController.text222");
+                                    print(phoneController.text);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         backgroundColor: Colors.red,
