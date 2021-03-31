@@ -199,7 +199,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                 showDialog(
                                                         context: context,
                                                         builder: (_) =>
-                                                            CupertinoAlertDialog(
+                                                            AlertDialog(
                                                               title: Text(
                                                                   'Вы уверены?'),
                                                               actions: [
@@ -209,9 +209,9 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                         context);
                                                                   },
                                                                   child:
-                                                                      CupertinoDialogAction(
+                                                                      TextButton(
                                                                     child: Text(
-                                                                        'Нет'),
+                                                                        'Нет', style: TextStyle(color: Colors.black),),
                                                                   ),
                                                                 ),
                                                                 GestureDetector(
@@ -237,39 +237,6 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                       isOpen =
                                                                           "false";
                                                                     }
-                                                                    // BlocProvider
-                                                                    //     .value(
-                                                                    //   value: BlocProvider.of<
-                                                                    //           SelfStationBloc>(
-                                                                    //       context)
-                                                                    //     ..add(
-                                                                    //       SelfStationToggleEvent(
-                                                                    //         token:
-                                                                    //             token,
-                                                                    //         stationId:
-                                                                    //             state.selfStationModel.message[i].id.toString(),
-                                                                    //         isOpen:
-                                                                    //             isOpen,
-                                                                    //         regionId:
-                                                                    //             "1",
-                                                                    //       ),
-                                                                    //     ),
-                                                                    // );
-                                                                    // bloc.add(
-                                                                    //   SelfStationToggleEvent(
-                                                                    //     token:
-                                                                    //         token,
-                                                                    //     stationId: state
-                                                                    //         .selfStationModel
-                                                                    //         .message[i]
-                                                                    //         .id
-                                                                    //         .toString(),
-                                                                    //     isOpen:
-                                                                    //         isOpen,
-                                                                    //     regionId:
-                                                                    //         "1",
-                                                                    //   ),
-                                                                    // );
                                                                     BlocProvider.of<SelfStationBloc>(
                                                                             context)
                                                                         .add(
@@ -289,16 +256,12 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                     );
                                                                     Navigator.pop(
                                                                         context);
-                                                                    // valuesOfButton[
-                                                                    //         i] =
-                                                                    //     value;
-                                                                    // falseBooleanCreatedForCheckingTheStation =
-                                                                    //     value;
                                                                   },
                                                                   child:
-                                                                      CupertinoDialogAction(
+                                                                      TextButton(
                                                                     child: Text(
-                                                                        'Да'),
+                                                                        'Да',
+                                                                        style: TextStyle(color: Colors.black),),
                                                                   ),
                                                                 ),
                                                               ],

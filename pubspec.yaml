@@ -12,6 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+#  flutter_launcher_icons: ^0.9.0
+#
+#flutter_icons:
+#  image_path: "assets/icon_agzs.png"
+#  android: true
+#  ios: true
+
   flutter_localizations:
     sdk: flutter
   mask_text_input_formatter: ^1.2.1
@@ -31,6 +38,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_launcher_icons: ^0.9.0
+
+flutter_icons:
+  image_path: "assets/icon_agzs.png"
+  android: true
+  ios: true
 
 flutter:
   uses-material-design: true
