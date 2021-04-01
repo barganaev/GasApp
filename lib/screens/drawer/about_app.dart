@@ -29,7 +29,13 @@ class _AboutAppState extends State<AboutApp> {
               color: Colors.blue,
             )),
       ),
-      body: BlocBuilder<InfoBloc, InfoState>(
+      body: BlocConsumer<InfoBloc, InfoState>(
+        listener: (context, state){
+          if(state is InfoError){
+            // print('Phoneix here');
+            // Phoenix.rebirth(context);
+          }
+        },
         builder: (context, state) {
           if (state is InfoLoading) {
             return Center(
@@ -79,8 +85,10 @@ class _AboutAppState extends State<AboutApp> {
                 ],
               ),
             );
-          } else {
-            return Text('Error in screen -> drawer -> about-app');
+          } else if(state is InfoError){
+            return Center(child: Text('Error'));
+          }else {
+            return Text('Last error');
           }
         },
       ),

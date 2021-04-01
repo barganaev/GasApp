@@ -229,6 +229,7 @@ class ApiProvider {
     var responseJson;
     try {
       final response = await http.get(Uri.parse(_baseUrl));
+      //return Exception();
       responseJson = _response(response, requestName);
     } catch (e) {
       print(e);
