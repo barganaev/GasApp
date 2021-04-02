@@ -29,7 +29,13 @@ class _AboutAppState extends State<AboutApp> {
               color: Colors.blue,
             )),
       ),
-      body: BlocBuilder<InfoBloc, InfoState>(
+      body: BlocConsumer<InfoBloc, InfoState>(
+        listener: (context, state){
+          if(state is InfoError){
+            // print('Phoneix here');
+            // Phoenix.rebirth(context);
+          }
+        },
         builder: (context, state) {
           if (state is InfoLoading) {
             return Center(
@@ -50,12 +56,12 @@ class _AboutAppState extends State<AboutApp> {
                         child: Text(
                           'О приложении',
                           style:
-                              TextStyle(color: Color(0xFF2295C1), fontSize: 30),
+                              TextStyle(color: Color(0xFF2295C1), fontSize: 24),
                         )),
                   ),
                   Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: screenSize(context).width * 0.08,
+                          horizontal: screenSize(context).width * 0.04,
                           vertical: screenSize(context).height * 0.02),
                       child: Html(
                         data: state.infoModel.text,
@@ -79,8 +85,10 @@ class _AboutAppState extends State<AboutApp> {
                 ],
               ),
             );
-          } else {
-            return Text('Error in screen -> drawer -> about-app');
+          } else if(state is InfoError){
+            return Center(child: Text('Error'));
+          }else {
+            return Text('Last error');
           }
         },
       ),

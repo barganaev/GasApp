@@ -51,13 +51,13 @@ class _AccountScreenState extends State<AccountScreen> {
           },
           child: Icon(
             Icons.arrow_back_outlined,
-            color: Colors.blue,
+            color: Color(0xFF016fbe),
           ),
         ),
         centerTitle: true,
         title: Text(
           'Личный кабинет',
-          style: TextStyle(color: Colors.blue),
+          style: TextStyle(color: Color(0xFF016fbe)),
         ),
         actions: [
           TextButton(
@@ -161,7 +161,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                               style: TextStyle(
                                                   decoration:
                                                       TextDecoration.underline,
-                                                  color: Colors.blue),
+                                                  color: Color(0xFF016fbe)),
                                             ),
                                           ),
                                         ],

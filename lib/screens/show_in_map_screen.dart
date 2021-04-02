@@ -88,7 +88,7 @@ class _ShowInMapScreenState extends State<ShowInMapScreen> {
             initialCameraPosition: CameraPosition(target: LatLng(widget.x, widget.y), zoom: 13),
             mapType: mapTypeNormal ? MapType.normal : MapType.hybrid,
             zoomControlsEnabled: true,
-            mapToolbarEnabled: false,
+            mapToolbarEnabled: true,
           ),
           Padding(
             padding: EdgeInsets.only(top: screenSize(context).height * 0.05),

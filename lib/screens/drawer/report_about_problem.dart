@@ -26,7 +26,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.blue,
+            color: Color(0xFF016fbe),
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -75,7 +75,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                             child: Text(
                               'Сообщить о несоответствии',
                               style: TextStyle(
-                                  color: Color(0xFF2295C1), fontSize: 30),
+                                  color: Color(0xFF016fbe), fontSize: 30),
                             )),
                       ),
                       Container(
@@ -213,7 +213,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF2295C1),
+                              Color(0xFF016fbe),
                             ),
                           ),
                           onPressed: () {
