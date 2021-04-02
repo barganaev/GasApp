@@ -132,7 +132,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
           },
           child: Icon(
             Icons.arrow_back_ios,
-            color: Colors.blue,
+            color: Color(0xFF016fbe),
           ),
         ),
       ),
@@ -156,7 +156,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                       child: Text(
                         'Объемы поставок',
                         style:
-                            TextStyle(color: Color(0xFF2295C1), fontSize: 28),
+                            TextStyle(color: Color(0xFF016fbe), fontSize: 24),
                       ),
                     ),
                   ),
@@ -191,7 +191,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                               child: Text(
                                 'Другая дата',
                                 style: TextStyle(
-                                    fontSize: 10, color: Color(0xFF2295C1)),
+                                    fontSize: 10, color: Color(0xFF016fbe)),
                               ),
                             ),
                             Image.asset(

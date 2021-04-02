@@ -56,7 +56,7 @@ class _LogInState extends State<LogIn> {
                         child: Text(
                           "Вход",
                           style: TextStyle(
-                            color: Color(0xFF2295C1),
+                            color: Color(0xFF016fbe),
                             fontSize: 45.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -213,7 +213,7 @@ class _LogInState extends State<LogIn> {
                                         "Далее",
                                         style: TextStyle(
                                           fontSize: 18.0,
-                                          color: Color(0xFF2295C1),
+                                          color: Color(0xFF016fbe),
                                         ),
                                       ),
                                     ),
@@ -227,7 +227,7 @@ class _LogInState extends State<LogIn> {
                                     style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
-                                              Color(0xFF2295C1)),
+                                              Color(0xFF016fbe)),
                                     ),
                                     onPressed: () {
                                       Navigator.pop(context);
