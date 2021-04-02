@@ -53,12 +53,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
-                    color: Color(0xFF5897cf) /*Colors.black87*/,
+                    color: Color(0xFF016fbe) /*Colors.black87*/,
                     fontSize: 20),
               ),
               subtitle: Text(
                 "Газозаправочные станции Мангистауской области",
-                style: TextStyle(color: Color(0xFF5897cf), fontSize: 12),
+                style: TextStyle(color: Color(0xFF016fbe), fontSize: 12),
               ),
               //trailing: Icon(Icons.arrow_right_sharp),
             ),

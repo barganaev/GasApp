@@ -67,7 +67,7 @@ class _ListOfStationsState extends State<ListOfStations> {
             },
             child: Icon(
               Icons.arrow_back_ios,
-              color: Colors.blue,
+              color: Color(0xFF016fbe),
             )),
       ),
       body: BlocBuilder<ListOfStationsBloc, ListOfStationsState>(
@@ -91,7 +91,7 @@ class _ListOfStationsState extends State<ListOfStations> {
                         child: Text(
                           'Перечень заправочных станций',
                           style:
-                              TextStyle(color: Color(0xFF2295C1), fontSize: 28),
+                              TextStyle(color: Color(0xFF016fbe), fontSize: 24),
                         )),
                   ),
                   Align(
@@ -183,7 +183,7 @@ class _ListOfStationsState extends State<ListOfStations> {
                                           style: TextStyle(
                                               decoration:
                                                   TextDecoration.underline,
-                                              color: Colors.blue),
+                                              color: Color(0xFF016fbe)),
                                         ),
                                       ),
                                     ),
