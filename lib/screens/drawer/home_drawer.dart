@@ -164,7 +164,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_4.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Вход в личный кабинет"),
+            title: Text("Личный кабинет"),
             //trailing: Icon(Icons.arrow_right_sharp),
           ),
           Divider(
