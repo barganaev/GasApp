@@ -59,256 +59,483 @@ class _AccountScreenState extends State<AccountScreen> {
           'Личный кабинет',
           style: TextStyle(color: Color(0xFF016fbe)),
         ),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              await prefs.clear();
-              Navigator.of(context).popUntil((route) => route.isFirst);
-            },
-            child: Text('Выход'),
-          ),
-          // IconButton(
-          //   onPressed: () async {
-          // final prefs = await SharedPreferences.getInstance();
-          // await prefs.clear();
-          // Navigator.of(context).popUntil((route) => route.isFirst);
-          //   },
-          //   icon: Icon(
-          //     Icons.logout,
-          //     color: Colors.blue,
-          //   ),
-          //   tooltip: "Выйти из аккаунта",
-          // ),
-        ],
       ),
       body: BlocBuilder<SelfStationBloc, SelfStationState>(
         builder: (context, state) {
           if (state is SelfStationLoaded) {
             print("in loaded");
-            return Container(
-              padding: EdgeInsets.only(
-                left: screenSize(context).width * 0.1,
-                right: screenSize(context).width * 0.1,
-              ),
-              child: Column(
-                children: [
-                  Text(state.selfStationModel.message != null &&
-                          state.selfStationModel.message.isNotEmpty
-                      ? state.selfStationModel.message[0].boss ?? " "
-                      : " "),
-                  // Text('+7(707) 001 01 01'),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(top: screenSize(context).height * 0.05),
-                    child: Text(
-                      'Режим работы ваших станции',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+            return Column(
+              children: [
+                Container(
+                  height: screenSize(context).height * 0.18,
+                  color: Colors.grey[200],
+                  child: IntrinsicHeight(
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: screenSize(context).width * 0.05,
+                                    right: screenSize(context).width * 0.05),
+                                child: CircleAvatar(
+                                  radius: 32,
+                                  backgroundColor: Colors.grey[300],
+                                  child: Image.asset(
+                                    'assets/logo_blue.png',
+                                    height: screenSize(context).height * 0.08,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: screenSize(context).height * 0.05),
+                                child: Column(
+                                  //mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      state.selfStationModel.message != null &&
+                                              state.selfStationModel.message
+                                                  .isNotEmpty
+                                          ? state.selfStationModel.message[0]
+                                                  .boss ??
+                                              " "
+                                          : " ",
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      '+77012345678',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      'E-mail: umirbek@gmail.com',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: screenSize(context).height * 0.05,
+                                right: screenSize(context).width * 0.03),
+                            child: IconButton(
+                              icon: Icon(Icons.settings),
+                              onPressed: () {
+                                showDialog(
+                                        context: context,
+                                        builder: (_) => Container(
+                                              margin: EdgeInsets.only(
+                                                  top: screenSize(context)
+                                                          .height *
+                                                      0.25,
+                                                  left: screenSize(context)
+                                                          .width *
+                                                      0.2,
+                                                  right: screenSize(context)
+                                                          .width *
+                                                      0.1,
+                                                  bottom: screenSize(context)
+                                                          .height *
+                                                      0.48),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Expanded(
+                                                      child: Center(
+                                                          child: Padding(
+                                                    padding: EdgeInsets.symmetric(
+                                                        horizontal:
+                                                            screenSize(context)
+                                                                    .width *
+                                                                0.05),
+                                                    child: Container(
+                                                        child: Text(
+                                                      'Вы действительно хотите закрыть аккаунт и выйти из личного кабинета?',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                  ))),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                          padding: EdgeInsets.symmetric(
+                                                              horizontal:
+                                                                  screenSize(context)
+                                                                          .width *
+                                                                      0.05),
+                                                          width:
+                                                              screenSize(context)
+                                                                      .width *
+                                                                  0.3,
+                                                          child: TextButton(
+                                                              style: ButtonStyle(
+                                                                  backgroundColor:
+                                                                      MaterialStateProperty.all<Color>(Colors
+                                                                          .grey),
+                                                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                      RoundedRectangleBorder(
+                                                                          borderRadius: BorderRadius.circular(10)))),
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(
+                                                                'Нет',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                              ))),
+                                                      Expanded(
+                                                        child: Container(
+                                                            padding: EdgeInsets.only(
+                                                                right: screenSize(
+                                                                            context)
+                                                                        .width *
+                                                                    0.05),
+                                                            child: TextButton(
+                                                                style:
+                                                                    ButtonStyle(
+                                                                  backgroundColor:
+                                                                      MaterialStateProperty.all<
+                                                                              Color>(
+                                                                          Color(
+                                                                              0xFF016fbe)),
+                                                                  shape: MaterialStateProperty
+                                                                      .all<
+                                                                          RoundedRectangleBorder>(
+                                                                    RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                onPressed:
+                                                                    () async {
+                                                                  final prefs =
+                                                                      await SharedPreferences
+                                                                          .getInstance();
+                                                                  await prefs
+                                                                      .clear();
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .popUntil(
+                                                                          (route) =>
+                                                                              route.isFirst);
+                                                                },
+                                                                child: Text(
+                                                                  'Выйти',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                ))),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: screenSize(context)
+                                                            .height *
+                                                        0.03,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                        barrierDismissible: false)
+                                    .then((value) {
+                                  setState(() {});
+                                });
+                                // AlertDialog(
+                                //   title: Text('Вы действительно хотите закрыть аккаунт и выйти из личного кабинета?'),
+                                //   actions: [
+                                //     ElevatedButton(
+                                //       onPressed: (){
+                                //         Navigator.pop(context);
+                                //       },
+                                //       child: Text('Нет'),
+                                //     )
+                                //   ],
+                                // );
+                              },
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    height: screenSize(context).height * 0.05,
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: ListView.builder(
-                        itemCount: state.selfStationModel.message.length,
-                        itemBuilder: (context, i) {
-                          valuesOfButton.add(false);
-                          return Container(
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      //color: Colors.green,
-                                      width: screenSize(context).width * 0.5,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                ),
+                Expanded(
+                  child: Container(
+                    // height: screenSize(context).height * 0.6,
+                    padding: EdgeInsets.only(
+                      left: screenSize(context).width * 0.1,
+                      right: screenSize(context).width * 0.1,
+                    ),
+                    child: Column(
+                      children: [
+                        // Text(state.selfStationModel.message != null &&
+                        //         state.selfStationModel.message.isNotEmpty
+                        //     ? state.selfStationModel.message[0].boss ?? " "
+                        //     : " "),
+                        // Text('+7(707) 001 01 01'),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: screenSize(context).height * 0.05),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Режим работы газовых заправок',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF016fbe),
+                                  fontSize: 17),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenSize(context).height * 0.05,
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: ListView.builder(
+                              itemCount: state.selfStationModel.message.length,
+                              itemBuilder: (context, i) {
+                                valuesOfButton.add(false);
+                                return Container(
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            state.selfStationModel.message[i]
-                                                    .name ??
-                                                "name",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: Colors.orange),
-                                          ),
-                                          Text(
-                                            state.selfStationModel.message[i]
-                                                    .comment ??
-                                                "address",
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                          GestureDetector(
-                                            onTap: (){
-                                              Navigator.push(
-                                                context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) => ShowInMapScreen(
-                                                      x: double.parse(state.selfStationModel.message[i].coordX),
-                                                      y: double.parse(state.selfStationModel.message[i].coordY,)
-                                                    ),
+                                          Container(
+                                            //color: Colors.green,
+                                            width:
+                                                screenSize(context).width * 0.5,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  state.selfStationModel
+                                                          .message[i].name ??
+                                                      "name",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 18,
+                                                      color: Colors.orange),
+                                                ),
+                                                Text(
+                                                  state.selfStationModel
+                                                          .message[i].comment ??
+                                                      "address",
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ShowInMapScreen(
+                                                                x: double.parse(state
+                                                                    .selfStationModel
+                                                                    .message[i]
+                                                                    .coordX),
+                                                                y: double.parse(
+                                                                  state
+                                                                      .selfStationModel
+                                                                      .message[
+                                                                          i]
+                                                                      .coordY,
+                                                                )),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Text(
+                                                    'Показать на карте',
+                                                    style: TextStyle(
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                        color:
+                                                            Color(0xFF016fbe)),
                                                   ),
-                                              );
-                                            },
-                                            child: Text(
-                                              'Показать на карте',
-                                              style: TextStyle(
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  color: Color(0xFF016fbe)),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                right:
+                                                    screenSize(context).width *
+                                                        0.03),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                    child: Text('Сейчас: ')),
+                                                Status(state.selfStationModel
+                                                    .message[i].isOpen)
+                                              ],
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          right:
-                                              screenSize(context).width * 0.03),
-                                      child: Column(
-                                        children: [
-                                          Container(child: Text('Сейчас: ')),
-                                          Status(state.selfStationModel
-                                              .message[i].isOpen)
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      top: screenSize(context).height * 0.02),
-                                  child: Container(
-                                    //color: Colors.lightGreen[200],
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                            padding: EdgeInsets.only(
-                                                left:
-                                                    screenSize(context).width *
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: screenSize(context).height *
+                                                0.02),
+                                        child: Container(
+                                          //color: Colors.lightGreen[200],
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                  width: screenSize(context)
+                                                          .width *
+                                                      0.5, // TODO: Crash is here!
+                                                  padding: EdgeInsets.only(
+                                                      left: screenSize(context)
+                                                              .width *
+                                                          0.03),
+                                                  child: Text(
+                                                    'Открыть или закрыть объект',
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            screenSize(context)
+                                                                    .width *
+                                                                0.034),
+                                                  )),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    right: screenSize(context)
+                                                            .width *
                                                         0.03),
-                                            child: Text(
-                                                'Открыть или закрыть объект')),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              right: screenSize(context).width *
-                                                  0.03),
-                                          child: CupertinoSwitch(
-                                              trackColor: Colors.red,
-                                              activeColor: Colors.green,
-                                              value: state.selfStationModel
-                                                          .message[i].isOpen ==
-                                                      "1"
-                                                  ? true
-                                                  : false,
-                                              onChanged: (bool value) {
-                                                showDialog(
-                                                        context: context,
-                                                        builder: (_) =>
-                                                            AlertDialog(
-                                                              title: Text(
-                                                                  'Вы уверены?'),
-                                                              actions: [
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                  },
-                                                                  child:
-                                                                      TextButton(
-                                                                    child: Text(
-                                                                        'Нет', style: TextStyle(color: Colors.black),),
-                                                                  ),
-                                                                ),
-                                                                GestureDetector(
-                                                                  onTap:
-                                                                      () async {
-                                                                    final prefs =
-                                                                        await SharedPreferences
-                                                                            .getInstance();
-                                                                    String
-                                                                        token =
-                                                                        prefs.getString(
-                                                                            "token");
-                                                                    String
-                                                                        isOpen;
-                                                                    if (state
-                                                                            .selfStationModel
-                                                                            .message[i]
-                                                                            .isOpen ==
-                                                                        "0") {
-                                                                      isOpen =
-                                                                          "true";
-                                                                    } else {
-                                                                      isOpen =
-                                                                          "false";
-                                                                    }
-                                                                    BlocProvider.of<SelfStationBloc>(
-                                                                            context)
-                                                                        .add(
-                                                                      SelfStationToggleEvent(
-                                                                        token:
-                                                                            token,
-                                                                        stationId: state
-                                                                            .selfStationModel
-                                                                            .message[i]
-                                                                            .id
-                                                                            .toString(),
-                                                                        isOpen:
-                                                                            isOpen,
-                                                                        regionId:
-                                                                            "1",
+                                                child: CupertinoSwitch(
+                                                    trackColor: Colors.red,
+                                                    activeColor: Colors.green,
+                                                    value: state
+                                                                .selfStationModel
+                                                                .message[i]
+                                                                .isOpen ==
+                                                            "1"
+                                                        ? true
+                                                        : false,
+                                                    onChanged: (bool value) {
+                                                      showDialog(
+                                                              context: context,
+                                                              builder: (_) =>
+                                                                  AlertDialog(
+                                                                    title: Text(
+                                                                        'Вы уверены?'),
+                                                                    actions: [
+                                                                      GestureDetector(
+                                                                        onTap:
+                                                                            () {},
+                                                                        child:
+                                                                            TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.pop(context);
+                                                                          },
+                                                                          child:
+                                                                              Text(
+                                                                            'Нет',
+                                                                            style:
+                                                                                TextStyle(color: Colors.black),
+                                                                          ),
+                                                                        ),
                                                                       ),
-                                                                    );
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                  },
-                                                                  child:
-                                                                      TextButton(
-                                                                    child: Text(
-                                                                        'Да',
-                                                                        style: TextStyle(color: Colors.black),),
+                                                                      GestureDetector(
+                                                                        onTap:
+                                                                            () async {
+                                                                          final prefs =
+                                                                              await SharedPreferences.getInstance();
+                                                                          String
+                                                                              token =
+                                                                              prefs.getString("token");
+                                                                          String
+                                                                              isOpen;
+                                                                          if (state.selfStationModel.message[i].isOpen ==
+                                                                              "0") {
+                                                                            isOpen =
+                                                                                "true";
+                                                                          } else {
+                                                                            isOpen =
+                                                                                "false";
+                                                                          }
+                                                                          BlocProvider.of<SelfStationBloc>(context)
+                                                                              .add(
+                                                                            SelfStationToggleEvent(
+                                                                              token: token,
+                                                                              stationId: state.selfStationModel.message[i].id.toString(),
+                                                                              isOpen: isOpen,
+                                                                              regionId: "1",
+                                                                            ),
+                                                                          );
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                        child:
+                                                                            TextButton(
+                                                                          child:
+                                                                              Text(
+                                                                            'Да',
+                                                                            style:
+                                                                                TextStyle(color: Colors.black),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                        barrierDismissible:
-                                                            false)
-                                                    .then((value) {
-                                                  setState(() {});
-                                                });
-                                                print(value);
-                                              }),
+                                                              barrierDismissible:
+                                                                  false)
+                                                          .then((value) {
+                                                        setState(() {});
+                                                      });
+                                                      print(value);
+                                                    }),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical:
+                                                screenSize(context).height *
+                                                    0.02),
+                                        child: Divider(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical:
-                                          screenSize(context).height * 0.02),
-                                  child: Divider(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           } else if (state is SelfStationLoading) {
             print("in loading");
