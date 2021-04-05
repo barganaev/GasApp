@@ -97,25 +97,21 @@ class _AccountScreenState extends State<AccountScreen> {
                                   //mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      state.selfStationModel.message != null &&
-                                              state.selfStationModel.message
-                                                  .isNotEmpty
-                                          ? state.selfStationModel.message[0]
-                                                  .boss ??
-                                              " "
-                                          : " ",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      '+77012345678',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      'E-mail: umirbek@gmail.com',
-                                      style: TextStyle(fontSize: 12),
+                                    Container(
+                                      width: screenSize(context).width * 0.55,
+                                      child: Text(
+                                        state.selfStationModel.message !=
+                                                    null &&
+                                                state.selfStationModel.message
+                                                    .isNotEmpty
+                                            ? state.selfStationModel.message[0]
+                                                    .boss ??
+                                                " "
+                                            : " ",
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ],
                                 ),
