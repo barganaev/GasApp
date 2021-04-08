@@ -33,8 +33,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
         children: <Widget>[
           Container(
             height: screenSize(context).height * 0.13,
-            //color: Colors.red,
-            //color: Colors.white,
             child: ListTile(
               contentPadding: EdgeInsets.only(
                 top: 20,
@@ -72,13 +70,14 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             onTap: () {
+              // BlocProvider.of<MapBloc>(context).add(MapGetMarkersEvent());
               Navigator.pop(context);
             },
             leading: Image.asset(
               'assets/icon_2.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Карта заправочных станций"),
+            title: Text("Карта заправочных станций"), //Обновить состояние карты
             //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
@@ -219,8 +218,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 MaterialPageRoute(
                   builder: (newcontext) => BlocProvider<InfoBloc>.value(
                     // create: (context) => InfoBloc()..add(InfoGetEvent()),
-                    value: BlocProvider.of<InfoBloc>(context)
-                      ..add(InfoGetEvent()),
+                    value: BlocProvider.of<InfoBloc>(context),
                     child: AboutApp(),
                   ),
                 ),

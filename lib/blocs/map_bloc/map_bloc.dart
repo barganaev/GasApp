@@ -22,6 +22,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         //     ApiProvider().requestPost("stations"),
         //   ],
         // );
+        yield MapLoadingState();
         print("HERE I AM");
         List<StationsModel> stationsModel =
             await ApiProvider().requestPost("stations");
