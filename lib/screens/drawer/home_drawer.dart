@@ -209,7 +209,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_6.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Обратнаяя связь"),
+            title: Text("Обратная связь"),
             //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(

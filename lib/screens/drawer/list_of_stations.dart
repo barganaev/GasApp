@@ -141,14 +141,20 @@ class _ListOfStationsState extends State<ListOfStations> {
                                     ),
                                   ),
                                 ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(state
-                                              .listOfStationsModel[i].boss !=
-                                          null
-                                      ? "Владелец: ${state.listOfStationsModel[i].boss}"
-                                      : ""),
+
+                                SizedBox(
+                                  height: screenSize(context).height * 0.015,
                                 ),
+
+                                // Align(
+                                //   alignment: Alignment.centerLeft,
+                                //   child: Text(state
+                                //               .listOfStationsModel[i].boss !=
+                                //           null
+                                //       ? "Владелец: ${state.listOfStationsModel[i].boss}"
+                                //       : ""),
+                                // ),
+
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
