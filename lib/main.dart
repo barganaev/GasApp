@@ -136,7 +136,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           return Stack(
             children: [
               Image.asset(
-                'assets/scr_1.png',
+                /*'assets/scr_1.png'*/ 'assets/scr_1_old.png',
                 fit: BoxFit.fill,
                 height: screenSize(context).height,
                 width: screenSize(context).width,
