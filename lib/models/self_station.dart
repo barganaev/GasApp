@@ -45,6 +45,9 @@ class Message {
     this.boss,
     this.address,
     this.gsoId,
+    this.user_name,
+    this.email,
+    this.phone_number,
   });
 
   int id;
@@ -62,6 +65,9 @@ class Message {
   String boss;
   String address;
   String gsoId;
+  String user_name;
+  String email;
+  String phone_number;
 
   factory Message.fromJson(Map<String, dynamic> json) => Message(
         id: json["id"],
@@ -79,6 +85,9 @@ class Message {
         boss: json["boss"],
         address: json["address"],
         gsoId: json["gso_id"],
+        user_name: json["user_name"] ?? " ",
+        email: json["email"] ?? " ",
+        phone_number: json["phone_number"] ?? " ",
       );
 
   Map<String, dynamic> toJson() => {

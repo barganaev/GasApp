@@ -105,12 +105,41 @@ class _AccountScreenState extends State<AccountScreen> {
                                                 state.selfStationModel.message
                                                     .isNotEmpty
                                             ? state.selfStationModel.message[0]
-                                                    .boss ??
+                                                    .user_name ??
                                                 " "
                                             : " ",
                                         style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: screenSize(context).width * 0.55,
+                                      child: Text(
+                                        state.selfStationModel.message !=
+                                                    null &&
+                                                state.selfStationModel.message
+                                                    .isNotEmpty
+                                            ? state.selfStationModel.message[0]
+                                                    .phone_number ??
+                                                " "
+                                            : " ",
+                                        style: TextStyle(
+                                            fontSize: 14,),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: screenSize(context).width * 0.55,
+                                      child: Text(
+                                        state.selfStationModel.message !=
+                                                    null &&
+                                                state.selfStationModel.message
+                                                    .isNotEmpty
+                                            ? "Email: ${state.selfStationModel.message[0].email}" ??
+                                                " "
+                                            : " ",
+                                        style: TextStyle(
+                                            fontSize: 14,),
                                       ),
                                     ),
                                   ],

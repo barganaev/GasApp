@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/map_bloc/map_bloc.dart';
 import 'package:gasapp/blocs/regions_bloc/regions_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
@@ -21,9 +20,6 @@ class HomeScreen extends StatefulWidget {
   BitmapDescriptor customIconActive;
   BitmapDescriptor customIconNotActive;
 
-  // HomeScreen(
-  //     {@required this.list, this.customIconActive, this.customIconNotActive});
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -33,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   GoogleMapController mapController;
   bool mapTypeNormal = true;
 
+  bool _checked = false;
   int indexOfCity = 0;
   String selectedCountry;
   String selectedProvince;
@@ -107,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onMapCreated(GoogleMapController controller) async {
     controller.setMapStyle(mapStyle);
-    // _controller.complete(controller);
+    _controller.complete(controller);
     await curLocation();
   }
 
@@ -152,22 +149,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //   children: [
-                //     Container(
-                //       width: screenSize(context).width * 0.4,
-                //       child: Text("Рабочее время: "),
-                //     ),
-                //     Container(
-                //       width: screenSize(context).width * 0.4,
-                //       child: Text("10:00 - 22:00"),
-                //     ),
-                //   ],
-                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -187,36 +168,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //   children: [
-                //     Container(
-                //       width: screenSize(context).width * 0.4,
-                //       child: Text("Объем запаса"),
-                //     ),
-                //     Container(
-                //       width: screenSize(context).width * 0.4,
-                //       child: Text("10 тонна"),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //   children: [
-                //     Container(
-                //       width: screenSize(context).width * 0.4,
-                //       child:
-                //           Text("Ориентировочные даты, в котовых газ должен быть"),
-                //     ),
-                //     Container(
-                //       width: screenSize(context).width * 0.4,
-                //       child: Text("25.03 - 22.04"),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),
@@ -228,29 +179,43 @@ class _HomeScreenState extends State<HomeScreen> {
   Set<Marker> markers(BuildContext context) {
     Set<Marker> markers = {};
     for (int i = 1; i <= widget.list.length; i++) {
-      markers.add(
-        Marker(
-          onTap: () {
-            getBottomSheet(context, widget.list[i - 1]);
-          },
-          markerId: MarkerId('id-$i'),
-          position: LatLng(
-            double.parse(widget.list[i - 1].coordX),
-            double.parse(widget.list[i - 1].coordY),
+      if (_checked == true) {
+        if (widget.list[i - 1].isOpen == "1") {
+          markers.add(Marker(
+              onTap: () {
+                getBottomSheet(context, widget.list[i - 1]);
+              },
+              markerId: MarkerId('id-$i'),
+              position: LatLng(
+                double.parse(widget.list[i - 1].coordX),
+                double.parse(widget.list[i - 1].coordY),
+              ),
+              icon: widget.customIconActive));
+        }
+      } else {
+        markers.add(
+          Marker(
+            onTap: () {
+              getBottomSheet(context, widget.list[i - 1]);
+            },
+            markerId: MarkerId('id-$i'),
+            position: LatLng(
+              double.parse(widget.list[i - 1].coordX),
+              double.parse(widget.list[i - 1].coordY),
+            ),
+            icon: widget.list[i - 1].isOpen == "0"
+                ? widget.customIconNotActive
+                : widget.customIconActive,
+            // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
           ),
-          icon: widget.list[i - 1].isOpen == "0"
-              ? widget.customIconNotActive
-              : widget.customIconActive,
-          // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-        ),
-      );
+        );
+      }
     }
     return markers;
   }
 
   @override
   Widget build(BuildContext context) {
-    print('here2');
     return BlocBuilder<RegionsBloc, RegionsState>(
       builder: (context, state) {
         if (state is RegionsLoadedState) {
@@ -280,71 +245,117 @@ class _HomeScreenState extends State<HomeScreen> {
                         mapToolbarEnabled: true,
                         zoomControlsEnabled: true,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height * 0.04,
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5),
-                              child: IconButton(
-                                onPressed: () {
-                                  // Scaffold.of(context).openDrawer();
-                                  _scaffoldKey.currentState.openDrawer();
-                                },
-                                icon: Icon(
-                                  Icons.menu,
-                                  size: 30,
-                                  // color: Colors.white,
-                                ),
-                              ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.04,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              height: MediaQuery.of(context).size.height * 0.05,
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: Icon(Icons.search),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(right: 10),
-                                    width: screenSize(context).width * 0.65,
-                                    child: DropdownButton<String>(
-                                      underline: Container(),
-                                      value: selectedCountry,
-                                      isExpanded: true,
-                                      items: regions.map((RegionsModel value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value.name,
-                                          child: Text(
-                                            value.name,
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: onChangedCallback,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 5),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      // Scaffold.of(context).openDrawer();
+                                      _scaffoldKey.currentState.openDrawer();
+                                    },
+                                    icon: Icon(
+                                      Icons.menu,
+                                      size: 30,
+                                      // color: Colors.white,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                  ),
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.05,
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Icon(Icons.search),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(right: 10),
+                                        width: screenSize(context).width * 0.65,
+                                        child: DropdownButton<String>(
+                                          underline: Container(),
+                                          value: selectedCountry,
+                                          isExpanded: true,
+                                          items:
+                                              regions.map((RegionsModel value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value.name,
+                                              child: Text(
+                                                value.name,
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: onChangedCallback,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height * 0.01,
+                                right: MediaQuery.of(context).size.width *
+                                    0.05, // TODO: Размерін келтіру керек, Джиги!
+                              ),
+                              child: CupertinoSwitch(
+                                  trackColor: Colors.grey,
+                                  activeColor: Colors.green,
+                                  value: _checked,
+                                  onChanged: (bool value) {
+                                    _checked = value;
+                                    setState(() {});
+                                    print(value);
+                                  }),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   );
                 } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return Stack(
+                    children: [
+                      Image.asset(
+                        'assets/scr_1_old.png',
+                        fit: BoxFit.fill,
+                        height: screenSize(context).height,
+                        width: screenSize(context).width,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: screenSize(context).height * 0.8,
+                          left: screenSize(context).width * 0.45,
+                        ),
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ],
                   );
+                  // return Center(
+                  //   child: CircularProgressIndicator(),
+                  // );
                 }
               },
             ),
@@ -364,13 +375,66 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         } else {
-          return Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.red,
-            ),
+          return Stack(
+            children: [
+              Image.asset(
+                'assets/scr_1_old.png',
+                fit: BoxFit.fill,
+                height: screenSize(context).height,
+                width: screenSize(context).width,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: screenSize(context).height * 0.8,
+                  left: screenSize(context).width * 0.45,
+                ),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
+                  backgroundColor: Colors.white,
+                ),
+              ),
+            ],
           );
+          // return Center(
+          //   child: CircularProgressIndicator(),
+          // );
         }
       },
     );
   }
 }
+
+// Container(
+//                             decoration: BoxDecoration(
+//                               borderRadius: BorderRadius.circular(10),
+//                               color: Colors.white,
+//                             ),
+//                             height: MediaQuery.of(context).size.height * 0.05,
+//                             child: Row(
+//                               children: [
+//                                 Padding(
+//                                   padding: EdgeInsets.symmetric(horizontal: 10),
+//                                   child: Icon(Icons.search),
+//                                 ),
+//                                 Container(
+//                                   padding: EdgeInsets.only(right: 10),
+//                                   width: screenSize(context).width * 0.65,
+//                                   child: DropdownButton<String>(
+//                                     underline: Container(),
+//                                     value: selectedCountry,
+//                                     isExpanded: true,
+//                                     items: regions.map((RegionsModel value) {
+//                                       return DropdownMenuItem<String>(
+//                                         value: value.name,
+//                                         child: Text(
+//                                           value.name,
+//                                           style: TextStyle(color: Colors.black),
+//                                         ),
+//                                       );
+//                                     }).toList(),
+//                                     onChanged: onChangedCallback,
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),

@@ -46,17 +46,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 // height: 50,
                 fit: BoxFit.fill,
               ),
-              title: Text(
-                "АГЗС",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    color: Color(0xFF016fbe) /*Colors.black87*/,
-                    fontSize: 20),
-              ),
+              // title: Text(
+              //   "АГЗС",
+              //   style: TextStyle(
+              //       fontWeight: FontWeight.bold,
+              //       fontFamily: 'Montserrat',
+              //       color: Color(0xFF016fbe) /*Colors.black87*/,
+              //       fontSize: 20),
+              // ),
               subtitle: Text(
                 "Газозаправочные станции Мангистауской области",
-                style: TextStyle(color: Color(0xFF016fbe), fontSize: 12),
+                style: TextStyle(color: Color(0xFF016fbe), fontSize: 15/*12*/),
               ),
               //trailing: Icon(Icons.arrow_right_sharp),
             ),
@@ -208,7 +208,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_6.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Обратнаяя связь"),
+            title: Text("Обратная связь"),
             //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
