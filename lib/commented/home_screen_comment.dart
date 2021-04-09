@@ -188,26 +188,26 @@
 //         ),
 //       ],
 //     );
-    return Stack(
-      children: [
-        Image.asset(
-          'assets/scr_1.png',
-          fit: BoxFit.fill,
-          height: screenSize(context).height,
-          width: screenSize(context).width,
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: screenSize(context).height * 0.8,
-            left: screenSize(context).width * 0.45,
-          ),
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
-            backgroundColor: Colors.white,
-          ),
-        ),
-      ],
-    );
+    // return Stack(
+    //   children: [
+    //     Image.asset(
+    //       'assets/scr_1.png',
+    //       fit: BoxFit.fill,
+    //       height: screenSize(context).height,
+    //       width: screenSize(context).width,
+    //     ),
+    //     Padding(
+    //       padding: EdgeInsets.only(
+    //         top: screenSize(context).height * 0.8,
+    //         left: screenSize(context).width * 0.45,
+    //       ),
+    //       child: CircularProgressIndicator(
+    //         valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF046cbc)),
+    //         backgroundColor: Colors.white,
+    //       ),
+    //     ),
+    //   ],
+    // );
 //   },
 // ),
 
