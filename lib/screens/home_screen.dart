@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -43,16 +44,31 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     if (Platform.isAndroid) {
       print('Android is true');
-      BitmapDescriptor.fromAssetImage(
-              ImageConfiguration(), 'assets/ico_agzs_green_android.png')
-          .then((onValue) {
-        widget.customIconActive = onValue;
-      });
-      BitmapDescriptor.fromAssetImage(ImageConfiguration(),
-              'assets/ico_agzs_gray_android.png' /*'assets/ico_agzs_gray_22_32_android.png'*/)
-          .then((onValue) {
-        widget.customIconNotActive = onValue;
-      });
+      if(window.physicalSize.width > 480 || window.physicalSize.height > 800){
+      /*if(screenSize(context).width > 240 || screenSize(context).height > 320){*/
+      /*if(screenWidthSize(context) > 240 || screenHeightSize(context) > 320){*/
+        BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(), 'assets/ico_agzs_green_android.png')
+            .then((onValue) {
+          widget.customIconActive = onValue;
+        });
+        BitmapDescriptor.fromAssetImage(ImageConfiguration(),
+            'assets/ico_agzs_gray_android.png' /*'assets/ico_agzs_gray_22_32_android.png'*/)
+            .then((onValue) {
+          widget.customIconNotActive = onValue;
+        });
+      }else{
+        BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(), 'assets/ico_agzs_green_22_32_android.png')
+            .then((onValue) {
+          widget.customIconActive = onValue;
+        });
+        BitmapDescriptor.fromAssetImage(ImageConfiguration(),
+            'assets/ico_agzs_gray_22_32_android.png' /*'assets/ico_agzs_gray_22_32_android.png'*/)
+            .then((onValue) {
+          widget.customIconNotActive = onValue;
+        });
+      }
     } else {
       print('IOS is true');
       BitmapDescriptor.fromAssetImage(
