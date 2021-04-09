@@ -46,14 +46,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 // height: 50,
                 fit: BoxFit.fill,
               ),
-              // title: Text(
-              //   "АГЗС",
-              //   style: TextStyle(
-              //       fontWeight: FontWeight.bold,
-              //       fontFamily: 'Montserrat',
-              //       color: Color(0xFF016fbe) /*Colors.black87*/,
-              //       fontSize: 20),
-              // ),
               subtitle: Text(
                 "Газозаправочные станции Мангистауской области",
                 style: TextStyle(color: Color(0xFF016fbe), fontSize: 15/*12*/),
