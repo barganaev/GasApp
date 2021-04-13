@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/shipment_bloc/shipment_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:gasapp/utils/utils.dart';
 import 'package:intl/intl.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class VolumeOfDeliveries extends StatefulWidget {
   List<RegionsModel> list;
@@ -19,47 +21,59 @@ class VolumeOfDeliveries extends StatefulWidget {
 class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
   final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
-  List<String> months = [
-    "Январь",
-    "Февраль",
-    "Март",
-    "Апрель",
-    "Май",
-    "Июнь",
-    "Июль",
-    "Август",
-    "Сентябрь",
-    "Октябрь",
-    "Ноябрь",
-    "Декабрь"
-  ];
+  // List<String> months = [
+  //   "Январь",
+  //   "Февраль",
+  //   "Март",
+  //   "Апрель",
+  //   "Май",
+  //   "Июнь",
+  //   "Июль",
+  //   "Август",
+  //   "Сентябрь",
+  //   "Октябрь",
+  //   "Ноябрь",
+  //   "Декабрь"
+  // ];
 
   String selectedMonthName(int selectedMonth) {
     for (int i = 1; i <= 12; i++) {
       if (selectedMonth == 1) {
-        return months[0];
+        // return months[0];
+        return LocaleKeys.months_january.tr();
       } else if (selectedMonth == 2) {
-        return months[1];
+        // return months[1];
+        return LocaleKeys.months_february.tr();
       } else if (selectedMonth == 3) {
-        return months[2];
+        // return months[2];
+        return LocaleKeys.months_march.tr();
       } else if (selectedMonth == 4) {
-        return months[3];
+        // return months[3];
+        return LocaleKeys.months_april.tr();
       } else if (selectedMonth == 5) {
-        return months[4];
+        // return months[4];
+        return LocaleKeys.months_may.tr();
       } else if (selectedMonth == 6) {
-        return months[5];
+        // return months[5];
+        return LocaleKeys.months_june.tr();
       } else if (selectedMonth == 7) {
-        return months[6];
+        // return months[6];
+        return LocaleKeys.months_july.tr();
       } else if (selectedMonth == 8) {
-        return months[7];
+        // return months[7];
+        return LocaleKeys.months_august.tr();
       } else if (selectedMonth == 9) {
-        return months[8];
+        // return months[8];
+        return LocaleKeys.months_september.tr();
       } else if (selectedMonth == 10) {
-        return months[9];
+        // return months[9];
+        return LocaleKeys.months_october.tr();
       } else if (selectedMonth == 11) {
-        return months[10];
+        // return months[10];
+        return LocaleKeys.months_november.tr();
       } else if (selectedMonth == 12) {
-        return months[11];
+        // return months[11];
+        return LocaleKeys.months_december.tr();
       }
     }
   }
@@ -154,7 +168,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Объемы поставок',
+                        LocaleKeys.volume_of_deliveries_name.tr()/*'Объемы поставок'*/,
                         style:
                             TextStyle(color: Color(0xFF016fbe), fontSize: 24),
                       ),
@@ -189,7 +203,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                           children: [
                             Container(
                               child: Text(
-                                'Другая дата',
+                                LocaleKeys.volume_of_deliveries_change_date.tr()/*'Другая дата'*/,
                                 style: TextStyle(
                                     fontSize: 10, color: Color(0xFF016fbe)),
                               ),
@@ -245,7 +259,7 @@ class _VolumeOfDeliveriesState extends State<VolumeOfDeliveries> {
                                   vertical: screenSize(context).height * 0.03),
                               child: Container(
                                   child: Text(
-                                'Наименование получателя',
+                                    LocaleKeys.volume_of_deliveries_name_of_recipient.tr()/*'Наименование получателя'*/,
                                 style: TextStyle(
                                     fontSize: 15, color: Color(0xFF6e6e6e)),
                               )),

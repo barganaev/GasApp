@@ -5,7 +5,9 @@ import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
 import 'package:gasapp/blocs/self_station_bloc/self_station_bloc.dart';
 import 'package:gasapp/screens/account_screen.dart';
 import 'package:gasapp/screens/home_screen.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 //import 'package:flutter_firebase/chat/lets_text.dart';
 //import 'package:flutter_firebase/providers/phone_auth.dart';
 //import 'package:flutter_firebase/utils/constants.dart';
@@ -17,7 +19,7 @@ class PhoneAuthVerify extends StatefulWidget {
   String phoneNumber;
   final Color cardBackgroundColor = Color(0xFF5897cf) /*Color(0xFFFCA967)*/;
   //final String logo = Assets.firebase;
-  final String appName = "Вход";
+  final String appName = LocaleKeys.account_page_enter.tr()/*"Вход"*/;
 
   @override
   _PhoneAuthVerifyState createState() => _PhoneAuthVerifyState();
@@ -79,7 +81,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
               Scaffold.of(context).showSnackBar(
                 SnackBar(
                   backgroundColor: Colors.red,
-                  content: Text('Неверный номер'),
+                  content: Text(LocaleKeys.account_page_wrong_number.tr()/*'Неверный номер'*/),
                   duration: Duration(seconds: 2),
                 ),
               );
@@ -143,7 +145,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
               Expanded(
                   child: Center(
                       child: Text(
-                'Пожалуйста, введите одноразовый пароль полученный устройством',
+                        LocaleKeys.account_page_description_2.tr()/*'Пожалуйста, введите одноразовый пароль полученный устройством'*/,
                 style: TextStyle(color: Colors.white),
               ))),
               SizedBox(width: 16.0),
@@ -199,7 +201,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Подтвердить',
+                LocaleKeys.account_page_confirm.tr()/*'Подтвердить'*/,
                 style: TextStyle(
                     color: widget.cardBackgroundColor, fontSize: 18.0),
               ),
@@ -215,7 +217,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
                 Navigator.pop(context);
               },
               child: Text(
-                'Назад',
+                LocaleKeys.account_page_back_btn.tr()/*'Назад'*/,
                 style: TextStyle(color: Colors.white),
               ),
             ),

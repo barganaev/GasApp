@@ -3,7 +3,9 @@ import 'package:gasapp/screens/show_in_map_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
 import 'package:gasapp/models/regions_model.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ListOfStations extends StatefulWidget {
   List<RegionsModel> list;
@@ -19,12 +21,12 @@ class _ListOfStationsState extends State<ListOfStations> {
   Widget Status(String isOpen) {
     if (isOpen == "1") {
       return Text(
-        'Открыт',
+        LocaleKeys.account_page_open.tr()/*'Открыт'*/,
         style: TextStyle(color: Colors.green),
       );
     } else {
       return Text(
-        'Закрыт',
+        LocaleKeys.account_page_close.tr()/*'Закрыт'*/,
         style: TextStyle(color: Colors.red),
       );
     }
@@ -89,7 +91,7 @@ class _ListOfStationsState extends State<ListOfStations> {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Перечень заправочных станций',
+                          LocaleKeys.list_of_stations_name.tr()/*'Перечень заправочных станций'*/,
                           style:
                               TextStyle(color: Color(0xFF016fbe), fontSize: 24),
                         )),
@@ -158,7 +160,7 @@ class _ListOfStationsState extends State<ListOfStations> {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    'Местонахождение: ${state.listOfStationsModel[i].comment}',
+                                    '${LocaleKeys.list_of_stations_location.tr()}: ${state.listOfStationsModel[i].comment}', // Местонахождение
                                     style: TextStyle(fontSize: 15),
                                   ),
                                 ),
@@ -185,7 +187,7 @@ class _ListOfStationsState extends State<ListOfStations> {
                                       child: Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          'Показать на карте',
+                                          LocaleKeys.list_of_stations_show_in_map.tr()/*'Показать на карте'*/,
                                           style: TextStyle(
                                               decoration:
                                                   TextDecoration.underline,

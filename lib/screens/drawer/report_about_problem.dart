@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/add_feedback_bloc/add_feedback_bloc.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ReportAboutProblem extends StatefulWidget {
   @override
@@ -48,7 +50,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  "Успешно отправлено!",
+                  LocaleKeys.account_page_successful_sent.tr()/*"Успешно отправлено!"*/,
                   style: TextStyle(
                     color: Colors.green,
                   ),
@@ -73,7 +75,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                         child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Сообщить о несоответствии',
+                              LocaleKeys.report_about_problem_sub_name.tr()/*'Сообщить о несоответствии'*/,
                               style: TextStyle(
                                   color: Color(0xFF016fbe), fontSize: 30),
                             )),
@@ -86,7 +88,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                             padding: EdgeInsets.only(
                                 bottom: screenSize(context).height * 0.1),
                             child: Text(
-                                'Вы можете отправить сообщения по работе газозаправочных станций. Ваше сообщение поможет нам изучить ситуацию и улучшить взаимодействие.'),
+                                LocaleKeys.report_about_problem_description.tr()/*'Вы можете отправить сообщения по работе газозаправочных станций. Ваше сообщение поможет нам изучить ситуацию и улучшить взаимодействие.'*/),
                           ),
                         ),
                       ),
@@ -95,14 +97,14 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                             top: screenSize(context).height * 0.02),
                         child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Ваше имя')),
+                            child: Text(LocaleKeys.report_about_problem_your_name.tr()/*'Ваше имя'*/)),
                       ),
                       Container(
                         // height: screenSize(context).height * 0.05,
                         child: TextFormField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Введите текст';
+                              return LocaleKeys.account_page_write_text.tr()/*'Введите текст'*/;
                             }
                             return null;
                           },
@@ -134,14 +136,14 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                             top: screenSize(context).height * 0.02),
                         child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Электронная почта')),
+                            child: Text(LocaleKeys.report_about_problem_email.tr()/*'Электронная почта'*/)),
                       ),
                       Container(
                         // height: screenSize(context).height * 0.05,
                         child: TextFormField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Введите текст';
+                              return LocaleKeys.account_page_write_text.tr()/*'Введите текст'*/;
                             }
                             return null;
                           },
@@ -173,7 +175,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                             top: screenSize(context).height * 0.02),
                         child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Текст сообщения')),
+                            child: Text(LocaleKeys.report_about_problem_text_message.tr()/*'Текст сообщения'*/)),
                       ),
                       Container(
                         // height: screenSize(context).height * 0.15,
@@ -182,7 +184,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                           maxLines: 5,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Введите текст';
+                              return LocaleKeys.account_page_write_text.tr()/*'Введите текст'*/;
                             }
                             return null;
                           },
@@ -237,7 +239,7 @@ class _ReportAboutProblemState extends State<ReportAboutProblem> {
                               emailController.text = "";
                             }
                           },
-                          child: Text('Отправить'),
+                          child: Text(LocaleKeys.report_about_problem_send_btn.tr()/*'Отправить'*/),
                         ),
                       )
                     ],
