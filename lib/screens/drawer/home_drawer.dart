@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gasapp/app_builder.dart';
 import 'package:gasapp/blocs/add_feedback_bloc/add_feedback_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
@@ -11,11 +14,13 @@ import 'package:gasapp/screens/drawer/feedback.dart';
 import 'package:gasapp/screens/drawer/list_of_stations.dart';
 import 'package:gasapp/screens/drawer/report_about_problem.dart';
 import 'package:gasapp/screens/drawer/volume_of_deliveries.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../account_screen.dart';
 import '../login.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeDrawer extends StatefulWidget {
   List<RegionsModel> list;
@@ -28,6 +33,9 @@ class HomeDrawer extends StatefulWidget {
 class _HomeDrawerState extends State<HomeDrawer> {
   @override
   Widget build(BuildContext context) {
+    print("_HomeDrawerState");
+    print(context.locale.toString());
+    log(context.locale.toString());
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -46,17 +54,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 // height: 50,
                 fit: BoxFit.fill,
               ),
-              // title: Text(
-              //   "АГЗС",
-              //   style: TextStyle(
-              //       fontWeight: FontWeight.bold,
-              //       fontFamily: 'Montserrat',
-              //       color: Color(0xFF016fbe) /*Colors.black87*/,
-              //       fontSize: 20),
-              // ),
               subtitle: Text(
                 "Газозаправочные станции Мангистауской области",
-                style: TextStyle(color: Color(0xFF016fbe), fontSize: 15/*12*/),
+                style: TextStyle(color: Color(0xFF016fbe), fontSize: 15 /*12*/),
               ),
               //trailing: Icon(Icons.arrow_right_sharp),
             ),
@@ -228,7 +228,32 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_7.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("О приложении"),
+            title: Text(LocaleKeys.about.tr()), //Text("about").tr(),  ??
+          ),
+          ListTile(
+            onTap: () async {
+              // await context.resetLocale();
+              await context.setLocale(Locale('kk', 'KZ'));
+              // setState(() {
+              //   AppBuilder.of(context).rebuild;
+              // });
+            },
+            leading: Image.asset(
+              'assets/icon_7.png',
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            title: Text("change lang kk"), //Text("about").tr(),  ??
+          ),
+          ListTile(
+            onTap: () async {
+              // await context.resetLocale();
+              await context.setLocale(Locale('ru'));
+            },
+            leading: Image.asset(
+              'assets/icon_7.png',
+              width: MediaQuery.of(context).size.width * 0.07,
+            ),
+            title: Text("change lang ru"), //Text("about").tr(),  ??
           ),
         ],
       ),

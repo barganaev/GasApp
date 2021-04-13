@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AccountScreen extends StatefulWidget {
   String token;
   AccountScreen({this.token});
+
   @override
   _AccountScreenState createState() => _AccountScreenState();
 }
@@ -19,6 +20,7 @@ class _AccountScreenState extends State<AccountScreen> {
   bool switchState = false;
 
   bool falseBooleanCreatedForCheckingTheStation = false;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   Widget Status(String isOpen) {
@@ -125,7 +127,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                                 " "
                                             : " ",
                                         style: TextStyle(
-                                            fontSize: 14,),
+                                          fontSize: 14,
+                                        ),
                                       ),
                                     ),
                                     Container(
@@ -139,7 +142,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                                 " "
                                             : " ",
                                         style: TextStyle(
-                                            fontSize: 14,),
+                                          fontSize: 14,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -452,89 +456,85 @@ class _AccountScreenState extends State<AccountScreen> {
                                                             .width *
                                                         0.03),
                                                 child: CupertinoSwitch(
-                                                    trackColor: Colors.red,
-                                                    activeColor: Colors.green,
-                                                    value: state
-                                                                .selfStationModel
-                                                                .message[i]
-                                                                .isOpen ==
-                                                            "1"
-                                                        ? true
-                                                        : false,
-                                                    onChanged: (bool value) {
-                                                      showDialog(
-                                                              context: context,
-                                                              builder: (_) =>
-                                                                  AlertDialog(
-                                                                    title: Text(
-                                                                        'Вы уверены?'),
-                                                                    actions: [
-                                                                      GestureDetector(
-                                                                        onTap:
-                                                                            () {},
-                                                                        child:
-                                                                            TextButton(
-                                                                          onPressed:
-                                                                              () {
+                                                  trackColor: Colors.red,
+                                                  activeColor: Colors.green,
+                                                  value: state
+                                                              .selfStationModel
+                                                              .message[i]
+                                                              .isOpen ==
+                                                          "1"
+                                                      ? true
+                                                      : false,
+                                                  onChanged: (bool value) {
+                                                    showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (_) =>
+                                                                    AlertDialog(
+                                                                      title: Text(
+                                                                          'Вы уверены?'),
+                                                                      actions: [
+                                                                        GestureDetector(
+                                                                          onTap:
+                                                                              () {},
+                                                                          child:
+                                                                              TextButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                            child:
+                                                                                Text(
+                                                                              'Нет',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        GestureDetector(
+                                                                          onTap:
+                                                                              () async {
+                                                                            final prefs =
+                                                                                await SharedPreferences.getInstance();
+                                                                            String
+                                                                                token =
+                                                                                prefs.getString("token");
+                                                                            String
+                                                                                isOpen;
+                                                                            if (state.selfStationModel.message[i].isOpen ==
+                                                                                "0") {
+                                                                              isOpen = "true";
+                                                                            } else {
+                                                                              isOpen = "false";
+                                                                            }
+                                                                            BlocProvider.of<SelfStationBloc>(context).add(
+                                                                              SelfStationToggleEvent(
+                                                                                token: token,
+                                                                                stationId: state.selfStationModel.message[i].id.toString(),
+                                                                                isOpen: isOpen,
+                                                                                regionId: "1",
+                                                                              ),
+                                                                            );
                                                                             Navigator.pop(context);
                                                                           },
                                                                           child:
-                                                                              Text(
-                                                                            'Нет',
-                                                                            style:
-                                                                                TextStyle(color: Colors.black),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                      GestureDetector(
-                                                                        onTap:
-                                                                            () async {
-                                                                          final prefs =
-                                                                              await SharedPreferences.getInstance();
-                                                                          String
-                                                                              token =
-                                                                              prefs.getString("token");
-                                                                          String
-                                                                              isOpen;
-                                                                          if (state.selfStationModel.message[i].isOpen ==
-                                                                              "0") {
-                                                                            isOpen =
-                                                                                "true";
-                                                                          } else {
-                                                                            isOpen =
-                                                                                "false";
-                                                                          }
-                                                                          BlocProvider.of<SelfStationBloc>(context)
-                                                                              .add(
-                                                                            SelfStationToggleEvent(
-                                                                              token: token,
-                                                                              stationId: state.selfStationModel.message[i].id.toString(),
-                                                                              isOpen: isOpen,
-                                                                              regionId: "1",
+                                                                              TextButton(
+                                                                            child:
+                                                                                Text(
+                                                                              'Да',
+                                                                              style: TextStyle(color: Colors.black),
                                                                             ),
-                                                                          );
-                                                                          Navigator.pop(
-                                                                              context);
-                                                                        },
-                                                                        child:
-                                                                            TextButton(
-                                                                          child:
-                                                                              Text(
-                                                                            'Да',
-                                                                            style:
-                                                                                TextStyle(color: Colors.black),
                                                                           ),
                                                                         ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                              barrierDismissible:
-                                                                  false)
-                                                          .then((value) {
-                                                        setState(() {});
-                                                      });
-                                                      print(value);
-                                                    }),
+                                                                      ],
+                                                                    ),
+                                                            barrierDismissible:
+                                                                false)
+                                                        .then((value) {
+                                                      setState(() {});
+                                                    });
+                                                    print(value);
+                                                  },
+                                                ),
                                               ),
                                             ],
                                           ),
