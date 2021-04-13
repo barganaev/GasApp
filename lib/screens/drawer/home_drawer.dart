@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gasapp/app_builder.dart';
 import 'package:gasapp/blocs/add_feedback_bloc/add_feedback_bloc.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
 import 'package:gasapp/blocs/list_of_stations_bloc/list_of_stations_bloc.dart';
@@ -50,15 +49,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
               ),
               leading: Image.asset(
                 "assets/logo_blue.png",
-                //width: screenSize(context).width * 0.2,
-                // height: 50,
                 fit: BoxFit.fill,
               ),
               subtitle: Text(
                 LocaleKeys.title.tr()/*"Газозаправочные станции Мангистауской области"*/,
                 style: TextStyle(color: Color(0xFF016fbe), fontSize: 15 /*12*/),
               ),
-              //trailing: Icon(Icons.arrow_right_sharp),
             ),
           ),
           Divider(
@@ -217,7 +213,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 context,
                 MaterialPageRoute(
                   builder: (newcontext) => BlocProvider<InfoBloc>.value(
-                    // create: (context) => InfoBloc()..add(InfoGetEvent()),
                     value: BlocProvider.of<InfoBloc>(context),
                     child: AboutApp(),
                   ),
@@ -232,28 +227,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             onTap: () async {
-              // await context.resetLocale();
-              await context.setLocale(Locale('kk', 'KZ'));
-              // setState(() {
-              //   AppBuilder.of(context).rebuild;
-              // });
+              if (context.locale == Locale('ru')) {
+                await context.setLocale(Locale('kk', 'KZ'));
+              } else {
+                await context.setLocale(Locale('ru'));
+              }
             },
-            leading: Image.asset(
-              'assets/icon_7.png',
-              width: MediaQuery.of(context).size.width * 0.07,
-            ),
-            title: Text("change lang kk"), //Text("about").tr(),  ??
-          ),
-          ListTile(
-            onTap: () async {
-              // await context.resetLocale();
-              await context.setLocale(Locale('ru'));
-            },
-            leading: Image.asset(
-              'assets/icon_7.png',
-              width: MediaQuery.of(context).size.width * 0.07,
-            ),
-            title: Text("change lang ru"), //Text("about").tr(),  ??
+            contentPadding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
+            title: Text(context.locale == Locale('ru')
+                ? "Қазақ тілі"
+                : "Русский язык"), //Text("about").tr(),  ??
           ),
         ],
       ),

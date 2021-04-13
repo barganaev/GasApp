@@ -5,6 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:gasapp/models/stations_model.dart';
 import 'package:gasapp/repo/requests.dart';
+import 'package:gasapp/utils/utils.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'map_event.dart';
 part 'map_state.dart';
@@ -29,7 +31,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         print(stationsModel);
         if (stationsModel != null) {
           print("HELLO! NOT NULL");
-          yield MapLoadedState(stationsModel: stationsModel);
+          List<BitmapDescriptor> listOfIcons = await iconSet();
+          yield MapLoadedState(
+              stationsModel: stationsModel, listOfIcons: listOfIcons);
         } else {
           print("HELLO! ISISIS NULL");
           yield MapErrorState();

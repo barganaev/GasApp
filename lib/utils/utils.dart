@@ -1,5 +1,44 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+List<BitmapDescriptor> listOfIcons = [];
+Future<List<BitmapDescriptor>> iconSet() async {
+  if (listOfIcons.isNotEmpty) {
+    return listOfIcons;
+  }
+
+  BitmapDescriptor bitmapDescriptorActive;
+  BitmapDescriptor bitmapDescriptorNotActive;
+
+  if (Platform.isAndroid) {
+    print('Android is true');
+    if (window.physicalSize.width > 480 || window.physicalSize.height > 800) {
+      bitmapDescriptorActive = await BitmapDescriptor.fromAssetImage(
+          ImageConfiguration(), 'assets/ico_agzs_green_android.png');
+      bitmapDescriptorNotActive = await BitmapDescriptor.fromAssetImage(
+          ImageConfiguration(),
+          'assets/ico_agzs_gray_android.png' /*'assets/ico_agzs_gray_22_32_android.png'*/);
+    } else {
+      bitmapDescriptorActive = await BitmapDescriptor.fromAssetImage(
+          ImageConfiguration(), 'assets/ico_agzs_green_22_32_android.png');
+      bitmapDescriptorNotActive = await BitmapDescriptor.fromAssetImage(
+          ImageConfiguration(),
+          'assets/ico_agzs_gray_22_32_android.png' /*'assets/ico_agzs_gray_22_32_android.png'*/);
+    }
+  } else {
+    print('IOS is true');
+    bitmapDescriptorActive = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(), 'assets/ico_agzs_green_ios.png');
+    bitmapDescriptorNotActive = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(), 'assets/ico_agzs_gray_ios.png');
+  }
+  listOfIcons.add(bitmapDescriptorActive);
+  listOfIcons.add(bitmapDescriptorNotActive);
+  return listOfIcons;
+}
 
 List<String> cities = [
   'город Актау',

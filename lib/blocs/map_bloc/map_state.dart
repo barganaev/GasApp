@@ -11,7 +11,8 @@ class MapLoadingState extends MapState {}
 
 class MapLoadedState extends MapState {
   final List<StationsModel> stationsModel;
-  MapLoadedState({@required this.stationsModel});
+  List<BitmapDescriptor> listOfIcons;
+  MapLoadedState({@required this.stationsModel, this.listOfIcons});
 }
 
 class MapErrorState extends MapState {}
