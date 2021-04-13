@@ -223,22 +223,24 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_7.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text(LocaleKeys.about.tr()), //Text("about").tr(),  ??
+            title: Text('Настройки'),
+            // title: Text(LocaleKeys.about.tr()), //Text("about").tr(),  ??
           ),
-          ListTile(
-            onTap: () async {
-              if (context.locale == Locale('ru')) {
-                await context.setLocale(Locale('kk', 'KZ'));
-              } else {
-                await context.setLocale(Locale('ru'));
-              }
-            },
-            contentPadding:
-                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
-            title: Text(context.locale == Locale('ru')
-                ? "Қазақ тілі"
-                : "Русский язык"), //Text("about").tr(),  ??
-          ),
+          // ListTile(
+          //   onTap: () async {
+          //     if (context.locale == Locale('ru')) {
+          //       await context.setLocale(Locale('kk', 'KZ'));
+          //     } else {
+          //       await context.setLocale(Locale('ru'));
+          //     }
+          //   },
+          //   leading: Image.asset(context.locale == Locale('ru') ? 'assets/flag_kz.png' : 'assets/flag_ru.png', height: screenSize(context).height * 0.05,),
+          //   contentPadding:
+          //       EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
+          //   title: Text(context.locale == Locale('ru')
+          //       ? "Қазақ тілі"
+          //       : "Русский язык"), //Text("about").tr(),  ??
+          // ),
         ],
       ),
     );
