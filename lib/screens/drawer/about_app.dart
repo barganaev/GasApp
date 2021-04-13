@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -30,6 +31,8 @@ class _AboutAppState extends State<AboutApp> {
               Icons.arrow_back_ios,
               color: Colors.blue,
             )),
+        title: Text('Настройки', style: TextStyle(color: Color(0xFF016fbe))),
+        centerTitle: true,
       ),
       body: BlocConsumer<InfoBloc, InfoState>(
         listener: (context, state){
@@ -47,6 +50,32 @@ class _AboutAppState extends State<AboutApp> {
             return SingleChildScrollView(
               child: Column(
                 children: [
+                  ListTile(
+                    onTap: () async {
+                      if (context.locale == Locale('ru')) {
+                        await context.setLocale(Locale('kk', 'KZ'));
+                      } else {
+                        await context.setLocale(Locale('ru'));
+                      }
+                    },
+                    leading: Image.asset(context.locale == Locale('ru') ? 'assets/flag_kz.png' : 'assets/flag_ru.png', height: screenSize(context).height * 0.05,),
+                    // contentPadding:
+                    //     EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
+                    title: Text(context.locale == Locale('ru')
+                        ? "Қазақ тілі"
+                        : "Русский язык"), //Text("about").tr(),  ??
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.05),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Push-уведомление'),
+                        CupertinoSwitch(value: true, onChanged: (bool value){})
+                      ],
+                    ),
+                  ),
+                  Divider(),
                   Container(
                     padding: EdgeInsets.only(
                       left: screenSize(context).width * 0.1,
