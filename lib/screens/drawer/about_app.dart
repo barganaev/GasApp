@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:gasapp/blocs/info_bloc/info_bloc.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AboutApp extends StatefulWidget {
   @override
@@ -54,7 +56,7 @@ class _AboutAppState extends State<AboutApp> {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'О приложении',
+                          LocaleKeys.about.tr()/*'О приложении'*/,
                           style:
                               TextStyle(color: Color(0xFF2295C1), fontSize: 24),
                         )),

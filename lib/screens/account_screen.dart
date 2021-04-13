@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/self_station_bloc/self_station_bloc.dart';
 import 'package:gasapp/screens/show_in_map_screen.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AccountScreen extends StatefulWidget {
   String token;
@@ -26,12 +28,12 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget Status(String isOpen) {
     if (isOpen == "1") {
       return Text(
-        'Открыт',
+        LocaleKeys.account_page_open.tr()/*'Открыт'*/,
         style: TextStyle(color: Colors.green),
       );
     } else {
       return Text(
-        'Закрыт',
+        LocaleKeys.account_page_close.tr()/*'Закрыт'*/,
         style: TextStyle(color: Colors.red),
       );
     }
@@ -58,7 +60,7 @@ class _AccountScreenState extends State<AccountScreen> {
         ),
         centerTitle: true,
         title: Text(
-          'Личный кабинет',
+          LocaleKeys.account_page_name.tr()/*'Личный кабинет'*/,
           style: TextStyle(color: Color(0xFF016fbe)),
         ),
       ),
@@ -191,7 +193,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                 0.05),
                                                     child: Container(
                                                         child: Text(
-                                                      'Вы действительно хотите закрыть аккаунт и выйти из личного кабинета?',
+                                                          LocaleKeys.account_page_alert.tr()/*'Вы действительно хотите закрыть аккаунт и выйти из личного кабинета?'*/,
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold),
@@ -222,7 +224,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                     context);
                                                               },
                                                               child: Text(
-                                                                'Нет',
+                                                                LocaleKeys.account_page_no.tr()/*'Нет'*/,
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .black),
@@ -266,7 +268,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                               route.isFirst);
                                                                 },
                                                                 child: Text(
-                                                                  'Выйти',
+                                                                  LocaleKeys.account_page_exit.tr()/*'Выйти'*/,
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .white),
@@ -325,7 +327,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Режим работы газовых заправок',
+                              LocaleKeys.account_page_work_mode.tr()/*'Режим работы газовых заправок'*/,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF016fbe),
@@ -396,7 +398,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                     );
                                                   },
                                                   child: Text(
-                                                    'Показать на карте',
+                                                    LocaleKeys.account_page_show_in_map.tr()/*'Показать на карте'*/,
                                                     style: TextStyle(
                                                         decoration:
                                                             TextDecoration
@@ -443,7 +445,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                               .width *
                                                           0.03),
                                                   child: Text(
-                                                    'Открыть или закрыть объект',
+                                                    LocaleKeys.account_page_open_or_close.tr()/*'Открыть или закрыть объект'*/,
                                                     style: TextStyle(
                                                         fontSize:
                                                             screenSize(context)
@@ -472,7 +474,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                 (_) =>
                                                                     AlertDialog(
                                                                       title: Text(
-                                                                          'Вы уверены?'),
+                                                                          LocaleKeys.account_page_alert_2.tr()/*'Вы уверены?'*/),
                                                                       actions: [
                                                                         GestureDetector(
                                                                           onTap:
@@ -485,7 +487,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                             },
                                                                             child:
                                                                                 Text(
-                                                                              'Нет',
+                                                                                  LocaleKeys.account_page_no.tr()/*'Нет'*/,
                                                                               style: TextStyle(color: Colors.black),
                                                                             ),
                                                                           ),
@@ -520,7 +522,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                                               TextButton(
                                                                             child:
                                                                                 Text(
-                                                                              'Да',
+                                                                                  LocaleKeys.account_page_yes.tr()/*'Да'*/,
                                                                               style: TextStyle(color: Colors.black),
                                                                             ),
                                                                           ),

@@ -52,7 +52,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 fit: BoxFit.fill,
               ),
               subtitle: Text(
-                "Газозаправочные станции Мангистауской области",
+                LocaleKeys.title.tr()/*"Газозаправочные станции Мангистауской области"*/,
                 style: TextStyle(color: Color(0xFF016fbe), fontSize: 15 /*12*/),
               ),
             ),
@@ -73,7 +73,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_2.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Карта заправочных станций"), //Обновить состояние карты
+            title: Text(LocaleKeys.map_of_station.tr()/*"Карта заправочных станций"*/), //Обновить состояние карты
+            //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
             onTap: () {
@@ -102,7 +103,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_1.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Объемы поставок газа"),
+            title: Text(LocaleKeys.volume_of_deliveries_name.tr()/*"Объемы поставок газа"*/),
           ),
           ListTile(
             onTap: () {
@@ -122,7 +123,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_3.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Перечень станций"),
+            title: Text(LocaleKeys.list_of_stations_name.tr()/*"Перечень станций"*/),
+            //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
             onTap: () async {
@@ -157,7 +159,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_4.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Личный кабинет"),
+            title: Text(LocaleKeys.account_page_name.tr()/*"Личный кабинет"*/),
+            //trailing: Icon(Icons.arrow_right_sharp),
           ),
           Divider(
             height: 10,
@@ -182,7 +185,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_5.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Сообщить о проблеме"),
+            title: Text(LocaleKeys.report_about_problem_name.tr()/*"Сообщить о проблеме"*/),
+            //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
             onTap: () {
@@ -200,7 +204,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_6.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text("Обратная связь"),
+            title: Text(LocaleKeys.feedback_name.tr()/*"Обратная связь"*/),
+            //trailing: Icon(Icons.arrow_right_sharp),
           ),
           ListTile(
             onTap: () {

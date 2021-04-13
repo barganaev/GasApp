@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/add_feedback_bloc/add_feedback_bloc.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Feedbackk extends StatefulWidget {
   @override
@@ -40,7 +42,7 @@ class _FeedbackkState extends State<Feedbackk> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  "Успешно отправлено!",
+                  LocaleKeys.account_page_back_to_map.tr()/*"Успешно отправлено!"*/,
                   style: TextStyle(
                     color: Colors.green,
                   ),
@@ -67,7 +69,7 @@ class _FeedbackkState extends State<Feedbackk> {
                         child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Письмо в техподдержку',
+                              LocaleKeys.feedback_sub_name.tr()/*'Письмо в техподдержку'*/,
                               style: TextStyle(
                                   color: Color(0xFF016fbe), fontSize: 30),
                             )),
@@ -80,7 +82,7 @@ class _FeedbackkState extends State<Feedbackk> {
                           padding: EdgeInsets.only(
                               bottom: screenSize(context).height * 0.1),
                           child:
-                              Text('Касательно работы мобильного приложения'),
+                              Text(LocaleKeys.feedback_description.tr()/*'Касательно работы мобильного приложения'*/),
                         ),
                       )),
                       Padding(
@@ -88,7 +90,7 @@ class _FeedbackkState extends State<Feedbackk> {
                             top: screenSize(context).height * 0.02),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Ваше имя'),
+                          child: Text(LocaleKeys.feedback_your_name.tr()/*'Ваше имя'*/),
                         ),
                       ),
                       Container(
@@ -96,7 +98,7 @@ class _FeedbackkState extends State<Feedbackk> {
                         child: TextFormField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Введите текст';
+                              return LocaleKeys.account_page_write_text.tr()/*'Введите текст'*/;
                             }
                             return null;
                           },
@@ -128,7 +130,7 @@ class _FeedbackkState extends State<Feedbackk> {
                             top: screenSize(context).height * 0.02),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Электронная почта'),
+                          child: Text(LocaleKeys.feedback_email.tr()/*'Электронная почта'*/),
                         ),
                       ),
                       Container(
@@ -136,7 +138,7 @@ class _FeedbackkState extends State<Feedbackk> {
                         child: TextFormField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Введите текст';
+                              return LocaleKeys.account_page_write_text.tr()/*'Введите текст'*/;
                             }
                             return null;
                           },
@@ -168,7 +170,7 @@ class _FeedbackkState extends State<Feedbackk> {
                             top: screenSize(context).height * 0.02),
                         child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Текст сообщения')),
+                            child: Text(LocaleKeys.feedback_text_message.tr()/*'Текст сообщения'*/)),
                       ),
                       Container(
                         child: TextFormField(
@@ -176,7 +178,7 @@ class _FeedbackkState extends State<Feedbackk> {
                           keyboardType: TextInputType.text,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Введите текст';
+                              return LocaleKeys.account_page_write_text.tr()/*'Введите текст'*/;
                             }
                             return null;
                           },
@@ -228,7 +230,7 @@ class _FeedbackkState extends State<Feedbackk> {
                               emailController.text = "";
                             }
                           },
-                          child: Text('Отправить'),
+                          child: Text(LocaleKeys.feedback_send_btn.tr()/*'Отправить'*/),
                         ),
                       )
                     ],

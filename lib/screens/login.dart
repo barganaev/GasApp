@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gasapp/blocs/check_number_bloc/check_number_bloc.dart';
 import 'package:gasapp/blocs/login_bloc/login_bloc.dart';
 import 'package:gasapp/screens/verify_screen.dart';
+import 'package:gasapp/translations/locale_keys.g.dart';
 import 'package:gasapp/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -54,7 +56,7 @@ class _LogInState extends State<LogIn> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Вход",
+                          LocaleKeys.account_page_enter.tr()/*"Вход"*/,
                           style: TextStyle(
                             color: Color(0xFF016fbe),
                             fontSize: 45.0,
@@ -68,7 +70,7 @@ class _LogInState extends State<LogIn> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Личный кабинет для персонала заправочных станций чтобы продолжить пожалуйста авторизуйтесь",
+                          LocaleKeys.account_page_description_1.tr()/*"Личный кабинет для персонала заправочных станций чтобы продолжить пожалуйста авторизуйтесь"*/,
                           style: TextStyle(
                             fontSize: 18.0,
                           ),
@@ -100,7 +102,7 @@ class _LogInState extends State<LogIn> {
                                 autocorrect: false,
                                 validator: (String inValue) {
                                   if (inValue == null || inValue.isEmpty) {
-                                    return 'Пожалуйста, введите ваш номер';
+                                    return LocaleKeys.account_page_please_enter_number.tr()/*'Пожалуйста, введите ваш номер'*/;
                                   }
                                   return null;
                                 },
@@ -119,7 +121,7 @@ class _LogInState extends State<LogIn> {
                                   errorStyle: TextStyle(
                                     color: Color(0xFFE04146),
                                   ),
-                                  labelText: "Номер телефона",
+                                  labelText: LocaleKeys.account_page_phone_number.tr()/*"Номер телефона"*/,
                                   hintStyle: TextStyle(
                                     color: Color(0xFFDDDDDD),
                                   ),
@@ -155,7 +157,7 @@ class _LogInState extends State<LogIn> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         backgroundColor: Colors.red,
-                                        content: Text('Номер не определен'),
+                                        content: Text(LocaleKeys.account_page_number_not_defined.tr()/*'Номер не определен'*/),
                                         duration: Duration(seconds: 2),
                                       ),
                                     );
@@ -210,7 +212,7 @@ class _LogInState extends State<LogIn> {
                                         }
                                       },
                                       child: Text(
-                                        "Далее",
+                                        LocaleKeys.account_page_next.tr()/*"Далее"*/,
                                         style: TextStyle(
                                           fontSize: 18.0,
                                           color: Color(0xFF016fbe),
@@ -232,7 +234,7 @@ class _LogInState extends State<LogIn> {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text('вернуться на карту')),
+                                    child: Text(LocaleKeys.account_page_back_to_map.tr()/*'вернуться на карту'*/)),
                               ),
                             ],
                           ),
