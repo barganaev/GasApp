@@ -68,6 +68,9 @@ abstract class  LocaleKeys {
   static const feedback_text_message = 'feedback.text_message';
   static const feedback_send_btn = 'feedback.send_btn';
   static const feedback = 'feedback';
+  static const settings_lang = 'settings.lang';
+  static const settings_name = 'settings.name';
+  static const settings = 'settings';
   static const about = 'about';
 
 }
