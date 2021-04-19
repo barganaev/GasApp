@@ -223,7 +223,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               'assets/icon_7.png',
               width: MediaQuery.of(context).size.width * 0.07,
             ),
-            title: Text('Настройки'),
+            title: Text(LocaleKeys.settings_name.tr()/*'Настройки'*/),
             // title: Text(LocaleKeys.about.tr()), //Text("about").tr(),  ??
           ),
           // ListTile(

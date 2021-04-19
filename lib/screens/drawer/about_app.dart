@@ -50,32 +50,63 @@ class _AboutAppState extends State<AboutApp> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  ListTile(
-                    onTap: () async {
-                      if (context.locale == Locale('ru')) {
-                        await context.setLocale(Locale('kk', 'KZ'));
-                      } else {
-                        await context.setLocale(Locale('ru'));
-                      }
-                    },
-                    leading: Image.asset(context.locale == Locale('ru') ? 'assets/flag_kz.png' : 'assets/flag_ru.png', height: screenSize(context).height * 0.05,),
-                    // contentPadding:
-                    //     EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
-                    title: Text(context.locale == Locale('ru')
-                        ? "Қазақ тілі"
-                        : "Русский язык"), //Text("about").tr(),  ??
-                  ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.05),
+                    padding: EdgeInsets.symmetric(vertical: screenSize(context).height * 0.01, horizontal: screenSize(context).width * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Push-уведомление'),
-                        CupertinoSwitch(value: true, onChanged: (bool value){})
+                        Text(LocaleKeys.settings_lang.tr()/*'Выбранный язык'*/),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 5
+                          ),
+                          onPressed: () async {
+                            if (context.locale == Locale('ru')) {
+                              await context.setLocale(Locale('kk', 'KZ'));
+                            } else {
+                              await context.setLocale(Locale('ru'));
+                            }
+                          },
+                          child: Text(context.locale == Locale('ru')
+                              ? "Русский язык"
+                              : "Қазақ тілі"),
+                        ),
                       ],
                     ),
                   ),
-                  Divider(),
+                  // ListTile(
+                  //   onTap: () async {
+                  //     if (context.locale == Locale('ru')) {
+                  //       await context.setLocale(Locale('kk', 'KZ'));
+                  //     } else {
+                  //       await context.setLocale(Locale('ru'));
+                  //     }
+                  //   },
+                  //    leading: Image.asset(context.locale == Locale('ru') ? 'assets/flag_kz.png' : 'assets/flag_ru.png', height: screenSize(context).height * 0.05,),
+                  //   // contentPadding:
+                  //   //     EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2),
+                  //   title: Text(context.locale == Locale('ru')
+                  //       ? "Қазақ тілі"
+                  //       : "Русский язык"), //Text("about").tr(),  ??
+                  // ),
+
+                  // Container(
+                  //   padding: EdgeInsets.symmetric(vertical: screenSize(context).height * 0.01, horizontal: screenSize(context).width * 0.05),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Text('Push-уведомление'),
+                  //       CupertinoSwitch(value: true, onChanged: (bool value){})
+                  //     ],
+                  //   ),
+                  // ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: screenSize(context).height * 0.01),
+                    child: Divider(
+                      color: Colors.black,
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.only(
                       left: screenSize(context).width * 0.1,

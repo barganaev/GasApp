@@ -98,6 +98,10 @@ class CodegenLoader extends AssetLoader{
     "text_message": "Хабарлама мәтіні",
     "send_btn": "Жіберу"
   },
+  "settings": {
+    "lang": "Таңдалған тіл",
+    "name": "Баптаулар"
+  },
   "about": "Қосымша туралы"
 };
 static const Map<String,dynamic> ru = {
@@ -183,6 +187,10 @@ static const Map<String,dynamic> ru = {
     "email": "Электронная почта",
     "text_message": "Текст сообщения",
     "send_btn": "Отправить"
+  },
+  "settings": {
+    "lang": "Выбранный язык",
+    "name": "Настройки"
   },
   "about": "О приложении"
 };
